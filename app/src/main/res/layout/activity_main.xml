@@ -10,24 +10,67 @@
     <com.example.structuremonitoringsystem.OpenGL.OpenGLView
         android:id="@+id/openGLView"
         android:layout_width="match_parent"
+        android:layout_height="900px"
+        android:layout_marginStart="15px"
+        android:layout_marginTop="15px"
+        android:layout_marginEnd="15px"
+        android:layout_marginBottom="15px"/>
+
+
+    <RelativeLayout
+        android:id="@+id/btnLayout"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/text">
+        android:layout_below="@id/openGLView"
+        android:layout_above="@id/text">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Up"
+                android:id="@+id/upBtn"
+                android:layout_centerHorizontal="true"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Left"
+                android:id="@+id/leftBtn"
+                android:layout_below="@id/upBtn"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Down"
+                android:id="@+id/downBtn"
+                android:layout_below="@id/centerBtn"
+                android:layout_centerHorizontal="true"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Right"
+                android:id="@+id/rightBtn"
+                android:layout_below="@+id/upBtn"
+                android:layout_toRightOf="@id/centerBtn"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="reset"
+                android:id="@+id/centerBtn"
+                android:layout_below="@+id/upBtn"
+                android:layout_toRightOf="@id/leftBtn"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 
-    </com.example.structuremonitoringsystem.OpenGL.OpenGLView>
-<!--    <TextView-->
-<!--        android:id="@+id/text2"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Hello World!"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textSize="100px"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:layout_centerInParent="true"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/text"
