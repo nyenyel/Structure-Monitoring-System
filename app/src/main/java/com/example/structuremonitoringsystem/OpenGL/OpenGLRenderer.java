@@ -20,6 +20,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     private Square square;
 
     // vPMatrix is an abbreviation for "Model View Projection Matrix"
+    private float objectPositionX = 0.0f;
     private final float[] vPMatrix = new float[16];
     private final float[] projectionMatrix = new float[16];
     private final float[] viewMatrix = new float[16];
@@ -80,16 +81,25 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
             0.0f,1.0f,0.0f,
             0.0f,0.0f,0.0f,1.0f};
 
-
     @Override
     public void onDrawFrame(GL10 gl) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
 
         // Set the camera position (View matrix)
-        Matrix.setLookAtM(viewMatrix, 0, 0, 0, 3, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+        Matrix.setLookAtM(viewMatrix, 0, 0, 0, 4, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
 
         // Calculate the projection and view transformation
         Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0);
+
+
+        float[] translationMatrix = new float[16];
+        // Update the object's position based on translation
+        Matrix.setIdentityM(translationMatrix, 0);
+        Matrix.translateM(translationMatrix, 0, -objectPositionX, objectPositionX, -objectPositionX);
+        Matrix.multiplyMM(vPMatrix, 0, vPMatrix, 0, translationMatrix, 0);
+
+        // Update the object's position for the next frame
+        objectPositionX += 0.005f; // Adjust this value based on your desired movement speed
 
 //        square.draw(vPMatrix);
 
@@ -110,13 +120,26 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
 
 
         float[] scratch = new float[16];
+
+
         // -----------------------------------------------------------------------------
         // Create a rotation for the triangle
-        // long time = SystemClock.uptimeMillis() % 4000L;
-        // float angle = 0.090f * ((int) time);
-//        Matrix.setRotateM(rotationMatrix, 0, mAngle, 0, 0, -1.0f);
-        // -----------------------------------------------------------------------------
+//         long time = SystemClock.uptimeMillis() % 2000L;
+//         float angle = 0.090f * ((int) time);
+//        Matrix.setRotateM(rotationMatrix, 0, angle, 0, 0, -1.0f);
 
+        long time = SystemClock.uptimeMillis() % 2000L;
+        float angle = (360.0f / 2000.0f) * ((int) time);
+        Matrix.setRotateM(rotationMatrix, 0, angle, 0.8f, 0.9f, -0.60f);
+
+        // Create a translation for the object
+//        float translationX = (float) (Math.sin(Math.toRadians(angle)) * 0.5); // Adjust translation distance as needed
+
+        // Combine rotation and translation with the projection and camera view
+
+
+        // -----------------------------------------------------------------------------
+/**
         if(isReset){
             resetView();
             setReset(false);
@@ -134,7 +157,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
                 Matrix.rotateM(rotationMatrix, 0, angleY, 0.0f, 1.0f, 0.0f);
                 Matrix.rotateM(rotationMatrix, 0, angleZ, 0.0f, 0.0f, 1.0f);
             }
-        }
+        }*/
 
 
 
@@ -142,9 +165,10 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         // Note that the vPMatrix factor *must be first* in order
         // for the matrix multiplication product to be correct.
         Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0);
+//        Matrix.multiplyMM(scratch, 0, scratch, 0,scratch, 0);
 
-        Log.d("vPMatrix", "vPMatrix: " + mergeFloatArrayToString(vPMatrix, ","));
-        Log.d("vPMatrix", "rotationMatrix: " + mergeFloatArrayToString(rotationMatrix, ","));
+//        Log.d("vPMatrix", "vPMatrix: " + mergeFloatArrayToString(vPMatrix, ","));
+        Log.d("rotation", "rotationMatrix: " + mergeFloatArrayToString(rotationMatrix, ","));
 
 
         // Draw triangle
@@ -179,6 +203,9 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
 
     public void storeOriginalVpMatrix() {
         // Store the current state as the original state
+        Matrix.setRotateM(rotationMatrix, 0, angleX, 1.0f, 0.0f, 0.0f);
+        Matrix.rotateM(rotationMatrix, 0, angleY, 0.0f, 1.0f, 0.0f);
+        Matrix.rotateM(rotationMatrix, 0, angleZ, 0.0f, 0.0f, 1.0f);
         System.arraycopy(vPMatrix, 0, originalVpMatrix, 0, vPMatrix.length);
         System.arraycopy(rotationMatrix, 0, originalRotationMatrix, 0, rotationMatrix.length);
 
@@ -188,9 +215,12 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
 //        System.arraycopy(originalVpMatrix, 0, vPMatrix, 0, vPMatrix.length);
 //        System.arraycopy(originalVpMatrix, 0, vPMatrix, 0, vPMatrix.length);
         System.arraycopy(rMatrix, 0, rotationMatrix, 0, rotationMatrix.length);
-        Log.e("Reset", "Reset:" + mergeFloatArrayToString(rMatrix, ","));
+        Log.e("Original", "Reset:" + mergeFloatArrayToString(rMatrix, ","));
     }
 
+    public void moveLeft(){
+
+    }
     public static String mergeFloatArrayToString(float[] floatArray, String delimiter) {
         StringBuilder stringBuilder = new StringBuilder();
 

@@ -28,8 +28,9 @@ public class OpenGLView extends GLSurfaceView {
         // Pass the context to the OpenGLRenderer constructor
         renderer = new OpenGLRenderer(context);
         setRenderer(renderer);
+
         // Render the view only when there is a change in the drawing data
-        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+//        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
     }
 
     private final float TOUCH_SCALE_FACTOR = 180.0f / 320;
@@ -45,9 +46,13 @@ public class OpenGLView extends GLSurfaceView {
         renderer.setReset(true);
         renderer.resetView();
         requestRender();
-
     }
 
+    public void left(){
+        renderer.moveLeft();
+        requestRender();
+    }
+/**
     @Override
     public boolean onTouchEvent(MotionEvent e) {
 
@@ -127,5 +132,5 @@ public class OpenGLView extends GLSurfaceView {
 
 
         return true;
-    }
+    }*/
 }

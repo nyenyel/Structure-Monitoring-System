@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.e("Controller", "Left");
+//                openGLView.left();
             }
         });
         rightBtn.setOnClickListener(new View.OnClickListener() {
