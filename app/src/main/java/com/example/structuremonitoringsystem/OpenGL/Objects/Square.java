@@ -35,6 +35,10 @@ public class Square {
 
     private FloatBuffer vertexBuffer;
 
+    private int positionHandle;
+    private int colorHandle;
+
+
     // num of coordinates per vertex in the array
     static final int COORDS_PER_VERTEX = 3;
     static float squareCoords[] = { // counter-clockwise
@@ -43,6 +47,9 @@ public class Square {
             0.2f, -0.2f, 0.0f,   // bottom right
             -0.2f, -0.2f, 0.0f    // bottom left
     };
+
+    private final int vertexCount = squareCoords.length / COORDS_PER_VERTEX;
+    private final int vertexStride = COORDS_PER_VERTEX * 4;
 
     // object Color
     float squareColor[] = {0f, 1f, 0f, 1f}; // Green color for the square
@@ -64,12 +71,6 @@ public class Square {
         GLES20.glAttachShader(mProgram, fragmentShader);
         GLES20.glLinkProgram(mProgram);
     }
-
-    private int positionHandle;
-    private int colorHandle;
-
-    private final int vertexCount = squareCoords.length / COORDS_PER_VERTEX;
-    private final int vertexStride = COORDS_PER_VERTEX * 4;
 
     public void draw(float[] mvpMatrix) {
         GLES20.glUseProgram(mProgram);

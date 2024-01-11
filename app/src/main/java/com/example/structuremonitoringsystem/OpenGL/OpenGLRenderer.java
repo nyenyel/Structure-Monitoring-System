@@ -19,17 +19,36 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     private Triangle triangle;
     private Square square;
 
-    // vPMatrix is an abbreviation for "Model View Projection Matrix"
-    private float objectPositionX = 0.0f;
+    public volatile float mAngle;
+
+    private float[] scratch = new float[16];
     private final float[] vPMatrix = new float[16];
     private final float[] projectionMatrix = new float[16];
     private final float[] viewMatrix = new float[16];
     private float[] originalVpMatrix = new float[16];
     private float[] originalRotationMatrix = new float[16];
 
-    private boolean isReset = false;
+    private float[] rotationMatrix = new float[16];
 
+
+    // vPMatrix is an abbreviation for "Model View Projection Matrix"
+    private float objectPositionX = 0.0f;
+    private float objectPositionY = 0.0f;
+    private float objectPositionZ = 0.0f;
+    private float angleX = 0.0f;
+    private float angleY = 0.0f;
+    private float angleZ = 0.0f;
+    private float[] rMatrix = {
+            1.0f,0.0f,0.0f,
+            0.0f,0.0f,1.0f,
+            0.0f,0.0f,0.0f,
+            0.0f,1.0f,0.0f,
+            0.0f,0.0f,0.0f,1.0f};
+    private boolean isReset = false;
     private boolean isFirstRun = true;
+
+
+
 
     public void setFirstRun(boolean isFirstRun){
         this.isFirstRun = isFirstRun;
@@ -37,6 +56,14 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
 
     public void setReset(boolean isReset){
         this.isReset = isReset;
+    }
+
+    public float getAngle() {
+        return mAngle;
+    }
+
+    public void setAngle(float angle) {
+        mAngle = angle;
     }
 
     public OpenGLRenderer(Context context) {
@@ -72,14 +99,6 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         Matrix.frustumM(projectionMatrix, 0, -ratio, ratio, -1, 1, 3, 7);
     }
 
-    private float[] rotationMatrix = new float[16];
-
-    private float[] rMatrix = {
-            1.0f,0.0f,0.0f,
-            0.0f,0.0f,1.0f,
-            0.0f,0.0f,0.0f,
-            0.0f,1.0f,0.0f,
-            0.0f,0.0f,0.0f,1.0f};
 
     @Override
     public void onDrawFrame(GL10 gl) {
@@ -91,16 +110,9 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         // Calculate the projection and view transformation
         Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0);
 
-
-        float[] translationMatrix = new float[16];
-        // Update the object's position based on translation
-        Matrix.setIdentityM(translationMatrix, 0);
-        Matrix.translateM(translationMatrix, 0, -objectPositionX, objectPositionX, -objectPositionX);
-        Matrix.multiplyMM(vPMatrix, 0, vPMatrix, 0, translationMatrix, 0);
-
-        // Update the object's position for the next frame
-        objectPositionX += 0.005f; // Adjust this value based on your desired movement speed
-
+        moveObject();
+        rotateObject();
+        /**
 //        square.draw(vPMatrix);
 
 //        float[] scratch = new float[16];
@@ -119,7 +131,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
 //        square.draw(scratch);
 
 
-        float[] scratch = new float[16];
+
 
 
         // -----------------------------------------------------------------------------
@@ -128,9 +140,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
 //         float angle = 0.090f * ((int) time);
 //        Matrix.setRotateM(rotationMatrix, 0, angle, 0, 0, -1.0f);
 
-        long time = SystemClock.uptimeMillis() % 2000L;
-        float angle = (360.0f / 2000.0f) * ((int) time);
-        Matrix.setRotateM(rotationMatrix, 0, angle, 0.8f, 0.9f, -0.60f);
+
 
         // Create a translation for the object
 //        float translationX = (float) (Math.sin(Math.toRadians(angle)) * 0.5); // Adjust translation distance as needed
@@ -157,38 +167,22 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
                 Matrix.rotateM(rotationMatrix, 0, angleY, 0.0f, 1.0f, 0.0f);
                 Matrix.rotateM(rotationMatrix, 0, angleZ, 0.0f, 0.0f, 1.0f);
             }
-        }*/
+        }
 
 
 
-        // Combine the rotation matrix with the projection and camera view
-        // Note that the vPMatrix factor *must be first* in order
-        // for the matrix multiplication product to be correct.
-        Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0);
+
 //        Matrix.multiplyMM(scratch, 0, scratch, 0,scratch, 0);
 
 //        Log.d("vPMatrix", "vPMatrix: " + mergeFloatArrayToString(vPMatrix, ","));
+         */
         Log.d("rotation", "rotationMatrix: " + mergeFloatArrayToString(rotationMatrix, ","));
-
 
         // Draw triangle
         square.draw(scratch);
     }
 
 
-    public volatile float mAngle;
-
-    public float getAngle() {
-        return mAngle;
-    }
-
-    public void setAngle(float angle) {
-        mAngle = angle;
-    }
-
-    private float angleX = 0.0f;
-    private float angleY = 0.0f;
-    private float angleZ = 0.0f;
 
     public void rotate(float angleX, float angleY, float angleZ) {
         this.angleX += angleX;
@@ -218,8 +212,29 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         Log.e("Original", "Reset:" + mergeFloatArrayToString(rMatrix, ","));
     }
 
-    public void moveLeft(){
+    public void moveObject(){
 
+        float[] translationMatrix = new float[16];
+        // Update the object's position based on translation
+        Matrix.setIdentityM(translationMatrix, 0);
+        Matrix.translateM(translationMatrix, 0, -objectPositionX, objectPositionX, -objectPositionX);
+        Matrix.multiplyMM(vPMatrix, 0, vPMatrix, 0, translationMatrix, 0);
+
+        // Update the object's position for the next frame
+        objectPositionX += 0.005f; // Adjust this value based on your desired movement speed
+
+    }
+
+    public void rotateObject(){
+
+        long time = SystemClock.uptimeMillis() % 2000L;
+        float angle = (360.0f / 2000.0f) * ((int) time);
+        Matrix.setRotateM(rotationMatrix, 0, angle, 0.8f, 0.9f, -0.60f);
+
+        // Combine the rotation matrix with the projection and camera view
+        // Note that the vPMatrix factor *must be first* in order
+        // for the matrix multiplication product to be correct.
+        Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0);
     }
     public static String mergeFloatArrayToString(float[] floatArray, String delimiter) {
         StringBuilder stringBuilder = new StringBuilder();
