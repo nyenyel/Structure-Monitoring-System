@@ -58,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openGLView.test();
-                openGLView.reset();
-                openGLView.reset();
+
             }
         });
 
