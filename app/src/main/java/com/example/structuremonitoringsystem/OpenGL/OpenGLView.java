@@ -41,8 +41,8 @@ public class OpenGLView extends GLSurfaceView {
 //        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
     }
 
-    public void left(){
-        renderer.moveObject();
+    public void moveObject(float x, float y, float z){
+        renderer.setPosition(x, y ,z);
         requestRender();
     }
 }

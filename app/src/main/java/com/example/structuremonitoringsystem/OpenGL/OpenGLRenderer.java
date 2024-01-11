@@ -45,6 +45,11 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     public void setAngle(float angle) {
         mAngle = angle;
     }
+    public void setPosition(float xAxis, float yAxis, float zAxis ){
+        objectPositionX += xAxis;
+        objectPositionY += yAxis;
+        objectPositionZ += zAxis;
+    }
 
     public OpenGLRenderer(Context context) {
         this.context = context;
@@ -104,11 +109,11 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         float[] translationMatrix = new float[16];
         // Update the object's position based on translation
         Matrix.setIdentityM(translationMatrix, 0);
-        Matrix.translateM(translationMatrix, 0, -objectPositionX, objectPositionX, -objectPositionX);
+        Matrix.translateM(translationMatrix, 0, objectPositionX, objectPositionY, objectPositionZ);
         Matrix.multiplyMM(vPMatrix, 0, vPMatrix, 0, translationMatrix, 0);
 
         // Update the object's position for the next frame
-        objectPositionX += 0.005f; // Adjust this value based on your desired movement speed
+        // objectPositionX += 0.005f; // Adjust this value based on your desired movement speed
 
     }
 
