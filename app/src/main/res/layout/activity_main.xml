@@ -10,7 +10,7 @@
     <com.example.structuremonitoringsystem.OpenGL.OpenGLView
         android:id="@+id/openGLView"
         android:layout_width="match_parent"
-        android:layout_height="900px"
+        android:layout_height="901px"
         android:layout_marginStart="15px"
         android:layout_marginTop="15px"
         android:layout_marginEnd="15px"

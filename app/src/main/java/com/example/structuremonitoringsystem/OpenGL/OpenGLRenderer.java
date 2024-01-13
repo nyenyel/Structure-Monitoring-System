@@ -18,25 +18,37 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     private final Context context;
     private Triangle triangle;
     private Square square;
+    public volatile float mAngle;
 
-    // vPMatrix is an abbreviation for "Model View Projection Matrix"
-    private float objectPositionX = 0.0f;
+    private float[] scratch = new float[16];
     private final float[] vPMatrix = new float[16];
     private final float[] projectionMatrix = new float[16];
     private final float[] viewMatrix = new float[16];
-    private float[] originalVpMatrix = new float[16];
-    private float[] originalRotationMatrix = new float[16];
+    private float[] rotationMatrix = new float[16];
 
-    private boolean isReset = false;
+    // vPMatrix is an abbreviation for "Model View Projection Matrix"
+    private float objectPositionX = 0.0f;
+    private float objectPositionY = 0.0f;
+    private float objectPositionZ = 0.0f;
 
     private boolean isFirstRun = true;
+
 
     public void setFirstRun(boolean isFirstRun){
         this.isFirstRun = isFirstRun;
     }
 
-    public void setReset(boolean isReset){
-        this.isReset = isReset;
+    public float getAngle() {
+        return mAngle;
+    }
+
+    public void setAngle(float angle) {
+        mAngle = angle;
+    }
+    public void setPosition(float xAxis, float yAxis, float zAxis ){
+        objectPositionX += xAxis;
+        objectPositionY += yAxis;
+        objectPositionZ += zAxis;
     }
 
     public OpenGLRenderer(Context context) {
@@ -72,14 +84,6 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         Matrix.frustumM(projectionMatrix, 0, -ratio, ratio, -1, 1, 3, 7);
     }
 
-    private float[] rotationMatrix = new float[16];
-
-    private float[] rMatrix = {
-            1.0f,0.0f,0.0f,
-            0.0f,0.0f,1.0f,
-            0.0f,0.0f,0.0f,
-            0.0f,1.0f,0.0f,
-            0.0f,0.0f,0.0f,1.0f};
 
     @Override
     public void onDrawFrame(GL10 gl) {
@@ -91,135 +95,38 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         // Calculate the projection and view transformation
         Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0);
 
+        moveObject();
+        rotateObject();
 
-        float[] translationMatrix = new float[16];
-        // Update the object's position based on translation
-        Matrix.setIdentityM(translationMatrix, 0);
-        Matrix.translateM(translationMatrix, 0, -objectPositionX, objectPositionX, -objectPositionX);
-        Matrix.multiplyMM(vPMatrix, 0, vPMatrix, 0, translationMatrix, 0);
-
-        // Update the object's position for the next frame
-        objectPositionX += 0.005f; // Adjust this value based on your desired movement speed
-
-//        square.draw(vPMatrix);
-
-//        float[] scratch = new float[16];
-//
-//        // Create a rotation transformation for the triangle
-//        long time = SystemClock.uptimeMillis() % 4000L;
-//        float angle = 0.090f * ((int) time);
-//        Matrix.setRotateM(rotationMatrix, 0, angle, 0, 0, -1.0f);
-//
-//        // Combine the rotation matrix with the projection and camera view
-//        // Note that the vPMatrix factor *must be first* in order
-//        // for the matrix multiplication product to be correct.
-//        Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0);
-//
-//        // Draw triangle
-//        square.draw(scratch);
-
-
-        float[] scratch = new float[16];
-
-
-        // -----------------------------------------------------------------------------
-        // Create a rotation for the triangle
-//         long time = SystemClock.uptimeMillis() % 2000L;
-//         float angle = 0.090f * ((int) time);
-//        Matrix.setRotateM(rotationMatrix, 0, angle, 0, 0, -1.0f);
-
-        long time = SystemClock.uptimeMillis() % 2000L;
-        float angle = (360.0f / 2000.0f) * ((int) time);
-        Matrix.setRotateM(rotationMatrix, 0, angle, 0.8f, 0.9f, -0.60f);
-
-        // Create a translation for the object
-//        float translationX = (float) (Math.sin(Math.toRadians(angle)) * 0.5); // Adjust translation distance as needed
-
-        // Combine rotation and translation with the projection and camera view
-
-
-        // -----------------------------------------------------------------------------
-/**
-        if(isReset){
-            resetView();
-            setReset(false);
-
-        }
-        else {
-            // Create a rotation matrix based on the accumulated angles
-            if(isFirstRun){
-                storeOriginalVpMatrix();
-                Log.d("First Run", "First Run");
-                setFirstRun(false);
-            }
-            else {
-                Matrix.setRotateM(rotationMatrix, 0, angleX, 1.0f, 0.0f, 0.0f);
-                Matrix.rotateM(rotationMatrix, 0, angleY, 0.0f, 1.0f, 0.0f);
-                Matrix.rotateM(rotationMatrix, 0, angleZ, 0.0f, 0.0f, 1.0f);
-            }
-        }*/
-
-
-
-        // Combine the rotation matrix with the projection and camera view
-        // Note that the vPMatrix factor *must be first* in order
-        // for the matrix multiplication product to be correct.
-        Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0);
-//        Matrix.multiplyMM(scratch, 0, scratch, 0,scratch, 0);
-
-//        Log.d("vPMatrix", "vPMatrix: " + mergeFloatArrayToString(vPMatrix, ","));
         Log.d("rotation", "rotationMatrix: " + mergeFloatArrayToString(rotationMatrix, ","));
-
 
         // Draw triangle
         square.draw(scratch);
     }
 
+    public void moveObject(){
 
-    public volatile float mAngle;
+        float[] translationMatrix = new float[16];
+        // Update the object's position based on translation
+        Matrix.setIdentityM(translationMatrix, 0);
+        Matrix.translateM(translationMatrix, 0, objectPositionX, objectPositionY, objectPositionZ);
+        Matrix.multiplyMM(vPMatrix, 0, vPMatrix, 0, translationMatrix, 0);
 
-    public float getAngle() {
-        return mAngle;
-    }
-
-    public void setAngle(float angle) {
-        mAngle = angle;
-    }
-
-    private float angleX = 0.0f;
-    private float angleY = 0.0f;
-    private float angleZ = 0.0f;
-
-    public void rotate(float angleX, float angleY, float angleZ) {
-        this.angleX += angleX;
-        this.angleY += angleY;
-
-        Log.e("Current Coordinates", "thiscX: " + this.angleX);
-        Log.e("Current Coordinates", "thiscY: " + this.angleY);
-
-        // If you want to include rotation around the Z axis, uncomment the line below
-        this.angleZ += angleZ;
-    }
-
-    public void storeOriginalVpMatrix() {
-        // Store the current state as the original state
-        Matrix.setRotateM(rotationMatrix, 0, angleX, 1.0f, 0.0f, 0.0f);
-        Matrix.rotateM(rotationMatrix, 0, angleY, 0.0f, 1.0f, 0.0f);
-        Matrix.rotateM(rotationMatrix, 0, angleZ, 0.0f, 0.0f, 1.0f);
-        System.arraycopy(vPMatrix, 0, originalVpMatrix, 0, vPMatrix.length);
-        System.arraycopy(rotationMatrix, 0, originalRotationMatrix, 0, rotationMatrix.length);
+        // Update the object's position for the next frame
+        // objectPositionX += 0.005f; // Adjust this value based on your desired movement speed
 
     }
-    public void resetView() {
-        // Restore the original state
-//        System.arraycopy(originalVpMatrix, 0, vPMatrix, 0, vPMatrix.length);
-//        System.arraycopy(originalVpMatrix, 0, vPMatrix, 0, vPMatrix.length);
-        System.arraycopy(rMatrix, 0, rotationMatrix, 0, rotationMatrix.length);
-        Log.e("Original", "Reset:" + mergeFloatArrayToString(rMatrix, ","));
-    }
 
-    public void moveLeft(){
+    public void rotateObject(){
 
+        long time = SystemClock.uptimeMillis() % 2000L;
+        float angle = (360.0f / 2000.0f) * ((int) time);
+        Matrix.setRotateM(rotationMatrix, 0, angle, 0.8f, 0.9f, -0.60f);
+
+        // Combine the rotation matrix with the projection and camera view
+        // Note that the vPMatrix factor *must be first* in order
+        // for the matrix multiplication product to be correct.
+        Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0);
     }
     public static String mergeFloatArrayToString(float[] floatArray, String delimiter) {
         StringBuilder stringBuilder = new StringBuilder();
