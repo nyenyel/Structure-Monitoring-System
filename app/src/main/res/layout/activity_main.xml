@@ -20,9 +20,8 @@
     <RelativeLayout
         android:id="@+id/btnLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/openGLView"
-        android:layout_above="@id/text">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/openGLView">
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,12 +61,82 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="reset"
+                android:text="Move"
                 android:id="@+id/centerBtn"
                 android:layout_below="@+id/upBtn"
                 android:layout_toRightOf="@id/leftBtn"/>
         </RelativeLayout>
 
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_below="@+id/btnLayout"
+        android:layout_above="@id/text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Up"
+                android:id="@+id/rotateUpBtn"
+                android:layout_centerHorizontal="true"/>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Left"
+                android:id="@+id/rotateLeftBtn"
+                android:layout_below="@id/rotateUpBtn"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Down"
+                android:id="@+id/rotateDownBtn"
+                android:layout_below="@id/rotateCenterBtn"
+                android:layout_centerHorizontal="true"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Right"
+                android:id="@+id/rotateRightBtn"
+                android:layout_below="@+id/rotateUpBtn"
+                android:layout_toRightOf="@id/rotateCenterBtn"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rotate"
+                android:id="@+id/rotateCenterBtn"
+                android:layout_below="@+id/rotateUpBtn"
+                android:layout_toRightOf="@id/rotateLeftBtn"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⬊"
+                android:id="@+id/rotate45Btn"
+                android:layout_toRightOf="@id/rotateUpBtn"
+                android:layout_centerHorizontal="true"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⬋"
+                android:id="@+id/rotate315Btn"
+                android:layout_toLeftOf="@id/rotateUpBtn"
+                android:layout_centerHorizontal="true"/>
+
+
+        </RelativeLayout>
     </RelativeLayout>
 
 
