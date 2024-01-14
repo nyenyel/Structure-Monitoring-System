@@ -42,23 +42,61 @@ public class Square {
     // num of coordinates per vertex in the array
     static final int COORDS_PER_VERTEX = 3;
     static float squareCoords[] = { // counter-clockwise
-            -0.2f,  0.2f, 0.0f,   // top left
-            0.2f,  0.2f, 0.0f,   // top right
-            0.2f, -0.2f, 0.0f,   // bottom right
-            -0.2f, -0.2f, 0.0f    // bottom left
+//            -0.2f,  0.2f, 0.0f,   // top left
+//            0.2f,  0.2f, 0.0f,   // top right
+//            0.2f, -0.2f, 0.0f,   // bottom right
+//            -0.2f, -0.2f, 0.0f    // bottom left
+
+            -0.5f, -0.5f,  0.5f,
+            0.5f, -0.5f,  0.5f,
+            0.5f,  0.5f,  0.5f,
+            -0.5f,  0.5f,  0.5f,
+
+
+            0.5f, -0.5f,  0.5f,
+            0.5f, -0.5f, -0.5f,
+            0.5f,  0.5f, -0.5f,
+            0.5f,  0.5f,  0.5f,
+
+
+            0.5f, -0.5f, -0.5f,
+            -0.5f, -0.5f, -0.5f,
+            -0.5f,  0.5f, -0.5f,
+            0.5f,  0.5f, -0.5f,
+
+
+            -0.5f, -0.5f, -0.5f,
+            -0.5f, -0.5f,  0.5f,
+            -0.5f,  0.5f,  0.5f,
+            -0.5f,  0.5f, -0.5f,
+
+
+            -0.5f,  0.5f,  0.5f,
+            0.5f,  0.5f,  0.5f,
+            0.5f,  0.5f, -0.5f,
+            -0.5f,  0.5f, -0.5f,
+
+
+            -0.5f, -0.5f,  0.5f,
+            0.5f, -0.5f,  0.5f,
+            0.5f, -0.5f, -0.5f,
+            -0.5f, -0.5f, -0.5f,
     };
 
     private final int vertexCount = squareCoords.length / COORDS_PER_VERTEX;
     private final int vertexStride = COORDS_PER_VERTEX * 4;
 
     // object Color
-    float squareColor[] = {0f, 1f, 0f, 1f}; // Green color for the square
+    float squareColor[] = {
+            0f, 1f, 0f, 1f
+    };
 
     // this creates the square object
     public Square() {
         // initialize vertex byte buffer for shape coordinates
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(squareCoords.length * 4);
         byteBuffer.order(ByteOrder.nativeOrder());
+
         vertexBuffer = byteBuffer.asFloatBuffer();
         vertexBuffer.put(squareCoords);
         vertexBuffer.position(0);
