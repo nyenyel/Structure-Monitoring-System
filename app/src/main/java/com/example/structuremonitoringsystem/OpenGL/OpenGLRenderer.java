@@ -7,6 +7,7 @@ import android.opengl.Matrix;
 import android.os.SystemClock;
 import android.util.Log;
 
+import com.example.structuremonitoringsystem.OpenGL.Objects.Cube;
 import com.example.structuremonitoringsystem.OpenGL.Objects.Square;
 import com.example.structuremonitoringsystem.OpenGL.Objects.Triangle;
 
@@ -18,8 +19,8 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     private final Context context;
     private Triangle triangle;
     private Square square;
-    public volatile float mAngle;
 
+    private Cube cube;
     private float[] scratch = new float[16];
     private final float[] vPMatrix = new float[16];
     private final float[] projectionMatrix = new float[16];
@@ -31,24 +32,33 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     private float objectPositionY = 0.0f;
     private float objectPositionZ = 0.0f;
 
-    private boolean isFirstRun = true;
+    private float objectRotationX = 0f;
+    private float objectRotationY = 0f;
+    private float objectRotationZ = 0f;
+    //until what degree will it go
+    private float angle = 1f;
 
+    //how long will it take for the object to rotate a full objectRotationInDegree Variable 1000f = 1s
+    private float objectRotateDuration = 0f;
+
+    private boolean isFirstRun = true;
 
     public void setFirstRun(boolean isFirstRun){
         this.isFirstRun = isFirstRun;
     }
 
-    public float getAngle() {
-        return mAngle;
-    }
-
-    public void setAngle(float angle) {
-        mAngle = angle;
-    }
     public void setPosition(float xAxis, float yAxis, float zAxis ){
         objectPositionX += xAxis;
         objectPositionY += yAxis;
         objectPositionZ += zAxis;
+    }
+
+    public void setRotation(float xRotation, float yRotation, float zRotation, float angle, float rotationDuration){
+        objectRotationX += xRotation;
+        objectRotationY += yRotation;
+        objectRotationZ += zRotation;
+        this.angle += angle;
+        objectRotateDuration = rotationDuration;
     }
 
     public OpenGLRenderer(Context context) {
@@ -71,23 +81,29 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         GLES20.glClearColor(0.2f, 0.2f, 0.2f,  0.03f);
         triangle = new Triangle();
         square = new Square();
+        cube = new Cube();
+
     }
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         GLES20.glViewport(0,0,width, height);
+        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
+        GLES20.glDepthFunc(GLES20.GL_LEQUAL);
+
 
         float ratio = (float) width / height;
 
         // this projection matrix is applied to object coordinates
         // in the onDrawFrame() method
-        Matrix.frustumM(projectionMatrix, 0, -ratio, ratio, -1, 1, 3, 7);
+        Matrix.frustumM(projectionMatrix, 0, -ratio, ratio, -1, 1, 2, 22);
     }
 
 
     @Override
     public void onDrawFrame(GL10 gl) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
         // Set the camera position (View matrix)
         Matrix.setLookAtM(viewMatrix, 0, 0, 0, 4, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
@@ -98,10 +114,10 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         moveObject();
         rotateObject();
 
-        Log.d("rotation", "rotationMatrix: " + mergeFloatArrayToString(rotationMatrix, ","));
+//        Log.d("rotation", "rotationMatrix: " + mergeFloatArrayToString(rotationMatrix, ","));
 
-        // Draw triangle
-        square.draw(scratch);
+
+        cube.draw(scratch, viewMatrix);
     }
 
     public void moveObject(){
@@ -119,9 +135,14 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
 
     public void rotateObject(){
 
+        //animate the object
         long time = SystemClock.uptimeMillis() % 2000L;
-        float angle = (360.0f / 2000.0f) * ((int) time);
-        Matrix.setRotateM(rotationMatrix, 0, angle, 0.8f, 0.9f, -0.60f);
+        //this will complete a full rotation of the angle with in the specified time 1000f is equal to 1s
+        //remove "this." at this.angle to animate within a set of time
+        //and change the this.angle at float angle to 360f
+        float angle = (360 / objectRotateDuration) * ((int) time);
+        Matrix.setRotateM(rotationMatrix, 0, this.angle, objectRotationX, objectRotationY, objectRotationZ);
+        Log.e("Angle", angle+" + " + objectRotationX+" + "  + objectRotationY+" + "  + objectRotationZ);
 
         // Combine the rotation matrix with the projection and camera view
         // Note that the vPMatrix factor *must be first* in order
