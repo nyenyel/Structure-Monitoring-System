@@ -25,6 +25,13 @@ public class MainActivity extends AppCompatActivity {
     private AppCompatButton rotateUpBtn, rotateDownBtn, rotateRightBtn, rotateLeftBtn,
             rotateCenterBtn, rotate45Btn, rotate315Btn;
 
+    private float x = 0f;
+    private float y = 0f;
+    private float z = 0f;
+    private  float a = 0f;
+
+    private float fullRotation = 360*6;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         rotate315Btn = (AppCompatButton) findViewById(R.id.rotate315Btn);
 
         context = this;
+
 
 
         upBtn.setOnClickListener(new View.OnClickListener() {
@@ -96,26 +104,78 @@ public class MainActivity extends AppCompatActivity {
         rotateUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGLView.rotateObject(1f, 0f, 0f, 1f, 2f);
+                boolean isZero = openGLView.getCurrentRotationX() <= 0;
+                boolean angleIsZero = openGLView.getCurrentAngle() == 0;
+                x = -6f;
+                y = 0f;
+                z = 0f;
+                a = -1f;
+                if(isZero){
+                    x = fullRotation;
+                }
+                if (angleIsZero){
+                    a = 360f;
+                }
+                openGLView.rotateObject(x, y , z, a, 2f);
+
             }
         });
         rotateDownBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGLView.rotateObject(-1f, 0f, 0f, -1f, 2f);
+                boolean isFullyRotated = openGLView.getCurrentRotationX() >= fullRotation;
+                boolean angleIs360 = openGLView.getCurrentAngle() >= 360;
+                x = 6f;
+                y = 0f;
+                z = 0f;
+                a = 1f;
+                if(isFullyRotated){
+                    x = -fullRotation;
+                }
+                if(angleIs360){
+                    a = -360;
+                }
+                openGLView.rotateObject(x, y , z, a, 2f);
+
             }
         });
 
         rotateLeftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGLView.rotateObject(0f, -1f, 0f, -1f, 2f);
+                boolean isZero = openGLView.getCurrentRotationY() <= 0;
+                boolean angleIsZero = openGLView.getCurrentAngle() == 0;
+                x = 0f;
+                y = -6f;
+                z = 0f;
+                a = -1f;
+                if(isZero){
+                    y = fullRotation;
+                }
+                if (angleIsZero){
+                    a = 360f;
+                }
+                openGLView.rotateObject(x, y , z, a, 2f);
+
             }
         });
         rotateRightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGLView.rotateObject(0f, 1f, 0f, 1f, 2f);
+                boolean isFullyRotated = openGLView.getCurrentRotationY() >= fullRotation;
+                boolean angleIs360 = openGLView.getCurrentAngle() >= 360;
+                x = 0f;
+                y = 6f;
+                z = 0f;
+                a = 1f;
+                if(isFullyRotated){
+                    y = -fullRotation;
+                }
+                if(angleIs360){
+                    a = -360;
+                }
+                openGLView.rotateObject(x, y , z, a, 2f);
+
             }
         });
         rotateCenterBtn.setOnClickListener(new View.OnClickListener() {
@@ -127,13 +187,42 @@ public class MainActivity extends AppCompatActivity {
         rotate45Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGLView.rotateObject(0f, 0f, 1f, 1f, 2f);
+
+                boolean isZero = openGLView.getCurrentRotationZ() <= 0;
+                boolean angleIsZero = openGLView.getCurrentAngle() == 0;
+                x = 0f;
+                y = 0f;
+                z = -6f;
+                a = -1f;
+                if(isZero){
+                    z = fullRotation;
+                }
+                if (angleIsZero){
+                    a = 360f;
+                }
+                openGLView.rotateObject(x, y , z, a, 2f);
             }
+
         });
         rotate315Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGLView.rotateObject(0f, 0f, -1f, -1f, 2f);
+
+                boolean isFullyRotated = openGLView.getCurrentRotationZ() >= fullRotation;
+                boolean angleIs360 = openGLView.getCurrentAngle() >= 360;
+                x = 0f;
+                y = 0f;
+                z = 6f;
+                a = 1f;
+                if(isFullyRotated){
+                    z = -fullRotation;
+                }
+                if(angleIs360){
+                    a = -360;
+                }
+                openGLView.rotateObject(x, y , z, a, 2f);
+
+
             }
         });
 

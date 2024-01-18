@@ -50,4 +50,20 @@ public class OpenGLView extends GLSurfaceView {
         renderer.setRotation(x, y, z, deg, time*1000);
         requestRender();
     }
+
+    public float getCurrentRotationX(){
+        return renderer.getObjectRotationX();
+    }
+
+    public float getCurrentRotationY(){
+        return renderer.getObjectRotationY();
+    }
+
+    public float getCurrentRotationZ(){
+        return renderer.getObjectRotationZ();
+    }
+
+    public float getCurrentAngle(){
+        return renderer.getAngle();
+    }
 }

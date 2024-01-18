@@ -33,10 +33,28 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     private float objectPositionZ = 0.0f;
 
     private float objectRotationX = 0f;
+
+    public float getObjectRotationX() {
+        return objectRotationX;
+    }
+
+    public float getObjectRotationY() {
+        return objectRotationY;
+    }
+
+    public float getObjectRotationZ() {
+        return objectRotationZ;
+    }
+
     private float objectRotationY = 0f;
     private float objectRotationZ = 0f;
+
+    public float getAngle() {
+        return angle;
+    }
+
     //until what degree will it go
-    private float angle = 1f;
+    private float angle = 0f;
 
     //how long will it take for the object to rotate a full objectRotationInDegree Variable 1000f = 1s
     private float objectRotateDuration = 0f;
@@ -53,11 +71,11 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         objectPositionZ += zAxis;
     }
 
-    public void setRotation(float xRotation, float yRotation, float zRotation, float angle, float rotationDuration){
+    public void setRotation(float xRotation, float yRotation, float zRotation, float a, float rotationDuration){
         objectRotationX += xRotation;
         objectRotationY += yRotation;
         objectRotationZ += zRotation;
-        this.angle += angle;
+        angle += a;
         objectRotateDuration = rotationDuration;
     }
 
@@ -140,9 +158,15 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         //this will complete a full rotation of the angle with in the specified time 1000f is equal to 1s
         //remove "this." at this.angle to animate within a set of time
         //and change the this.angle at float angle to 360f
-        float angle = (360 / objectRotateDuration) * ((int) time);
-        Matrix.setRotateM(rotationMatrix, 0, this.angle, objectRotationX, objectRotationY, objectRotationZ);
-        Log.e("Angle", angle+" + " + objectRotationX+" + "  + objectRotationY+" + "  + objectRotationZ);
+//        float angle = (360 / objectRotateDuration) * ((int) time);
+
+
+        float finalAngle = (objectRotationX + objectRotationY+ objectRotationZ)/6;
+//        angle = (objectPositionX + objectRotationY+ objectRotationZ)/6;
+        //finalAngle = (finalAngle % 360 + 360) % 360;
+
+        Matrix.setRotateM(rotationMatrix, 0, finalAngle, objectRotationX, objectRotationY, objectRotationZ);
+        Log.e("Angle", finalAngle+" + " + objectRotationX+" + "  + objectRotationY+" + "  + objectRotationZ );
 
         // Combine the rotation matrix with the projection and camera view
         // Note that the vPMatrix factor *must be first* in order
