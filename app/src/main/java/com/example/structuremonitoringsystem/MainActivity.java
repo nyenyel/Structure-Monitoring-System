@@ -110,12 +110,12 @@ public class MainActivity extends AppCompatActivity {
                 y = 0f;
                 z = 0f;
                 a = -1f;
-                if(isZero){
-                    x = fullRotation;
-                }
-                if (angleIsZero){
-                    a = 360f;
-                }
+//                if(isZero){
+//                    x = fullRotation;
+//                }
+//                if (angleIsZero){
+//                    a = 360f;
+//                }
                 openGLView.rotateObject(x, y , z, a, 2f);
 
             }
@@ -129,12 +129,12 @@ public class MainActivity extends AppCompatActivity {
                 y = 0f;
                 z = 0f;
                 a = 1f;
-                if(isFullyRotated){
-                    x = -fullRotation;
-                }
-                if(angleIs360){
-                    a = -360;
-                }
+//                if(isFullyRotated){
+//                    x = -fullRotation;
+//                }
+//                if(angleIs360){
+//                    a = -360;
+//                }
                 openGLView.rotateObject(x, y , z, a, 2f);
 
             }
@@ -149,12 +149,12 @@ public class MainActivity extends AppCompatActivity {
                 y = -6f;
                 z = 0f;
                 a = -1f;
-                if(isZero){
-                    y = fullRotation;
-                }
-                if (angleIsZero){
-                    a = 360f;
-                }
+//                if(isZero){
+//                    y = fullRotation;
+//                }
+//                if (angleIsZero){
+//                    a = 360f;
+//                }
                 openGLView.rotateObject(x, y , z, a, 2f);
 
             }
@@ -168,12 +168,12 @@ public class MainActivity extends AppCompatActivity {
                 y = 6f;
                 z = 0f;
                 a = 1f;
-                if(isFullyRotated){
-                    y = -fullRotation;
-                }
-                if(angleIs360){
-                    a = -360;
-                }
+//                if(isFullyRotated){
+//                    y = -fullRotation;
+//                }
+//                if(angleIs360){
+//                    a = -360;
+//                }
                 openGLView.rotateObject(x, y , z, a, 2f);
 
             }
@@ -194,12 +194,12 @@ public class MainActivity extends AppCompatActivity {
                 y = 0f;
                 z = -6f;
                 a = -1f;
-                if(isZero){
-                    z = fullRotation;
-                }
-                if (angleIsZero){
-                    a = 360f;
-                }
+//                if(isZero){
+//                    z = fullRotation;
+//                }
+//                if (angleIsZero){
+//                    a = 360f;
+//                }
                 openGLView.rotateObject(x, y , z, a, 2f);
             }
 
@@ -214,12 +214,12 @@ public class MainActivity extends AppCompatActivity {
                 y = 0f;
                 z = 6f;
                 a = 1f;
-                if(isFullyRotated){
-                    z = -fullRotation;
-                }
-                if(angleIs360){
-                    a = -360;
-                }
+//                if(isFullyRotated){
+//                    z = -fullRotation;
+//                }
+//                if(angleIs360){
+//                    a = -360;
+//                }
                 openGLView.rotateObject(x, y , z, a, 2f);
 
 

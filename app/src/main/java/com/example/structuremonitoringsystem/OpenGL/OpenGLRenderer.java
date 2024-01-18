@@ -159,9 +159,23 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         //remove "this." at this.angle to animate within a set of time
         //and change the this.angle at float angle to 360f
 //        float angle = (360 / objectRotateDuration) * ((int) time);
+        float tempX = objectRotationX;
+        float tempY = objectRotationY;
+        float tempZ = objectRotationZ;
 
+        if(tempX < 0){
+            tempX = -tempX;
+        }
 
-        float finalAngle = (objectRotationX + objectRotationY+ objectRotationZ)/6;
+        if(tempY < 0){
+            tempY = -tempY;
+        }
+
+        if(tempZ < 0){
+            tempZ = -tempZ;
+        }
+        float finalAngle = (tempX + tempY+ tempZ)/6;
+
 //        angle = (objectPositionX + objectRotationY+ objectRotationZ)/6;
         //finalAngle = (finalAngle % 360 + 360) % 360;
 
