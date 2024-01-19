@@ -8,6 +8,7 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import com.example.structuremonitoringsystem.OpenGL.Objects.Cube;
+import com.example.structuremonitoringsystem.OpenGL.Objects.CustomCube;
 import com.example.structuremonitoringsystem.OpenGL.Objects.Square;
 import com.example.structuremonitoringsystem.OpenGL.Objects.Triangle;
 
@@ -19,6 +20,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     private final Context context;
     private Triangle triangle;
     private Square square;
+    private CustomCube customCube;
 
     private Cube cube;
     private float[] scratch = new float[16];
@@ -61,6 +63,11 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
 
     private boolean isFirstRun = true;
 
+    private float oWidth = 0f;
+    private float oHeight = 0f;
+    private float oThickness = 0f;
+
+
     public void setFirstRun(boolean isFirstRun){
         this.isFirstRun = isFirstRun;
     }
@@ -79,8 +86,11 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         objectRotateDuration = rotationDuration;
     }
 
-    public OpenGLRenderer(Context context) {
+    public OpenGLRenderer(Context context, float width, float height, float thickness) {
         this.context = context;
+        oWidth = width;
+        oHeight = height;
+        oThickness = thickness;
     }
 
     public static int loadShader(int type, String shaderCode){
@@ -101,6 +111,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         square = new Square();
         cube = new Cube();
 
+        customCube = new CustomCube(oWidth,oHeight,oThickness);
     }
 
     @Override
@@ -132,10 +143,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         moveObject();
         rotateObject();
 
-//        Log.d("rotation", "rotationMatrix: " + mergeFloatArrayToString(rotationMatrix, ","));
-
-
-        cube.draw(scratch, viewMatrix);
+        customCube.draw(scratch, viewMatrix);
     }
 
     public void moveObject(){
@@ -187,6 +195,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         // for the matrix multiplication product to be correct.
         Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0);
     }
+
     public static String mergeFloatArrayToString(float[] floatArray, String delimiter) {
         StringBuilder stringBuilder = new StringBuilder();
 
