@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.structuremonitoringsystem.Bluetooth.BluetoothConnection;
 import com.example.structuremonitoringsystem.OpenGL.OpenGLView;
@@ -32,12 +33,30 @@ public class MainActivity extends AppCompatActivity {
 
     private float fullRotation = 360*6;
 
+    public float getWidth() {
+        return width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public float getThickness() {
+        return thickness;
+    }
+
+    private static float width, height, thickness;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        width = (getIntent().getFloatExtra("width", 0f))/100;
+        height = (getIntent().getFloatExtra("height", 0f))/100;
+        thickness = (getIntent().getFloatExtra("thickness", 0f))/100;
+        Log.e("Test", thickness+"");
+//        openGLView.thickness = thickness;
         setContentView(R.layout.activity_main);
 
-        GlobalVariable globalVariable = new GlobalVariable();
 
         openGLView = (OpenGLView) findViewById(R.id.openGLView);
 
@@ -58,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         rotate315Btn = (AppCompatButton) findViewById(R.id.rotate315Btn);
 
         context = this;
-
 
 
         upBtn.setOnClickListener(new View.OnClickListener() {
@@ -93,11 +111,7 @@ public class MainActivity extends AppCompatActivity {
         centerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGLView.test();
-                String MAC = globalVariable.getDeviceMacList(context);
-                String name= globalVariable.getDeviceNameList(context);
-                Log.e("MAC", MAC+"");
-                Log.e("Name", name+"");
+
             }
         });
 
@@ -225,6 +239,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
 
     }
 
