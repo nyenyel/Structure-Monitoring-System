@@ -25,6 +25,8 @@ public class Cube {
     private float[] lightPosition = {1.0f, 2.0f, 0.0f};
     private float[] lightColor = {5.0f, 5.0f, 5.0f};
 
+
+
     // Coordinates of the cube vertices
     static float cubeCoords[] = {
             // Front face
