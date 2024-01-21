@@ -4,31 +4,53 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.structuremonitoringsystem.LocalDatabase.DatabaseHelper;
+
+import java.util.ArrayList;
+
 public class CreateObject extends AppCompatActivity {
 
-    private AppCompatButton createObj;
-    private EditText height,width,thickness;
+    private DatabaseHelper databaseHelper;
+    private AppCompatButton createObj , getData;
+    private EditText height,width,thickness,tempName;
+
+    private static ArrayList<String> template_name, _id;
+    private static ArrayList<Float> _height, _width, _thickness;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_object);
 
-        createObj = (AppCompatButton) findViewById(R.id.createObj);
+        databaseHelper = new DatabaseHelper(CreateObject.this);
 
+        template_name = new ArrayList<>();
+        _id = new ArrayList<>();
+        _width = new ArrayList<>();
+        _height = new ArrayList<>();
+        _thickness = new ArrayList<>();
+
+        createObj = (AppCompatButton) findViewById(R.id.createObj);
+        getData = (AppCompatButton) findViewById(R.id.getData);
+
+        tempName = (EditText) findViewById(R.id.tempName);
         height = (EditText) findViewById(R.id.height);
         width = (EditText) findViewById(R.id.width);
         thickness = (EditText) findViewById(R.id.thickness);
+
+//        storeData();
 
         createObj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
+                    String getTemplateName = tempName.getText().toString();
                     float getHeight = Float.parseFloat(height.getText().toString());
                     float getWidth = Float.parseFloat(width.getText().toString());
                     float getThickness = Float.parseFloat(thickness.getText().toString());
@@ -37,7 +59,16 @@ public class CreateObject extends AppCompatActivity {
                     intent.putExtra("height", getHeight);
                     intent.putExtra("width", getWidth);
                     intent.putExtra("thickness", getThickness);
-                    startActivity(intent);
+
+
+//                    databaseHelper.addTemplate(getTemplateName, getWidth, getHeight, getThickness);
+//                    databaseHelper.updateTemplateData("2",getTemplateName, getWidth, getHeight, getThickness);
+//                    databaseHelper.deleteTemplate("1");
+
+                    height.setText("");
+                    width.setText("");
+                    thickness.setText("");
+//                    startActivity(intent);
 
                 }catch (NumberFormatException e){
                     Log.e("Error", "Please Enter Data");
@@ -45,5 +76,42 @@ public class CreateObject extends AppCompatActivity {
 
             }
         });
+
+        getData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                storeSingleData("2");
+            }
+        });
+    }
+
+    private void storeData(){
+        Cursor cursor = databaseHelper.readAllData();
+        if(cursor.getCount() == 0){
+            Log.e("Database Status", "Empty");
+        }else{
+            while (cursor.moveToNext()){
+                _id.add(cursor.getString(0));
+                template_name.add(cursor.getString(1));
+                _height.add(Float.parseFloat(cursor.getString(2)));
+                _width.add(Float.parseFloat(cursor.getString(3)));
+                _thickness.add(Float.parseFloat(cursor.getString(4)));
+            }
+        }
+    }
+
+    private void storeSingleData(String id){
+        Cursor cursor = databaseHelper.getSpecificDataById(id);
+        if(cursor.getCount() == 0){
+            Log.e("Database Status", "Empty");
+        }else{
+            while (cursor.moveToNext()){
+                _id.add(cursor.getString(0));
+                template_name.add(cursor.getString(1));
+                _height.add(Float.parseFloat(cursor.getString(2)));
+                _width.add(Float.parseFloat(cursor.getString(3)));
+                _thickness.add(Float.parseFloat(cursor.getString(4)));
+            }
+        }
     }
 }
