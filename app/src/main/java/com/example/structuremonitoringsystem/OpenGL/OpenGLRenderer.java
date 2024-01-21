@@ -110,7 +110,6 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         triangle = new Triangle();
         square = new Square();
         cube = new Cube();
-
         customCube = new CustomCube(oWidth,oHeight,oThickness);
     }
 
