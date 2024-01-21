@@ -57,7 +57,7 @@ public class GlobalVariable {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 0; i < floatArray.length; i++) {
-            stringBuilder.append(floatArray[i]);
+            stringBuilder.append(floatArray[i]+"f");
 
             // Add the delimiter if it's not the last element
             if (i < floatArray.length - 1) {
