@@ -11,7 +11,16 @@
         android:layout_height="match_parent"
         android:padding="10px">
         <EditText
+            android:id="@+id/tempName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Template Name"
+            android:textColor="@color/black"
+            android:inputType="text"
+            />
+        <EditText
             android:id="@+id/height"
+            android:layout_below="@+id/tempName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="height"
@@ -43,6 +52,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Create Object"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/getData"
+            android:layout_below="@id/createObj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get Data"/>
     </RelativeLayout>
 
 
