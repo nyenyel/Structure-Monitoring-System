@@ -21,6 +21,7 @@ public class Formula {
         return new double[]{roll, pitch, yaw};
     }
 
+
     public static void main(String[] args) {
         // Example usage
         double[][] rotationMatrix = {
