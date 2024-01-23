@@ -8,6 +8,7 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import com.example.structuremonitoringsystem.OpenGL.Objects.Cube;
+import com.example.structuremonitoringsystem.OpenGL.Objects.CustomCube;
 import com.example.structuremonitoringsystem.OpenGL.Objects.Square;
 import com.example.structuremonitoringsystem.OpenGL.Objects.Triangle;
 
@@ -19,6 +20,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     private final Context context;
     private Triangle triangle;
     private Square square;
+    private CustomCube customCube;
 
     private Cube cube;
     private float[] scratch = new float[16];
@@ -33,15 +35,38 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     private float objectPositionZ = 0.0f;
 
     private float objectRotationX = 0f;
+
+    public float getObjectRotationX() {
+        return objectRotationX;
+    }
+
+    public float getObjectRotationY() {
+        return objectRotationY;
+    }
+
+    public float getObjectRotationZ() {
+        return objectRotationZ;
+    }
+
     private float objectRotationY = 0f;
     private float objectRotationZ = 0f;
+
+    public float getAngle() {
+        return angle;
+    }
+
     //until what degree will it go
-    private float angle = 1f;
+    private float angle = 0f;
 
     //how long will it take for the object to rotate a full objectRotationInDegree Variable 1000f = 1s
     private float objectRotateDuration = 0f;
 
     private boolean isFirstRun = true;
+
+    private float oWidth = 0f;
+    private float oHeight = 0f;
+    private float oThickness = 0f;
+
 
     public void setFirstRun(boolean isFirstRun){
         this.isFirstRun = isFirstRun;
@@ -53,16 +78,19 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         objectPositionZ += zAxis;
     }
 
-    public void setRotation(float xRotation, float yRotation, float zRotation, float angle, float rotationDuration){
+    public void setRotation(float xRotation, float yRotation, float zRotation, float a, float rotationDuration){
         objectRotationX += xRotation;
         objectRotationY += yRotation;
         objectRotationZ += zRotation;
-        this.angle += angle;
+        angle += a;
         objectRotateDuration = rotationDuration;
     }
 
-    public OpenGLRenderer(Context context) {
+    public OpenGLRenderer(Context context, float width, float height, float thickness) {
         this.context = context;
+        oWidth = width;
+        oHeight = height;
+        oThickness = thickness;
     }
 
     public static int loadShader(int type, String shaderCode){
@@ -82,7 +110,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         triangle = new Triangle();
         square = new Square();
         cube = new Cube();
-
+        customCube = new CustomCube(oWidth,oHeight,oThickness);
     }
 
     @Override
@@ -114,10 +142,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         moveObject();
         rotateObject();
 
-//        Log.d("rotation", "rotationMatrix: " + mergeFloatArrayToString(rotationMatrix, ","));
-
-
-        cube.draw(scratch, viewMatrix);
+        customCube.draw(scratch, viewMatrix);
     }
 
     public void moveObject(){
@@ -140,15 +165,36 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         //this will complete a full rotation of the angle with in the specified time 1000f is equal to 1s
         //remove "this." at this.angle to animate within a set of time
         //and change the this.angle at float angle to 360f
-        float angle = (360 / objectRotateDuration) * ((int) time);
-        Matrix.setRotateM(rotationMatrix, 0, this.angle, objectRotationX, objectRotationY, objectRotationZ);
-        Log.e("Angle", angle+" + " + objectRotationX+" + "  + objectRotationY+" + "  + objectRotationZ);
+//        float angle = (360 / objectRotateDuration) * ((int) time);
+        float tempX = objectRotationX;
+        float tempY = objectRotationY;
+        float tempZ = objectRotationZ;
+
+        if(tempX < 0){
+            tempX = -tempX;
+        }
+
+        if(tempY < 0){
+            tempY = -tempY;
+        }
+
+        if(tempZ < 0){
+            tempZ = -tempZ;
+        }
+        float finalAngle = (tempX + tempY+ tempZ)/6;
+
+//        angle = (objectPositionX + objectRotationY+ objectRotationZ)/6;
+        //finalAngle = (finalAngle % 360 + 360) % 360;
+
+        Matrix.setRotateM(rotationMatrix, 0, finalAngle, objectRotationX, objectRotationY, objectRotationZ);
+        Log.e("Angle", finalAngle+" + " + objectRotationX+" + "  + objectRotationY+" + "  + objectRotationZ );
 
         // Combine the rotation matrix with the projection and camera view
         // Note that the vPMatrix factor *must be first* in order
         // for the matrix multiplication product to be correct.
         Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0);
     }
+
     public static String mergeFloatArrayToString(float[] floatArray, String delimiter) {
         StringBuilder stringBuilder = new StringBuilder();
 

@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import com.example.structuremonitoringsystem.MainActivity;
+
 public class OpenGLView extends GLSurfaceView {
 
     OpenGLRenderer renderer;
@@ -14,12 +16,16 @@ public class OpenGLView extends GLSurfaceView {
     private float previousY;
     private float previousZ;
 
-    public static void test(){
-        Log.e("Tst", "Test");
+    private float width = 0f;
+    private float height = 0f;
+    public float thickness = 0f;
+
+    public static void test(String loc){
+        Log.e("Tsts", "Test: "+loc );
     }
     public OpenGLView(Context context) {
         super(context);
-        init(context);
+//        init(context);
 
     }
 
@@ -32,14 +38,16 @@ public class OpenGLView extends GLSurfaceView {
         setEGLContextClientVersion(2);
         setPreserveEGLContextOnPause(true);
 
-
+        MainActivity mainActivity = new MainActivity();
+        setObjectSize(mainActivity.getWidth(),mainActivity.getHeight(),mainActivity.getThickness());
         // Pass the context to the OpenGLRenderer constructor
-        renderer = new OpenGLRenderer(context);
+        renderer = new OpenGLRenderer(context, width, height, thickness);
         setRenderer(renderer);
 
         // Render the view only when there is a change in the drawing data
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
     }
+
 
     public void moveObject(float x, float y, float z){
         renderer.setPosition(x, y ,z);
@@ -49,5 +57,27 @@ public class OpenGLView extends GLSurfaceView {
     public void rotateObject(float x, float y, float z, float deg, float time){
         renderer.setRotation(x, y, z, deg, time*1000);
         requestRender();
+    }
+
+    public void setObjectSize(float width, float height, float thickness){
+        this.width = width;
+        this.height = height;
+        this.thickness =thickness;
+    }
+
+    public float getCurrentRotationX(){
+        return renderer.getObjectRotationX();
+    }
+
+    public float getCurrentRotationY(){
+        return renderer.getObjectRotationY();
+    }
+
+    public float getCurrentRotationZ(){
+        return renderer.getObjectRotationZ();
+    }
+
+    public float getCurrentAngle(){
+        return renderer.getAngle();
     }
 }

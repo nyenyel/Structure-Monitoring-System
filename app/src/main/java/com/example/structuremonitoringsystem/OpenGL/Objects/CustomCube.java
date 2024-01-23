@@ -1,14 +1,19 @@
 package com.example.structuremonitoringsystem.OpenGL.Objects;
 
 import android.opengl.GLES20;
+import android.util.Log;
+
 import com.example.structuremonitoringsystem.OpenGL.OpenGLRenderer;
+import com.example.structuremonitoringsystem.Variables.GlobalVariable;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-public class Cube {
+public class CustomCube {
     private final int mProgram;
+
+    private GlobalVariable globalVariable = new GlobalVariable();
     private FloatBuffer vertexBuffer;
     private int positionHandle;
     private int mvpMatrixHandle;
@@ -26,57 +31,8 @@ public class Cube {
     private float[] lightColor = {5.0f, 5.0f, 5.0f};
 
 
-
     // Coordinates of the cube vertices
-    static float cubeCoords[] = {
-            // Front face
-            -0.5f, -0.5f,  0.5f,
-            0.5f, -0.5f,  0.5f,
-            0.5f,  0.5f,  0.5f,
-            -0.5f, -0.5f,  0.5f,
-            0.5f,  0.5f,  0.5f,
-            -0.5f,  0.5f,  0.5f,
 
-            // Right face
-            0.5f, -0.5f,  0.5f,
-            0.5f, -0.5f, -0.5f,
-            0.5f,  0.5f,  0.5f,
-            0.5f, -0.5f, -0.5f,
-            0.5f,  0.5f, -0.5f,
-            0.5f,  0.5f,  0.5f,
-
-            // Back face
-            0.5f, -0.5f, -0.5f,
-            -0.5f, -0.5f, -0.5f,
-            0.5f,  0.5f, -0.5f,
-            -0.5f, -0.5f, -0.5f,
-            -0.5f,  0.5f, -0.5f,
-            0.5f,  0.5f, -0.5f,
-
-            // Left face
-            -0.5f, -0.5f, -0.5f,
-            -0.5f, -0.5f,  0.5f,
-            -0.5f,  0.5f, -0.5f,
-            -0.5f, -0.5f,  0.5f,
-            -0.5f,  0.5f,  0.5f,
-            -0.5f,  0.5f, -0.5f,
-
-            // Top face
-            -0.5f,  0.5f,  0.5f,
-            0.5f,  0.5f,  0.5f,
-            0.5f,  0.5f, -0.5f,
-            -0.5f,  0.5f,  0.5f,
-            0.5f,  0.5f, -0.5f,
-            -0.5f,  0.5f, -0.5f,
-
-            // Bottom face
-            -0.5f, -0.5f,  0.5f,
-            0.5f, -0.5f,  0.5f,
-            0.5f, -0.5f, -0.5f,
-            -0.5f, -0.5f,  0.5f,
-            0.5f, -0.5f, -0.5f,
-            -0.5f, -0.5f, -0.5f
-    };
 
     // Color for cube edges (black)
     static float frontColor[] = {
@@ -99,12 +55,66 @@ public class Cube {
     };
 
 
-    public Cube() {
+    public CustomCube(float width, float height, float thickness) {
+
+        float cubeCoords[] = {
+                // Front face
+                -width, -height,  thickness,
+                width, -height,  thickness,
+                width,  height,  thickness,
+                -width, -height,  thickness,
+                width,  height,  thickness,
+                -width,  height,  thickness,
+
+                // Right face
+                width, -height,  thickness,
+                width, -height, -thickness,
+                width,  height,  thickness,
+                width, -height, -thickness,
+                width,  height, -thickness,
+                width,  height,  thickness,
+
+                // Back face
+                width, -height, -thickness,
+                -width, -height, -thickness,
+                width,  height, -thickness,
+                -width, -height, -thickness,
+                -width,  height, -thickness,
+                width,  height, -thickness,
+
+                // Left face
+                -width, -height, -thickness,
+                -width, -height,  thickness,
+                -width,  height, -thickness,
+                -width, -height,  thickness,
+                -width,  height,  thickness,
+                -width,  height, -thickness,
+
+                // Top face
+                -width,  height,  thickness,
+                width,  height,  thickness,
+                width,  height, -thickness,
+                -width,  height,  thickness,
+                width,  height, -thickness,
+                -width,  height, -thickness,
+
+                // Bottom face
+                -width, -height,  thickness,
+                width, -height,  thickness,
+                width, -height, -thickness,
+                -width, -height,  thickness,
+                width, -height, -thickness,
+                -width, -height, -thickness
+        };
+
         // initialize vertex byte buffer for shape coordinates
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(cubeCoords.length * 4);
         byteBuffer.order(ByteOrder.nativeOrder());
 
         vertexBuffer = byteBuffer.asFloatBuffer();
+        OpenGLRenderer openGLRenderer;
+        String coords = globalVariable.mergeFloatArrayToString(cubeCoords, ",");
+        Log.e("Size", coords);
         vertexBuffer.put(cubeCoords);
         vertexBuffer.position(0);
 
