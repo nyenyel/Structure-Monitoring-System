@@ -28,9 +28,6 @@
             android:name=".LineChartView"
             android:exported="false" />
         <activity
-            android:name=".LineChart"
-            android:exported="false" />
-        <activity
             android:name=".CreateObject"
             android:exported="true">
             <intent-filter>
@@ -43,5 +40,4 @@
             android:name=".MainActivity"
             android:exported="false" />
     </application>
-
 </manifest>
