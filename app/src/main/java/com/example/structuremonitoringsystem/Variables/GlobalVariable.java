@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.example.structuremonitoringsystem.Bluetooth.BluetoothConnection;
 
+import java.util.Random;
+
 public class GlobalVariable {
 
     public String arduinoDeviceMAC = "";
@@ -68,6 +70,9 @@ public class GlobalVariable {
         return stringBuilder.toString();
     }
 
-
+    public static double getRandomDouble(double min, double max) {
+        Random random = new Random();
+        return min + (max - min) * random.nextDouble();
+    }
 
 }

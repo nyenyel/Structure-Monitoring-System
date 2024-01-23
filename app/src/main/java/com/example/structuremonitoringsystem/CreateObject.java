@@ -11,13 +11,15 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseHelper;
+import com.example.structuremonitoringsystem.LocalDatabase.DatabaseHelperPIN;
 
 import java.util.ArrayList;
 
 public class CreateObject extends AppCompatActivity {
 
     private DatabaseHelper databaseHelper;
-    private AppCompatButton createObj , getData;
+    private DatabaseHelperPIN pin;
+    private AppCompatButton createObj , getData, cPIN, uPIN, chkPIN;
     private EditText height,width,thickness,tempName;
 
     private static ArrayList<String> template_name, _id;
@@ -29,6 +31,7 @@ public class CreateObject extends AppCompatActivity {
         setContentView(R.layout.activity_create_object);
 
         databaseHelper = new DatabaseHelper(CreateObject.this);
+        pin = new DatabaseHelperPIN(CreateObject.this);
 
         template_name = new ArrayList<>();
         _id = new ArrayList<>();
@@ -38,6 +41,10 @@ public class CreateObject extends AppCompatActivity {
 
         createObj = (AppCompatButton) findViewById(R.id.createObj);
         getData = (AppCompatButton) findViewById(R.id.getData);
+
+        cPIN = (AppCompatButton) findViewById(R.id.createPIN);
+        uPIN = (AppCompatButton) findViewById(R.id.updatePIN);
+        chkPIN = (AppCompatButton) findViewById(R.id.checkPIN);
 
         tempName = (EditText) findViewById(R.id.tempName);
         height = (EditText) findViewById(R.id.height);
@@ -61,14 +68,14 @@ public class CreateObject extends AppCompatActivity {
                     intent.putExtra("thickness", getThickness);
 
 
-//                    databaseHelper.addTemplate(getTemplateName, getWidth, getHeight, getThickness);
+                    databaseHelper.addTemplate(getTemplateName, getWidth, getHeight, getThickness);
 //                    databaseHelper.updateTemplateData("2",getTemplateName, getWidth, getHeight, getThickness);
 //                    databaseHelper.deleteTemplate("1");
 
                     height.setText("");
                     width.setText("");
                     thickness.setText("");
-//                    startActivity(intent);
+                    startActivity(intent);
 
                 }catch (NumberFormatException e){
                     Log.e("Error", "Please Enter Data");
@@ -80,7 +87,35 @@ public class CreateObject extends AppCompatActivity {
         getData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                storeSingleData("2");
+//                storeSingleData("2");
+                Intent intent = new Intent(CreateObject.this, LineChartView.class);
+                startActivity(intent);
+            }
+        });
+
+        cPIN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getPIN = tempName.getText().toString();
+                pin.createPIN(getPIN);
+            }
+        });
+
+        uPIN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getPIN = tempName.getText().toString();
+                pin.changePIN(getPIN);
+            }
+        });
+
+        chkPIN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getPIN = tempName.getText().toString();
+                if(pin.PINIsCorrect(getPIN)){
+                    Log.e("PIN Check", "PIN correct");
+                }else {Log.e("PIN Check", "PIN incorrect");}
             }
         });
     }
