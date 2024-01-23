@@ -34,5 +34,4 @@
         android:layout_below="@id/lChart2"
         android:layout_toRightOf="@id/addRandomData"
         android:text="0"/>
-
 </RelativeLayout>
