@@ -20,4 +20,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Structure Monitoring System"
 include(":app")
- 
