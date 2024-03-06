@@ -42,18 +42,6 @@ public class GlobalVariable {
 
     private BluetoothConnection bluetoothConnection;
 
-    public String getDeviceMacList(Context context) {
-        bluetoothConnection = new BluetoothConnection();
-        String deviceMacList = bluetoothConnection.getDeviceMACList(context);
-        return deviceMacList;
-    }
-
-
-    public String getDeviceNameList(Context context) {
-        bluetoothConnection = new BluetoothConnection();
-        String deviceNameList = bluetoothConnection.getDeviceNameList(context);
-        return deviceNameList;
-    }
 
     public static String mergeFloatArrayToString(float[] floatArray, String delimiter) {
         StringBuilder stringBuilder = new StringBuilder();

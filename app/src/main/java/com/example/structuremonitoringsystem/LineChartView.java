@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import com.example.structuremonitoringsystem.Excel.ExportDataToExcel;
 import com.example.structuremonitoringsystem.MPAndroidLineChart.Seismograph;
 import com.example.structuremonitoringsystem.Variables.GlobalVariable;
 import com.github.mikephil.charting.charts.LineChart;
@@ -16,9 +18,10 @@ import java.util.ArrayList;
 public class LineChartView extends AppCompatActivity {
 
     private Seismograph dataLogSeismograph, realtimeSeismograph;
+    private ExportDataToExcel exportDataToExcel;
     private GlobalVariable globalVariable;
     private LineChart logSeismograph, rlSeismograph;
-    private AppCompatButton zeroBtn, randBtn;
+    private AppCompatButton zeroBtn, randBtn, exportBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +34,12 @@ public class LineChartView extends AppCompatActivity {
 
         zeroBtn = (AppCompatButton) findViewById(R.id.addZeroData);
         randBtn = (AppCompatButton) findViewById(R.id.addRandomData);
+        exportBtn = (AppCompatButton) findViewById(R.id.exportData);
 
         //setting what the graph will handle
         dataLogSeismograph = new Seismograph(logSeismograph);
         realtimeSeismograph = new Seismograph(rlSeismograph);
+        exportDataToExcel = new ExportDataToExcel(LineChartView.this);
 
         //random values of data logging
         ArrayList<Entry> yValues = new ArrayList<>();
@@ -50,6 +55,8 @@ public class LineChartView extends AppCompatActivity {
 
         }
 
+
+
         //setting the ui of the graphs
         dataLogSeismograph.dataLoggingSeismograph(yValues);
         realtimeSeismograph.realTimeSeismograph();
@@ -60,12 +67,20 @@ public class LineChartView extends AppCompatActivity {
             public void onClick(View v) {
                 realtimeSeismograph.addRealtimeEntry(0);
             }
+
         });
 
         randBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 realtimeSeismograph.addRealtimeEntry(globalVariable.getRandomDouble(-10, 10));
+            }
+        });
+
+        exportBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exportDataToExcel.exportData(yValues);
             }
         });
     }
