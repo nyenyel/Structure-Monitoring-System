@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="40px">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/firstCol">
+
+            <ImageView
+                android:layout_width="500px"
+                android:layout_height="500px"
+                android:background="@drawable/logo"
+                android:id="@+id/logo"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please enter your PIN code"
+                android:textStyle=""
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/logo"
+                android:textSize="50px"
+                android:textColor="@color/txt_color"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pin"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/firstCol"
+            android:layout_marginTop="40px">
+
+            <ImageView
+                android:layout_width="40px"
+                android:layout_height="40px"
+                android:background="@drawable/circle"
+                android:id="@+id/pinOne"
+                android:layout_marginRight="80px"/>
+
+            <ImageView
+                android:layout_width="40px"
+                android:layout_height="40px"
+                android:background="@drawable/circle"
+                android:id="@+id/pinTwo"
+                android:layout_toRightOf="@+id/pinOne"
+                android:layout_marginRight="80px"/>
+
+            <ImageView
+                android:layout_width="40px"
+                android:layout_height="40px"
+                android:background="@drawable/circle"
+                android:id="@+id/pinThree"
+                android:layout_toRightOf="@+id/pinTwo"
+                android:layout_marginRight="80px"/>
+
+            <ImageView
+                android:layout_width="40px"
+                android:layout_height="40px"
+                android:background="@drawable/circle"
+                android:layout_toRightOf="@+id/pinThree"
+                android:id="@+id/pinFour"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/pin"
+            android:layout_marginTop="80px"
+            android:id="@+id/pinNum">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/numFirstCol">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textSize="150px"
+                    android:textColor="@color/txt_color"
+                    android:id="@+id/one"
+                    android:layout_marginRight="50px"
+                    android:background="@null"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2"
+                    android:textSize="150px"
+                    android:textColor="@color/txt_color"
+                    android:id="@+id/two"
+                    android:layout_toRightOf="@+id/one"
+                    android:layout_marginRight="50px"
+                    android:background="@null"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:textSize="150px"
+                    android:textColor="@color/txt_color"
+                    android:id="@+id/three"
+                    android:layout_toRightOf="@id/two"
+                    android:background="@null"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/numSectCol"
+                android:layout_below="@id/numFirstCol"
+                android:layout_marginTop="40px">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4"
+                    android:textColor="@color/txt_color"
+                    android:textSize="150px"
+                    android:id="@+id/four"
+                    android:layout_marginRight="50px"
+                    android:background="@null"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textSize="150px"
+                    android:textColor="@color/txt_color"
+                    android:id="@+id/five"
+                    android:layout_toRightOf="@+id/four"
+                    android:layout_marginRight="50px"
+                    android:background="@null"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6"
+                    android:textSize="150px"
+                    android:id="@+id/six"
+                    android:textColor="@color/txt_color"
+                    android:layout_toRightOf="@id/five"
+                    android:background="@null"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/numThirdCol"
+                android:layout_marginTop="40px"
+                android:layout_below="@id/numSectCol">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7"
+                    android:textSize="150px"
+                    android:id="@+id/seven"
+                    android:textColor="@color/txt_color"
+                    android:layout_marginRight="50px"
+                    android:background="@null"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8"
+                    android:textSize="150px"
+                    android:id="@+id/eight"
+                    android:textColor="@color/txt_color"
+                    android:layout_toRightOf="@+id/seven"
+                    android:layout_marginRight="50px"
+                    android:background="@null"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9"
+                    android:textColor="@color/txt_color"
+                    android:textSize="150px"
+                    android:id="@+id/nine"
+                    android:layout_toRightOf="@id/eight"
+                    android:background="@null"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/numFourthCol"
+                android:layout_marginTop="40px"
+                android:layout_below="@id/numThirdCol">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/none"
+                    android:textColor="@color/txt_color"
+                    android:layout_marginRight="50px"
+                    android:background="@null"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="150px"
+                    android:textColor="@color/txt_color"
+                    android:id="@+id/zero"
+                    android:layout_toRightOf="@+id/none"
+                    android:layout_marginRight="50px"
+                    android:background="@null"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="120px"
+                    android:layout_height="120px"
+                    android:textSize="150px"
+                    android:id="@+id/backspace"
+                    android:layout_toRightOf="@id/zero"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/txt_color"
+                    android:layout_marginLeft="50px"
+                    android:background="@drawable/delete"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/footer"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Version 0.0.0 (Sample)"
+                android:textColor="@color/txt_color"
+                android:textSize="30px"/>
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
