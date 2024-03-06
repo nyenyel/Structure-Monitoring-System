@@ -53,7 +53,6 @@ public class BluetoothConnection {
 //            Log.e("Global Variable", "Data Added");
             return blListName.substring(1);
 
-
         }
     }
 
@@ -75,9 +74,10 @@ public class BluetoothConnection {
         }
     }
 
-    public void deviceUUID(Context context, String deviceMAC){
+    public String deviceUUID(Context context, String deviceMAC){
 
         // Get the Bluetooth device based on its address
+        String deviceUUID = "";
         BluetoothDevice bluetoothDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(deviceMAC);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
             // Request Bluetooth permission
@@ -90,14 +90,15 @@ public class BluetoothConnection {
             if (uuids != null) {
                 // Print the UUIDs to the console
                 for (ParcelUuid uuid : uuids) {
+                    deviceUUID = uuid.getUuid().toString();
                     System.out.println("UUID: " + uuid.getUuid().toString());
                 }
             } else {
                 System.out.println("UUIDs not available for this device.");
-
+                deviceUUID = "UUIDs not available for this device.";
             }
         }
-
+        return deviceUUID;
     }
 
     public void bluetoothCn(Context context, String deviceMAC){
