@@ -24,6 +24,15 @@
         android:layout_marginTop="100px"
         />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/devList"
+        android:layout_above="@id/cnBtn"
+        android:layout_marginTop="10dp"
+        android:id="@+id/recView"
+        />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cnBtn"
         android:layout_width="wrap_content"
