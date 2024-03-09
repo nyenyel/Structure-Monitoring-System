@@ -28,18 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/devList"
-        android:layout_above="@id/cnBtn"
         android:layout_marginTop="10dp"
         android:id="@+id/recView"
         />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/cnBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10px"
-        android:text="connect"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50px"/>
 </RelativeLayout>

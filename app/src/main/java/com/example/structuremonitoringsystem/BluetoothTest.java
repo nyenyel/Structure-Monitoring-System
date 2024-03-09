@@ -22,8 +22,6 @@ public class BluetoothTest extends AppCompatActivity {
     BluetoothConnection btConnection;
     TextView deviceList;
     RecyclerView recyclerView;
-    AppCompatButton cnBt;
-
     static int counter = 0;
 
     @Override
@@ -32,7 +30,6 @@ public class BluetoothTest extends AppCompatActivity {
         setContentView(R.layout.activity_bluetooth_test);
 
         deviceList = (TextView) findViewById(R.id.devList);
-        cnBt = (AppCompatButton) findViewById(R.id.cnBtn);
         recyclerView = (RecyclerView) findViewById(R.id.recView);
 
         btConnection = new BluetoothConnection();
@@ -49,14 +46,9 @@ public class BluetoothTest extends AppCompatActivity {
         for(int x = 0; x < deviceName.length; x++){
             deviceItemList.add(new BluetoothItem(deviceName[x], deviceMAC[x]));
         }
+        recyclerView.setLayoutManager(new LinearLayoutManager(BluetoothTest.this));
+        recyclerView.setAdapter(new BluetoothAdapter(getApplicationContext(), deviceItemList));
 
-        cnBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(BluetoothTest.this));
-                recyclerView.setAdapter(new BluetoothAdapter(getApplicationContext(), deviceItemList));
-            }
-        });
 
     }
 }
