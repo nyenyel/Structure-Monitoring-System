@@ -30,9 +30,6 @@ public class CreateObject extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_object);
 
-        String uuid = getIntent().getStringExtra("UUID");
-        Log.e("UUID", uuid);
-
         databaseHelper = new DatabaseHelper(CreateObject.this);
         pin = new DatabaseHelperPIN(CreateObject.this);
 
