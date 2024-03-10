@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.structuremonitoringsystem.Bluetooth.BluetoothConnection;
+import com.example.structuremonitoringsystem.BluetoothTerminalTest;
 import com.example.structuremonitoringsystem.BluetoothTest;
 import com.example.structuremonitoringsystem.CreateObject;
 import com.example.structuremonitoringsystem.R;
@@ -32,8 +33,6 @@ public class BluetoothAdapter extends RecyclerView.Adapter<BluetoothViewHolder> 
         this.items = items;
     }
 
-
-
     @NonNull
     @Override
     public BluetoothViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,6 +43,7 @@ public class BluetoothAdapter extends RecyclerView.Adapter<BluetoothViewHolder> 
     public void onBindViewHolder(@NonNull BluetoothViewHolder holder, int position) {
         bluetoothConnection = new BluetoothConnection();
         String selectedDeviceMAC = items.get(position).getDeviceMac();
+        String selectedDeviceName = items.get(position).getDeviceName();
 
         holder.deviceName.setText(items.get(position).getDeviceName());
         holder.deviceMac.setText(selectedDeviceMAC);
@@ -52,8 +52,10 @@ public class BluetoothAdapter extends RecyclerView.Adapter<BluetoothViewHolder> 
         holder.deviceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, CreateObject.class);
+                Intent intent = new Intent(context, BluetoothTerminalTest.class);
                 intent.putExtra("UUID", uuid);
+                intent.putExtra("MAC", selectedDeviceMAC);
+                intent.putExtra("name", selectedDeviceName);
                 startActivity(context, intent, null);
             }
         });
