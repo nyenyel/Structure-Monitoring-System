@@ -4,12 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.example.structuremonitoringsystem.Excel.ExportDataToExcel;
 import com.example.structuremonitoringsystem.MPAndroidLineChart.Seismograph;
-import com.example.structuremonitoringsystem.Variables.GlobalVariable;
+import com.example.structuremonitoringsystem.OtherFunction.GlobalVariable;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 

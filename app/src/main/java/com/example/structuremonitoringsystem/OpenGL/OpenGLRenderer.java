@@ -110,7 +110,8 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         triangle = new Triangle();
         square = new Square();
         cube = new Cube();
-        customCube = new CustomCube(oWidth,oHeight,oThickness);
+//        customCube = new CustomCube(oWidth,oHeight,oThickness);
+        customCube = new CustomCube(0.3f,0.1f,0.2f);
     }
 
     @Override
@@ -151,6 +152,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         // Update the object's position based on translation
         Matrix.setIdentityM(translationMatrix, 0);
         Matrix.translateM(translationMatrix, 0, objectPositionX, objectPositionY, objectPositionZ);
+//        Log.e("Displacement",objectPositionX +"");
         Matrix.multiplyMM(vPMatrix, 0, vPMatrix, 0, translationMatrix, 0);
 
         // Update the object's position for the next frame
@@ -187,7 +189,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         //finalAngle = (finalAngle % 360 + 360) % 360;
 
         Matrix.setRotateM(rotationMatrix, 0, finalAngle, objectRotationX, objectRotationY, objectRotationZ);
-        Log.e("Angle", finalAngle+" + " + objectRotationX+" + "  + objectRotationY+" + "  + objectRotationZ );
+//        Log.e("Angle", finalAngle+" + " + objectRotationX+" + "  + objectRotationY+" + "  + objectRotationZ );
 
         // Combine the rotation matrix with the projection and camera view
         // Note that the vPMatrix factor *must be first* in order

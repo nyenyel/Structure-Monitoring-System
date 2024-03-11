@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Structure Monitoring System</string>
+    <string name="drawer_open">Navbar is open</string>
+    <string name="drawer_close">Navbar is close</string>
 </resources>

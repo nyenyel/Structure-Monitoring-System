@@ -1,7 +1,4 @@
-package com.example.structuremonitoringsystem.Variables;
-
-import android.content.Context;
-import android.util.Log;
+package com.example.structuremonitoringsystem.OtherFunction;
 
 import com.example.structuremonitoringsystem.Bluetooth.BluetoothConnection;
 

@@ -4,7 +4,7 @@ import android.opengl.GLES20;
 import android.util.Log;
 
 import com.example.structuremonitoringsystem.OpenGL.OpenGLRenderer;
-import com.example.structuremonitoringsystem.Variables.GlobalVariable;
+import com.example.structuremonitoringsystem.OtherFunction.GlobalVariable;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

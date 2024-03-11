@@ -7,23 +7,41 @@
     android:layout_height="match_parent"
     tools:context=".BluetoothTerminalTest">
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:layout_margin="10dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/realtimeSeismographX"/>
-    <com.github.mikephil.charting.charts.LineChart
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/realtimeSeismographY"
-        android:layout_below="@+id/realtimeSeismographX"/>
-    <com.github.mikephil.charting.charts.LineChart
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/realtimeSeismographZ"
-        android:layout_below="@+id/realtimeSeismographY"/>
+        android:layout_height="match_parent"
+        android:layout_above="@id/cancelBtn">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.github.mikephil.charting.charts.LineChart
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/realtimeSeismographX"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/realtimeSeismographY"
+                android:layout_below="@+id/realtimeSeismographX"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/realtimeSeismographZ"
+                android:layout_below="@+id/realtimeSeismographY"/>
+
+            <com.example.structuremonitoringsystem.OpenGL.OpenGLView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:id="@+id/openGLView"
+                android:layout_margin="10dp"
+                android:layout_below="@id/realtimeSeismographZ"/>
+        </RelativeLayout>
+    </ScrollView>
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
@@ -34,4 +52,11 @@
         android:id="@+id/cancelBtn"
         android:layout_marginBottom="20dp"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/showBtn"
+        android:layout_marginBottom="20dp"/>
 </RelativeLayout>

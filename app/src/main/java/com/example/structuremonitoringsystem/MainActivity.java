@@ -7,11 +7,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.structuremonitoringsystem.Bluetooth.BluetoothConnection;
 import com.example.structuremonitoringsystem.OpenGL.OpenGLView;
-import com.example.structuremonitoringsystem.Variables.GlobalVariable;
 
 public class MainActivity extends AppCompatActivity {
 

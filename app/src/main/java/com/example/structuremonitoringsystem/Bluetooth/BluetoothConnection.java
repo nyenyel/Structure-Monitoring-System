@@ -9,16 +9,11 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.ParcelUuid;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
-import com.example.structuremonitoringsystem.Variables.GlobalVariable;
-
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.UUID;
 
 public class BluetoothConnection {

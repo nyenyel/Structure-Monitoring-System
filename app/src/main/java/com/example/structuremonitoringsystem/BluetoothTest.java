@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,8 @@ public class BluetoothTest extends AppCompatActivity {
     BluetoothConnection btConnection;
     TextView deviceList;
     RecyclerView recyclerView;
+
+    AppCompatButton createObj;
     static int counter = 0;
 
     @Override
@@ -31,6 +34,7 @@ public class BluetoothTest extends AppCompatActivity {
 
         deviceList = (TextView) findViewById(R.id.devList);
         recyclerView = (RecyclerView) findViewById(R.id.recView);
+        createObj = (AppCompatButton) findViewById(R.id.createClass);
 
         btConnection = new BluetoothConnection();
 
@@ -48,6 +52,14 @@ public class BluetoothTest extends AppCompatActivity {
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(BluetoothTest.this));
         recyclerView.setAdapter(new BluetoothAdapter(getApplicationContext(), deviceItemList));
+
+        createObj.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BluetoothTest.this, CreateObject.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

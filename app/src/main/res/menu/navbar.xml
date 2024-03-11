@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:title="Dashboard"
+            android:id="@+id/navDashboard"
+            android:icon="@drawable/circle"/>
+
+        <item
+            android:title="Realtime Monitoring"
+            android:id="@+id/navRealtimeMonitoring"
+            android:icon="@drawable/circle"/>
+
+        <item
+            android:title="Drift Monitoring"
+            android:id="@+id/navDrift"
+            android:icon="@drawable/circle"/>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:title="Sensors"
+            android:id="@+id/navSensor"
+            android:icon="@drawable/circle"/>
+
+        <item
+            android:title="Objects"
+            android:id="@+id/navObject"
+            android:icon="@drawable/circle"/>
+
+        <item
+            android:title="Manual"
+            android:id="@+id/navManual"
+            android:icon="@drawable/circle"/>
+
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:title="Change PIN"
+            android:id="@+id/navChangePIN"
+            android:icon="@drawable/circle"/>
+    </group>
+</menu>

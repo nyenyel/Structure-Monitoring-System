@@ -2,6 +2,8 @@ package com.example.structuremonitoringsystem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,6 +14,8 @@ import android.widget.EditText;
 
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseHelper;
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseHelperPIN;
+import com.example.structuremonitoringsystem.OtherFunction.NavigationBar;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
@@ -21,6 +25,10 @@ public class CreateObject extends AppCompatActivity {
     private DatabaseHelperPIN pin;
     private AppCompatButton createObj , getData, cPIN, uPIN, chkPIN;
     private EditText height,width,thickness,tempName;
+
+    private NavigationView navbarView;
+    private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
 
     private static ArrayList<String> template_name, _id;
     private static ArrayList<Float> _height, _width, _thickness;
@@ -50,6 +58,15 @@ public class CreateObject extends AppCompatActivity {
         height = (EditText) findViewById(R.id.height);
         width = (EditText) findViewById(R.id.width);
         thickness = (EditText) findViewById(R.id.thickness);
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        navbarView = (NavigationView) findViewById(R.id.navbarView);
+        toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        NavigationBar navigationBar = new NavigationBar(drawerLayout, navbarView, toolbar);
+        navigationBar.setNavbar(this);
 
 //        storeData();
 
