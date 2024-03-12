@@ -6,11 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseHelper;
 import com.example.structuremonitoringsystem.R;
-import com.example.structuremonitoringsystem.RecyclerView.Adapter.BluetoothAdapter;
 import com.example.structuremonitoringsystem.RecyclerView.Adapter.ObjectAdapter;
 import com.example.structuremonitoringsystem.RecyclerView.Item.ObjectItem;
 
@@ -24,7 +22,7 @@ public class ObjectList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_object_list);
+        setContentView(R.layout.testing_object_list);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 

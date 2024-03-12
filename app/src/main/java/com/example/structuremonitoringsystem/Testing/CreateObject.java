@@ -37,7 +37,7 @@ public class CreateObject extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_object);
+        setContentView(R.layout.testing_create_object);
 
         databaseHelper = new DatabaseHelper(CreateObject.this);
         pin = new DatabaseHelperPIN(CreateObject.this);

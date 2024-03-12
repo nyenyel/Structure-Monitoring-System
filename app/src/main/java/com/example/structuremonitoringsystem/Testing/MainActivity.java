@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         thickness = (getIntent().getFloatExtra("thickness", 0f))/100;
         Log.e("Test", thickness+"");
 //        openGLView.thickness = thickness;
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.testing_main);
 
 
         openGLView = (OpenGLView) findViewById(R.id.openGLView);

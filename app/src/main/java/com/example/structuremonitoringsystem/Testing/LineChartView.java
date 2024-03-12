@@ -26,7 +26,7 @@ public class LineChartView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_line_chart_view);
+        setContentView(R.layout.testing_line_chart_view);
 
         //initializing the graph on the layout
         rlSeismograph = (LineChart) findViewById(R.id.lChart);

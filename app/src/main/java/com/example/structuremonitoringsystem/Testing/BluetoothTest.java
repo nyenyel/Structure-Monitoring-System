@@ -30,7 +30,7 @@ public class BluetoothTest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bluetooth_test);
+        setContentView(R.layout.testing_bluetooth_test);
 
         deviceList = (TextView) findViewById(R.id.devList);
         recyclerView = (RecyclerView) findViewById(R.id.recView);
