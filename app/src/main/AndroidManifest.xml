@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
     <!-- Tell the system this app requires OpenGL ES 2.0. -->
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -25,11 +25,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StructureMonitoringSystem"
-        tools:targetApi="31" >
+        tools:targetApi="31">
+        <activity
+            android:name=".ObjectTemplate"
+            android:exported="false" />
+        <activity
+            android:name=".Sensors"
+            android:exported="false" />
+        <activity
+            android:name=".DriftMonitoring"
+            android:exported="false" />
+        <activity
+            android:name=".RealtimeMonitoring"
+            android:exported="false" />
+        <activity
+            android:name=".Dashboard"
+            android:exported="false" />
+        <activity
+            android:name=".PinPage"
+            android:exported="false" />
         <activity
             android:name=".Testing.ObjectList"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".Testing.BluetoothTerminalTest"
             android:exported="false" />
@@ -42,7 +59,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Testing.LineChartView"
             android:exported="false" />
