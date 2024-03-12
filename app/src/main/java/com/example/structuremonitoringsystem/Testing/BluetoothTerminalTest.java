@@ -1,4 +1,4 @@
-package com.example.structuremonitoringsystem;
+package com.example.structuremonitoringsystem.Testing;
 
 import static kotlinx.coroutines.flow.FlowKt.skip;
 
@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.example.structuremonitoringsystem.Arduino.HC05Bluetooth;
 import com.example.structuremonitoringsystem.Bluetooth.BluetoothConnection;
 import com.example.structuremonitoringsystem.MPAndroidLineChart.Seismograph;
 import com.example.structuremonitoringsystem.OpenGL.OpenGLView;
+import com.example.structuremonitoringsystem.R;
 import com.github.mikephil.charting.charts.LineChart;
 
 import java.io.IOException;
@@ -39,7 +41,6 @@ public class BluetoothTerminalTest extends AppCompatActivity {
     BluetoothConnection bluetoothConnection;
     HC05Bluetooth hc05Bluetooth;
     OpenGLView openGLView;
-
     private static String textTerminal = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,8 @@ public class BluetoothTerminalTest extends AppCompatActivity {
         realtimeChartY = (LineChart) findViewById(R.id.realtimeSeismographY);
         realtimeChartZ = (LineChart) findViewById(R.id.realtimeSeismographZ);
         openGLView = (OpenGLView) findViewById(R.id.openGLView);
+        openGLView.init(this, 30,10,20);
+        openGLView.rotateObject(1,1,1,1,2);
 
         String mac = getIntent().getStringExtra("MAC");
         String name = getIntent().getStringExtra("name");
@@ -70,7 +73,7 @@ public class BluetoothTerminalTest extends AppCompatActivity {
         BluetoothSocket bluetoothSocket = bluetoothConnection.bluetoothCn(this, mac);
 
         // Create an instance of DisplacementCalculator with your desired alpha value
-        Formula calculator = new Formula(0.1f); // Adjust alpha as needed
+        Formula calculator = new Formula(0.7f); // Adjust alpha as needed
 
 // Start receiving data in a separate thread
         hc05Bluetooth.receiveData(bluetoothSocket, new HC05Bluetooth.DataListener() {
@@ -93,7 +96,7 @@ public class BluetoothTerminalTest extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.e("Displacement", displacementX + " : " + receivedData[0]);
+//                        Log.e("Displacement", displacementX + " : " + receivedData[0]);
                         openGLView.moveObject(displacementX, displacementY, displacementZ);
 
                         seismographX.addRealtimeEntry(x);
@@ -104,25 +107,6 @@ public class BluetoothTerminalTest extends AppCompatActivity {
             }
         });
 
-        showBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                float x,y,z,a;
-                boolean isZero = openGLView.getCurrentRotationZ() <= 0;
-                boolean angleIsZero = openGLView.getCurrentAngle() == 0;
-                x = 0f;
-                y = 0f;
-                z = -6f;
-                a = -1f;
-//                if(isZero){
-//                    z = fullRotation;
-//                }
-//                if (angleIsZero){
-//                    a = 360f;
-//                }
-                openGLView.rotateObject(x, y , z, a, 2f);
-            }
-        });
         // Remember to disconnect the Bluetooth socket when no longer needed
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +115,14 @@ public class BluetoothTerminalTest extends AppCompatActivity {
             }
         });
 
+        showBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bluetoothConnection.bluetoothDc(bluetoothSocket);
+                Intent intent = new Intent(BluetoothTerminalTest.this, ObjectList.class);
+                startActivity(intent);
+            }
+        });
     }
     @Override
     protected void onResume() {

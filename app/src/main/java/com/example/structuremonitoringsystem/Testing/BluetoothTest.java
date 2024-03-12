@@ -1,4 +1,4 @@
-package com.example.structuremonitoringsystem;
+package com.example.structuremonitoringsystem.Testing;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.structuremonitoringsystem.Bluetooth.BluetoothConnection;
+import com.example.structuremonitoringsystem.R;
 import com.example.structuremonitoringsystem.RecyclerView.Adapter.BluetoothAdapter;
 import com.example.structuremonitoringsystem.RecyclerView.Item.BluetoothItem;
 
@@ -50,6 +50,7 @@ public class BluetoothTest extends AppCompatActivity {
         for(int x = 0; x < deviceName.length; x++){
             deviceItemList.add(new BluetoothItem(deviceName[x], deviceMAC[x]));
         }
+
         recyclerView.setLayoutManager(new LinearLayoutManager(BluetoothTest.this));
         recyclerView.setAdapter(new BluetoothAdapter(getApplicationContext(), deviceItemList));
 

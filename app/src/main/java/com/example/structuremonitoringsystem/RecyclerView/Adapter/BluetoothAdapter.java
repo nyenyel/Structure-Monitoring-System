@@ -12,9 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.structuremonitoringsystem.Bluetooth.BluetoothConnection;
-import com.example.structuremonitoringsystem.BluetoothTerminalTest;
-import com.example.structuremonitoringsystem.BluetoothTest;
-import com.example.structuremonitoringsystem.CreateObject;
+import com.example.structuremonitoringsystem.Testing.BluetoothTerminalTest;
 import com.example.structuremonitoringsystem.R;
 import com.example.structuremonitoringsystem.RecyclerView.Item.BluetoothItem;
 import com.example.structuremonitoringsystem.RecyclerView.ViewHolder.BluetoothViewHolder;

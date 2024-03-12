@@ -1,4 +1,4 @@
-package com.example.structuremonitoringsystem;
+package com.example.structuremonitoringsystem.Testing;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -9,6 +9,7 @@ import android.view.View;
 import com.example.structuremonitoringsystem.Excel.ExportDataToExcel;
 import com.example.structuremonitoringsystem.MPAndroidLineChart.Seismograph;
 import com.example.structuremonitoringsystem.OtherFunction.GlobalVariable;
+import com.example.structuremonitoringsystem.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 

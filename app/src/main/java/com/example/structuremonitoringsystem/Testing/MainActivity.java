@@ -1,4 +1,4 @@
-package com.example.structuremonitoringsystem;
+package com.example.structuremonitoringsystem.Testing;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.structuremonitoringsystem.Bluetooth.BluetoothConnection;
 import com.example.structuremonitoringsystem.OpenGL.OpenGLView;
+import com.example.structuremonitoringsystem.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         openGLView = (OpenGLView) findViewById(R.id.openGLView);
+        openGLView.init(this, width, height, thickness);
 
         //Move Btn
         upBtn = (AppCompatButton) findViewById(R.id.upBtn);

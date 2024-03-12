@@ -4,10 +4,8 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.MotionEvent;
 
-import com.example.structuremonitoringsystem.BluetoothTerminalTest;
-import com.example.structuremonitoringsystem.MainActivity;
+import com.example.structuremonitoringsystem.Testing.MainActivity;
 
 public class OpenGLView extends GLSurfaceView {
 
@@ -32,15 +30,15 @@ public class OpenGLView extends GLSurfaceView {
 
     public OpenGLView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
+//        init(context);
     }
 
-    private void init(Context context){
+    public void init(Context context, float width, float height, float thickness){
         setEGLContextClientVersion(2);
         setPreserveEGLContextOnPause(true);
 
-        MainActivity mainActivity = new MainActivity();
-        setObjectSize(mainActivity.getWidth(),mainActivity.getHeight(),mainActivity.getThickness());
+
+        setObjectSize(width,height ,thickness);
         // Pass the context to the OpenGLRenderer constructor
         renderer = new OpenGLRenderer(context, width, height, thickness);
         setRenderer(renderer);

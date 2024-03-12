@@ -111,7 +111,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         square = new Square();
         cube = new Cube();
 //        customCube = new CustomCube(oWidth,oHeight,oThickness);
-        customCube = new CustomCube(0.3f,0.1f,0.2f);
+        customCube = new CustomCube(oWidth/100,oHeight/100,oThickness/100);
     }
 
     @Override

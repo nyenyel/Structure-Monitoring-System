@@ -1,4 +1,4 @@
-package com.example.structuremonitoringsystem;
+package com.example.structuremonitoringsystem.Testing;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -15,6 +15,7 @@ import android.widget.EditText;
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseHelper;
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseHelperPIN;
 import com.example.structuremonitoringsystem.OtherFunction.NavigationBar;
+import com.example.structuremonitoringsystem.R;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
