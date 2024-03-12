@@ -16,7 +16,7 @@
         app:headerLayout="@layout/navbar_header"
         app:menu="@menu/navbar"
         android:layout_gravity="start"
-        android:background="@drawable/square_with_no_edge"/>
+        android:background="@drawable/bg_square_with_no_edge"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"

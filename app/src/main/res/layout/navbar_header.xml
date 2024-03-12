@@ -10,7 +10,7 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/logo_no_name"
+        android:src="@drawable/image_logo_no_name"
         android:layout_marginTop="10dp"
         />
 

@@ -18,7 +18,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="500px"
-                android:background="@drawable/logo"
+                android:background="@drawable/image_logo"
                 android:id="@+id/logo"
                 android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
@@ -46,14 +46,14 @@
             <ImageView
                 android:layout_width="40px"
                 android:layout_height="40px"
-                android:background="@drawable/circle"
+                android:background="@drawable/shape_circle"
                 android:id="@+id/pinOne"
                 android:layout_marginRight="80px"/>
 
             <ImageView
                 android:layout_width="40px"
                 android:layout_height="40px"
-                android:background="@drawable/circle"
+                android:background="@drawable/shape_circle"
                 android:id="@+id/pinTwo"
                 android:layout_toRightOf="@+id/pinOne"
                 android:layout_marginRight="80px"/>
@@ -61,7 +61,7 @@
             <ImageView
                 android:layout_width="40px"
                 android:layout_height="40px"
-                android:background="@drawable/circle"
+                android:background="@drawable/shape_circle"
                 android:id="@+id/pinThree"
                 android:layout_toRightOf="@+id/pinTwo"
                 android:layout_marginRight="80px"/>
@@ -69,7 +69,7 @@
             <ImageView
                 android:layout_width="40px"
                 android:layout_height="40px"
-                android:background="@drawable/circle"
+                android:background="@drawable/shape_circle"
                 android:layout_toRightOf="@+id/pinThree"
                 android:id="@+id/pinFour"/>
         </RelativeLayout>
@@ -235,7 +235,7 @@
                     android:layout_centerVertical="true"
                     android:textColor="@color/txt_color"
                     android:layout_marginLeft="50px"
-                    android:background="@drawable/delete"/>
+                    android:background="@drawable/image_delete"/>
 
             </RelativeLayout>
 
