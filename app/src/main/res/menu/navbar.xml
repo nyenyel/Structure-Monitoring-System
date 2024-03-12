@@ -24,7 +24,7 @@
             android:icon="@drawable/circle"/>
 
         <item
-            android:title="Objects"
+            android:title="Object Template"
             android:id="@+id/navObject"
             android:icon="@drawable/circle"/>
 
