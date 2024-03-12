@@ -16,11 +16,14 @@
             android:id="@+id/firstCol">
 
             <ImageView
-                android:layout_width="500px"
+                android:layout_width="wrap_content"
                 android:layout_height="500px"
                 android:background="@drawable/logo"
                 android:id="@+id/logo"
-                android:layout_centerHorizontal="true"/>
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +81,6 @@
             android:layout_below="@+id/pin"
             android:layout_marginTop="80px"
             android:id="@+id/pinNum">
-
 
             <RelativeLayout
                 android:layout_width="wrap_content"
