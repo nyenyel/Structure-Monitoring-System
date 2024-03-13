@@ -16,9 +16,9 @@ public class ObjectViewHolder extends RecyclerView.ViewHolder {
     public ObjectViewHolder(@NonNull View itemView) {
         super(itemView);
         openGLView = itemView.findViewById(R.id.openGLView);
-        width = itemView.findViewById(R.id.width);
-        height = itemView.findViewById(R.id.height);
-        thickness = itemView.findViewById(R.id.thickness);
+        width = itemView.findViewById(R.id.widthValue);
+        height = itemView.findViewById(R.id.heightValue);
+        thickness = itemView.findViewById(R.id.thicknessValue);
         tempName = itemView.findViewById(R.id.tempName);
     }
 }
