@@ -36,10 +36,11 @@ public class ObjectAdapter extends RecyclerView.Adapter<ObjectViewHolder> {
         String objectWidth = items.get(position).getWidth();
         String objectThickness = items.get(position).getThickness();
 
+
         holder.tempName.setText(objectTempName);
-        holder.height.setText(objectHeight);
-        holder.width.setText(objectWidth);
-        holder.thickness.setText(objectThickness);
+        holder.height.setText(String.valueOf(Float.parseFloat(objectHeight)/10));
+        holder.width.setText(String.valueOf(Float.parseFloat(objectWidth)/10));
+        holder.thickness.setText(String.valueOf(Float.parseFloat(objectThickness)/10));
 
         holder.openGLView.init(
                 context.getApplicationContext(),
