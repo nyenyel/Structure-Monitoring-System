@@ -4,12 +4,14 @@
     android:layout_height="wrap_content"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:padding="30dp"
+    android:paddingLeft="30dp"
+    android:paddingBottom="10dp"
+    android:paddingTop="50dp"
     android:background="#E5EBF6">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:src="@drawable/image_logo_no_name"
         android:layout_marginTop="10dp"
         />
@@ -20,13 +22,13 @@
         android:text="Cautio-Struct"
         android:textColor="@color/txt_color"
         android:textStyle="bold"
-        android:textSize="50px"/>
+        android:textSize="40px"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Monitor Your Structure Today"
         android:textColor="@color/txt_color"
-        android:textSize="30px"/>
+        android:textSize="20px"/>
 
 </LinearLayout>
