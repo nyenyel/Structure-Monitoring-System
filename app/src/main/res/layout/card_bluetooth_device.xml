@@ -2,10 +2,11 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="75dp"
     android:layout_margin="10dp"
     android:background="@drawable/shape_square"
     android:padding="10dp"
+    android:elevation="1dp"
     android:id="@+id/deviceBtn">
 
     <RelativeLayout
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/text"
         android:layout_toEndOf="@+id/btIcon"
-        android:layout_marginStart="10dp"
+
         android:layout_centerVertical="true">
 
         <TextView
@@ -21,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Device Name"
+            android:textStyle="bold"
             android:textColor="@color/txt_color"
             android:textSize="20sp" />
         <TextView
@@ -34,9 +36,9 @@
 
     <ImageView
         android:id="@+id/btIcon"
-        android:layout_width="80dp"
+        android:layout_width="50dp"
         android:layout_height="match_parent"
-        android:background="@drawable/shape_circle"
+        android:background="@drawable/ic_bluetooth"
         />
 
 
