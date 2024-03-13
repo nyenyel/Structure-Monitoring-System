@@ -18,6 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static String COL_TEMPLATE_WIDTH = "_width";
     private static String COL_TEMPLATE_HEIGHT = "_height";
     private static String COL_TEMPLATE_THICKNESS = "_thickness";
+    private static String COL_DEFAULT = "_default";
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null,1);
         this.context = context;
@@ -29,9 +30,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COL_TEMPLATE_NAME + " TEXT, "
                 + COL_TEMPLATE_HEIGHT + " REAL, "
                 + COL_TEMPLATE_WIDTH + " REAL, "
-                + COL_TEMPLATE_THICKNESS + " REAL);" ;
+                + COL_TEMPLATE_THICKNESS + " REAL, "
+                + COL_DEFAULT + " INTEGER DEFAULT 0);";
         db.execSQL(query);
 
+        // Set the value of default column to 1 when id is 1
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(COL_TEMPLATE_NAME, "Sample");
+        contentValues.put(COL_TEMPLATE_WIDTH, "50");
+        contentValues.put(COL_TEMPLATE_HEIGHT, "50");
+        contentValues.put(COL_TEMPLATE_THICKNESS, "50");
+        contentValues.put(COL_DEFAULT, 1);
+
+        long result = db.insert(TABLE_NAME, null, contentValues);
+        if(result == -1){
+            Log.e("Data Progress", "Data insertion Failed");
+        }else{ Log.e("Data Progress", "Data insertion Success");}
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -100,5 +115,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public Cursor getDefaultObjectSize(){
+        SQLiteDatabase db = this.getReadableDatabase();
 
+        Cursor cursor = null;
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_DEFAULT + " = " + 1;
+
+        if (db != null){cursor = db.rawQuery(query, null);}
+
+        return cursor;
+    }
+
+    public void changeDefaultObjectSize(String oldDefault, String newDefault){
+        updateDefaultValues(newDefault, 1);
+        updateDefaultValues(oldDefault, 0);
+    }
+
+    private void updateDefaultValues(String id, int isDefault){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(COL_DEFAULT, isDefault);
+
+        long result = db.update(TABLE_NAME, contentValues, COL_ID+"=?", new String[]{id});
+        if(result == -1){
+            Log.e("Data Progress", "Data update Failed");
+        }else{ Log.e("Data Progress", "Data update Success");}
+    }
 }
