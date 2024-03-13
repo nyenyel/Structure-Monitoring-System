@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bg">#F3F3F3F3</color>
     <color name="txt_color">#547D90</color>
+    <color name="opengl_background">#333333</color>
+
 </resources>
