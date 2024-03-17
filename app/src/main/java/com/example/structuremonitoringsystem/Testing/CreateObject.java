@@ -12,8 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.structuremonitoringsystem.LocalDatabase.DatabaseHelper;
-import com.example.structuremonitoringsystem.LocalDatabase.DatabaseHelperPIN;
+import com.example.structuremonitoringsystem.LocalDatabase.DatabaseObjectSize;
+import com.example.structuremonitoringsystem.LocalDatabase.DatabaseDefaultSettings;
 import com.example.structuremonitoringsystem.OtherFunction.NavigationBar;
 import com.example.structuremonitoringsystem.R;
 import com.google.android.material.navigation.NavigationView;
@@ -22,8 +22,8 @@ import java.util.ArrayList;
 
 public class CreateObject extends AppCompatActivity {
 
-    private DatabaseHelper databaseHelper;
-    private DatabaseHelperPIN pin;
+    private DatabaseObjectSize databaseObjectSize;
+    private DatabaseDefaultSettings pin;
     private AppCompatButton createObj , getData, cPIN, uPIN, chkPIN;
     private EditText height,width,thickness,tempName;
 
@@ -39,8 +39,8 @@ public class CreateObject extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.testing_create_object);
 
-        databaseHelper = new DatabaseHelper(CreateObject.this);
-        pin = new DatabaseHelperPIN(CreateObject.this);
+        databaseObjectSize = new DatabaseObjectSize(CreateObject.this);
+        pin = new DatabaseDefaultSettings(CreateObject.this);
 
         template_name = new ArrayList<>();
         _id = new ArrayList<>();
@@ -86,9 +86,9 @@ public class CreateObject extends AppCompatActivity {
                     intent.putExtra("thickness", getThickness);
 
 
-                    databaseHelper.addTemplate(getTemplateName, getWidth, getHeight, getThickness);
-//                    databaseHelper.updateTemplateData("2",getTemplateName, getWidth, getHeight, getThickness);
-//                    databaseHelper.deleteTemplate("1");
+                    databaseObjectSize.addTemplate(getTemplateName, getWidth, getHeight, getThickness);
+//                    databaseObjectSize.updateTemplateData("2",getTemplateName, getWidth, getHeight, getThickness);
+//                    databaseObjectSize.deleteTemplate("1");
 
                     height.setText("");
                     width.setText("");
@@ -123,7 +123,7 @@ public class CreateObject extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String getPIN = tempName.getText().toString();
-                pin.changePIN(getPIN);
+                pin.seedDefaultData();
             }
         });
 
@@ -139,7 +139,7 @@ public class CreateObject extends AppCompatActivity {
     }
 
     private void storeData(){
-        Cursor cursor = databaseHelper.readAllData();
+        Cursor cursor = databaseObjectSize.readAllData();
         if(cursor.getCount() == 0){
             Log.e("Database Status", "Empty");
         }else{
@@ -154,7 +154,7 @@ public class CreateObject extends AppCompatActivity {
     }
 
     private void storeSingleData(String id){
-        Cursor cursor = databaseHelper.getSpecificDataById(id);
+        Cursor cursor = databaseObjectSize.getSpecificDataById(id);
         if(cursor.getCount() == 0){
             Log.e("Database Status", "Empty");
         }else{

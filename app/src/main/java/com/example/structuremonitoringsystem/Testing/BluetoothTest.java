@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.example.structuremonitoringsystem.Bluetooth.BluetoothConnection;
 import com.example.structuremonitoringsystem.R;
 import com.example.structuremonitoringsystem.RecyclerView.Adapter.BluetoothAdapter;
-import com.example.structuremonitoringsystem.RecyclerView.Item.BluetoothItem;
+import com.example.structuremonitoringsystem.Item.BluetoothItem;
 
 import java.util.ArrayList;
 import java.util.List;

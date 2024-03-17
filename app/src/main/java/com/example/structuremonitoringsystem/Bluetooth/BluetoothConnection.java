@@ -12,8 +12,16 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.structuremonitoringsystem.Item.BluetoothItem;
+import com.example.structuremonitoringsystem.LocalDatabase.DatabaseDefaultSettings;
+import com.example.structuremonitoringsystem.Testing.BluetoothTest;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class BluetoothConnection {
@@ -21,6 +29,7 @@ public class BluetoothConnection {
     private static final UUID arduinoUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private static final int REQUEST_BLUETOOTH_PERMISSION = 123;
 
+    DatabaseDefaultSettings defaultSettings;
     private BluetoothDevice bluetoothDevice;
 
     public void test(){
@@ -112,9 +121,7 @@ public class BluetoothConnection {
                 //Confirm of the device is connected through Bluetooth
                 try {
                     bluetoothSocket = bluetoothDevice.createRfcommSocketToServiceRecord(arduinoUUID);
-                    Log.e("Bluetooth Socket", "" + bluetoothSocket);
                     bluetoothSocket.connect();
-                    Log.e("Bluetooth Connection", "Connected: " + bluetoothSocket.isConnected());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

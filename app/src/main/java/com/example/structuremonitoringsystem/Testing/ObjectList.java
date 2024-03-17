@@ -9,12 +9,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
-import com.example.structuremonitoringsystem.LocalDatabase.DatabaseHelper;
+import com.example.structuremonitoringsystem.LocalDatabase.DatabaseObjectSize;
 import com.example.structuremonitoringsystem.R;
 import com.example.structuremonitoringsystem.RecyclerView.Adapter.ObjectAdapter;
-import com.example.structuremonitoringsystem.RecyclerView.Item.ObjectItem;
+import com.example.structuremonitoringsystem.Item.ObjectItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +34,9 @@ public class ObjectList extends AppCompatActivity {
 
         List<ObjectItem> objectItems= new ArrayList<ObjectItem>();
 
-        DatabaseHelper databaseHelper = new DatabaseHelper(this);
-//        databaseHelper.changeDefaultObjectSize("3","2");
-        Cursor objectList = databaseHelper.readAllData();
+        DatabaseObjectSize databaseObjectSize = new DatabaseObjectSize(this);
+//        databaseObjectSize.changeDefaultObjectSize("3","2");
+        Cursor objectList = databaseObjectSize.readAllData();
         try {
             if (objectList != null && objectList.moveToFirst()){
                 do {
