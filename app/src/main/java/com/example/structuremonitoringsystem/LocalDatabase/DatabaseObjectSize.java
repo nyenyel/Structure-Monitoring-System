@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseObjectSize extends SQLiteOpenHelper {
     private Context context;
 
     private static String DATABASE_NAME = "MonitoringSystem.db";
@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static String COL_TEMPLATE_HEIGHT = "_height";
     private static String COL_TEMPLATE_THICKNESS = "_thickness";
     private static String COL_DEFAULT = "_default";
-    public DatabaseHelper(Context context){
+    public DatabaseObjectSize(Context context){
         super(context, DATABASE_NAME, null,1);
         this.context = context;
     }
