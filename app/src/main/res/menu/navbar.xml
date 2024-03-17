@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:title="Dashboard"
+            android:id="@+id/navDashboard"
+            android:icon="@drawable/ic_dashboard_outlined"/>
+
+        <item
+            android:title="Realtime Monitoring"
+            android:id="@+id/navRealtimeMonitoring"
+            android:icon="@drawable/ic_realtime"/>
+
+        <item
+            android:title="Drift Monitoring"
+            android:id="@+id/navDrift"
+            android:icon="@drawable/ic_drift_2"/>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:title="Sensors"
+            android:id="@+id/navSensor"
+            android:icon="@drawable/ic_sensors"/>
+
+        <item
+            android:title="Object Template"
+            android:id="@+id/navObject"
+            android:icon="@drawable/ic_template_outlined"/>
+
+        <item
+            android:title="Manual"
+            android:id="@+id/navManual"
+            android:icon="@drawable/ic_manual_outlined"/>
+
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:title="Settings"
+            android:id="@+id/navSettings"
+            android:icon="@drawable/ic_settings_outline"/>
+    </group>
+
+</menu>

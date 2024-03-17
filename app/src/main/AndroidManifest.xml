@@ -13,6 +13,8 @@
         android:name="android.permission.BLUETOOTH_ADMIN"
         android:maxSdkVersion="30" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -25,10 +27,40 @@
         android:theme="@style/Theme.StructureMonitoringSystem"
         tools:targetApi="31">
         <activity
-            android:name=".LineChartView"
+            android:name=".ChangePIN"
             android:exported="false" />
         <activity
-            android:name=".CreateObject"
+            android:name=".SelectDefaultTemplate"
+            android:exported="false" />
+        <activity
+            android:name=".SelectDefaultBluetooth"
+            android:exported="false" />
+        <activity
+            android:name=".Manual"
+            android:exported="false" />
+        <activity
+            android:name=".Settings"
+            android:exported="false" />
+        <activity
+            android:name=".ObjectTemplate"
+            android:exported="false" />
+        <activity
+            android:name=".Sensors"
+            android:exported="false" />
+        <activity
+            android:name=".DriftMonitoring"
+            android:exported="false" />
+        <activity
+            android:name=".RealtimeMonitoring"
+            android:exported="false" />
+        <activity
+            android:name=".Dashboard"
+            android:exported="false" />
+        <activity
+            android:name=".PinPage"
+            android:exported="false" />
+        <activity
+            android:name=".Testing.ObjectList"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,7 +69,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Testing.BluetoothTerminalTest"
+            android:exported="false" />
+        <activity
+            android:name=".Testing.BluetoothTest"
+            android:exported="false" />
+        <activity
+            android:name=".Testing.LineChartView"
+            android:exported="false" />
+        <activity
+            android:name=".Testing.CreateObject"
+            android:exported="true" />
+        <activity
+            android:name=".Testing.MainActivity"
             android:exported="false" />
     </application>
+
 </manifest>

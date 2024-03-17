@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:id="@+id/layout"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_black_transparent_10"
+        android:id="@+id/cancelBtnTwo"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_bottom_popup">
+
+        <TextView
+            android:id="@+id/changingData"
+            android:layout_marginTop="10dp"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="@color/txt_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset Settings"/>
+        <TextView
+            android:layout_below="@+id/changingData"
+            android:id="@+id/collectionMethod"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="@color/txt_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="to Default"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_warning"
+            android:layout_alignParentRight="true"/>
+
+        <TextView
+            android:id="@+id/warningMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/collectionMethod"
+            android:layout_marginTop="15dp"
+            android:text="@string/reset_warning"
+            android:textColor="@color/txt_color"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/warningMessage"
+            android:id="@+id/buttonHolder">
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:id="@+id/confirmBtn"
+                android:background="@drawable/shape_square_btn"
+                android:text="Confirm"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:textColor="@color/txt_color"
+                android:id="@+id/cancelBtn"
+                android:layout_toStartOf="@id/confirmBtn"
+                android:text="@string/cancel"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

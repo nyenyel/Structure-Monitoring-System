@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="40px">
+
+        <RelativeLayout
+            android:id="@+id/firstCol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/ic_change_pin" />
+
+            <TextView
+                android:id="@+id/instruction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/logo"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/regular"
+                android:text="Please enter your PIN code"
+                android:textColor="@color/txt_color"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/pin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/firstCol"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40px">
+
+            <ImageView
+                android:id="@+id/pinOne"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="80px"
+                android:background="@drawable/shape_circle" />
+
+            <ImageView
+                android:id="@+id/pinTwo"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="80px"
+                android:layout_toRightOf="@+id/pinOne"
+                android:background="@drawable/shape_circle" />
+
+            <ImageView
+                android:id="@+id/pinThree"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="80px"
+                android:layout_toRightOf="@+id/pinTwo"
+                android:background="@drawable/shape_circle" />
+
+            <ImageView
+                android:id="@+id/pinFour"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_toRightOf="@+id/pinThree"
+                android:background="@drawable/shape_circle" />
+
+            <ImageView
+                android:id="@+id/pinOneFill"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="80px"
+                android:background="@drawable/shape_circle_fill"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/pinTwoFill"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="80px"
+                android:layout_toRightOf="@+id/pinOne"
+                android:background="@drawable/shape_circle_fill"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/pinThreeFill"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="80px"
+                android:layout_toRightOf="@+id/pinTwo"
+                android:background="@drawable/shape_circle_fill"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/pinFourFill"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_toRightOf="@+id/pinThree"
+                android:background="@drawable/shape_circle_fill"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/pinNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80px">
+
+            <RelativeLayout
+                android:id="@+id/numFirstCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50px"
+                    android:background="@null"
+                    android:fontFamily="@font/regular"
+                    android:text="1"
+                    android:textColor="@color/txt_color"
+                    android:textSize="50sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50px"
+                    android:layout_toRightOf="@+id/one"
+                    android:background="@null"
+                    android:fontFamily="@font/regular"
+                    android:text="2"
+                    android:textColor="@color/txt_color"
+                    android:textSize="50sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/two"
+                    android:background="@null"
+                    android:fontFamily="@font/regular"
+                    android:text="3"
+                    android:textColor="@color/txt_color"
+                    android:textSize="50sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/numSectCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/numFirstCol"
+                android:layout_marginTop="40px">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50px"
+                    android:background="@null"
+                    android:fontFamily="@font/regular"
+                    android:text="4"
+                    android:textColor="@color/txt_color"
+                    android:textSize="50sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/five"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50px"
+                    android:layout_toRightOf="@+id/four"
+                    android:background="@null"
+                    android:fontFamily="@font/regular"
+                    android:text="5"
+                    android:textColor="@color/txt_color"
+                    android:textSize="50sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/six"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/five"
+                    android:background="@null"
+                    android:fontFamily="@font/regular"
+                    android:text="6"
+                    android:textColor="@color/txt_color"
+                    android:textSize="50sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/numThirdCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/numSectCol"
+                android:layout_marginTop="40px">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/seven"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50px"
+                    android:background="@null"
+                    android:fontFamily="@font/regular"
+                    android:text="7"
+                    android:textColor="@color/txt_color"
+                    android:textSize="50sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/eight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50px"
+                    android:layout_toRightOf="@+id/seven"
+                    android:background="@null"
+                    android:fontFamily="@font/regular"
+                    android:text="8"
+                    android:textColor="@color/txt_color"
+                    android:textSize="50sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/nine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/eight"
+                    android:background="@null"
+                    android:fontFamily="@font/regular"
+                    android:text="9"
+                    android:textColor="@color/txt_color"
+                    android:textSize="50sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/numFourthCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/numThirdCol"
+                android:layout_marginTop="40px">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/none"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50px"
+                    android:background="@null"
+                    android:textColor="@color/txt_color" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/zero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50px"
+                    android:layout_toRightOf="@+id/none"
+                    android:background="@null"
+                    android:fontFamily="@font/regular"
+                    android:text="0"
+                    android:textColor="@color/txt_color"
+                    android:textSize="50sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/backspace"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50px"
+                    android:layout_toRightOf="@id/zero"
+                    android:background="@drawable/image_delete"
+                    android:textColor="@color/txt_color" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

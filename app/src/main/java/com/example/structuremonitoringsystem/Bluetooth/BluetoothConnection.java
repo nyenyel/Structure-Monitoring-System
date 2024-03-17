@@ -9,16 +9,19 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.ParcelUuid;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.structuremonitoringsystem.Variables.GlobalVariable;
+import com.example.structuremonitoringsystem.Item.BluetoothItem;
+import com.example.structuremonitoringsystem.LocalDatabase.DatabaseDefaultSettings;
+import com.example.structuremonitoringsystem.Testing.BluetoothTest;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class BluetoothConnection {
@@ -26,6 +29,7 @@ public class BluetoothConnection {
     private static final UUID arduinoUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private static final int REQUEST_BLUETOOTH_PERMISSION = 123;
 
+    DatabaseDefaultSettings defaultSettings;
     private BluetoothDevice bluetoothDevice;
 
     public void test(){
@@ -53,7 +57,6 @@ public class BluetoothConnection {
 //            Log.e("Global Variable", "Data Added");
             return blListName.substring(1);
 
-
         }
     }
 
@@ -75,9 +78,10 @@ public class BluetoothConnection {
         }
     }
 
-    public void deviceUUID(Context context, String deviceMAC){
+    public String deviceUUID(Context context, String deviceMAC){
 
         // Get the Bluetooth device based on its address
+        String deviceUUID = "";
         BluetoothDevice bluetoothDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(deviceMAC);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
             // Request Bluetooth permission
@@ -90,70 +94,48 @@ public class BluetoothConnection {
             if (uuids != null) {
                 // Print the UUIDs to the console
                 for (ParcelUuid uuid : uuids) {
-                    System.out.println("UUID: " + uuid.getUuid().toString());
+                    deviceUUID = uuid.getUuid().toString();
                 }
             } else {
                 System.out.println("UUIDs not available for this device.");
-
+                deviceUUID = "UUIDs not available for this device.";
             }
         }
-
+        return deviceUUID;
     }
 
-    public void bluetoothCn(Context context, String deviceMAC){
+    public BluetoothSocket bluetoothCn(Context context, String deviceMAC){
 
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         BluetoothDevice bluetoothDevice = bluetoothAdapter.getRemoteDevice(deviceMAC);
+        BluetoothSocket bluetoothSocket = null;
 
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
             // Request Bluetooth permission
             ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.BLUETOOTH}, REQUEST_BLUETOOTH_PERMISSION);
         } else {
             // Permission already granted, proceed with Bluetooth operations
-            BluetoothSocket bluetoothSocket = null;
 
-            //Confirm of the device is connected through Bluetooth
-            int counter = 0;
-            boolean count = counter <3;
+            int count = 0;
             do {
+                //Confirm of the device is connected through Bluetooth
                 try {
                     bluetoothSocket = bluetoothDevice.createRfcommSocketToServiceRecord(arduinoUUID);
-                    Log.e("Bluetooth Socket", ""+bluetoothSocket);
                     bluetoothSocket.connect();
-                    Log.e("Bluetooth Connection", "Connected: " + bluetoothSocket.isConnected());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                counter++;
-            } while (!bluetoothSocket.isConnected() && count);
-
-            //send command to the device
-            try {
-                OutputStream outputStream = bluetoothSocket.getOutputStream();
-                outputStream.write(48);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            //get data from device
-            InputStream inputStream = null;
-            try {
-                inputStream = bluetoothSocket.getInputStream();
-                inputStream.skip(inputStream.available());
-
-                for (int i = 0; i < 26; i++) {
-
-                    byte b = (byte) inputStream.read();
-                    System.out.println((char) b);
-
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+                count++;
+                Log.e("Counter", count+"");
+            }while (!bluetoothSocket.isConnected() && count < 4);
         }
+        return bluetoothSocket;
+    }
 
+    public void bluetoothDc(BluetoothSocket bluetoothSocket){
+        try {
+            bluetoothSocket.close();
+        }catch (IOException e){ e.printStackTrace(); }
     }
 
     private void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

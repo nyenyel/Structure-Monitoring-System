@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Structure Monitoring System</string>
+    <string name="drawer_open">Navbar is open</string>
+    <string name="drawer_close">Navbar is close</string>
+    <string name="behavior_app_running">While App is Running</string>
+    <string name="behavior_app_monitoring">While Monitoring Only</string>
+    <string name="behavior_app_even_not_running">Collect Data Even the App is NOT Running</string>
+    <string name="reset_settings"><u>Reset Settings</u></string>
+    <string name="save_warning"><b>WARNING:</b> confirming this message will change the applications way of collecting data. Are you sure you want save the changes?</string>
+    <string name="reset_warning"><b>WARNING:</b> confirming this message will reset all the setting into default. The change includes default <b>Template, Bluetooth MAC Address, PIN, and Data Collection Method.</b> Are you want to continue?</string>
+    <string name="incorrect_warning"><b>WARNING:</b> the PIN is incorrect. Please try again.</string>
+    <string name="cancel"><u>Cancel</u></string>
+    <string name="try_again"><u>Try Again</u></string>
+
 </resources>

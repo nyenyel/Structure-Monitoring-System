@@ -2,38 +2,27 @@ package com.example.structuremonitoringsystem.Arduino;
 
 public class Formula {
 
-    public static double[] calculateEulerAngles(double[][] rotationMatrix) {
-        // Extract individual rotation matrices
-        double[][] rotationX = { {1, 0, 0}, {0, Math.cos(rotationMatrix[0][0]), -Math.sin(rotationMatrix[0][0])}, {0, Math.sin(rotationMatrix[0][0]), Math.cos(rotationMatrix[0][0])} };
-        double[][] rotationY = { {Math.cos(rotationMatrix[1][1]), 0, Math.sin(rotationMatrix[1][1])}, {0, 1, 0}, {-Math.sin(rotationMatrix[1][1]), 0, Math.cos(rotationMatrix[1][1])} };
-        double[][] rotationZ = { {Math.cos(rotationMatrix[2][2]), -Math.sin(rotationMatrix[2][2]), 0}, {Math.sin(rotationMatrix[2][2]), Math.cos(rotationMatrix[2][2]), 0}, {0, 0, 1} };
+    private LowPassFilter filter;
 
-        // Compute Euler angles
-        double pitch = Math.asin(rotationY[0][2]);
-        double yaw = Math.atan2(-rotationX[1][2], rotationZ[1][1]);
-        double roll = Math.atan2(-rotationY[0][1], rotationY[0][0]);
+    public Formula(float alpha) {
+        this.filter = new LowPassFilter(alpha);
+    }
 
-        // Convert angles to degrees if needed
-        pitch = Math.toDegrees(pitch);
-        yaw = Math.toDegrees(yaw);
-        roll = Math.toDegrees(roll);
+    public float displacement(double velocityPerSec) {
+        float filteredVelocity = filter.filter((float) velocityPerSec);
 
-        return new double[]{roll, pitch, yaw};
+        // Define a threshold below which velocities are considered noise
+        double velocityThreshold = 0.1; // Adjust as needed
+
+        // Check if the filtered velocity exceeds the threshold
+        if (Math.abs(filteredVelocity) <= velocityThreshold) {
+            return 0f; // If filtered velocity is below the threshold, consider it as zero displacement
+        } else {
+            // Calculate displacement based on the filtered velocity
+            float timeInterval = 0.1f; // Assuming a time interval of 0.1 seconds
+            return filteredVelocity * timeInterval;
+        }
     }
 
 
-    public static void main(String[] args) {
-        // Example usage
-        double[][] rotationMatrix = {
-                {0.866, -0.5, 0},
-                {0.5, 0.866, 0},
-                {0, 0, 1}
-        };
-
-        double[] eulerAngles = calculateEulerAngles(rotationMatrix);
-
-        System.out.println("Roll: " + eulerAngles[0] + " degrees");
-        System.out.println("Pitch: " + eulerAngles[1] + " degrees");
-        System.out.println("Yaw: " + eulerAngles[2] + " degrees");
-    }
 }
