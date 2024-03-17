@@ -1,4 +1,4 @@
-package com.example.structuremonitoringsystem.RecyclerView.Item;
+package com.example.structuremonitoringsystem.Item;
 
 public class BluetoothItem {
 
