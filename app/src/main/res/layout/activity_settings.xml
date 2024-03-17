@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Settings"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:openDrawer="end">
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
@@ -19,14 +19,450 @@
         android:background="@drawable/bg_square_with_no_edge"/>
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/toolbar"
-            app:title="Settings"/>
-    </RelativeLayout>
+            android:id="@+id/toolbarHolder">
 
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/toolbar"
+                app:titleTextColor="@color/txt_color"
+                app:title="Settings"/>
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_below="@id/toolbarHolder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <!-- Default Bluetooth MAC-->
+                <RelativeLayout
+                    android:id="@+id/defaultMacBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="1dp"
+                    android:padding="10dp"
+                    android:background="@drawable/shape_square">
+
+                    <RelativeLayout
+                        android:id="@+id/btTextHolder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bluetooth MAC Address"
+                            android:id="@+id/btMacAddress"
+                            android:fontFamily="@font/bold"
+                            android:textSize="20dp"
+                            android:textColor="@color/txt_color" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/btMacAddress"
+                            android:textColor="@color/txt_color"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/regular"
+                            android:text="Default Bluetooth MAC Address"/>
+                    </RelativeLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_arrow_right"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+                <!-- Default Object Template-->
+                <RelativeLayout
+                    android:id="@+id/defaultTemplateBtn"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="1dp"
+                    android:padding="10dp"
+                    android:background="@drawable/shape_square">
+
+                    <RelativeLayout
+                        android:id="@+id/templateTextHolder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Template No. 1"
+                            android:fontFamily="@font/bold"
+                            android:id="@+id/templateName"
+                            android:textStyle="bold"
+                            android:textSize="20dp"
+                            android:textColor="@color/txt_color" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/templateName"
+                            android:textColor="@color/txt_color"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/regular"
+                            android:text="Default Object Template"/>
+                    </RelativeLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_arrow_right"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+                <!-- Change PIN-->
+                <RelativeLayout
+                    android:id="@+id/changePINBtn"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:elevation="1dp"
+                    android:padding="10dp"
+                    android:background="@drawable/shape_square">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toStartOf="@+id/viewPINBtn"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Change PIN"
+                            android:layout_centerVertical="true"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/bold"
+                            android:textSize="20dp"
+                            android:textColor="@color/txt_color" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/viewPINBtn"
+                        android:src="@drawable/ic_arrow_right"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reset_settings"
+                    android:fontFamily="@font/regular"
+                    android:id="@+id/resetSettingsBtn"
+                    android:textStyle="bold"
+                    android:textColor="#E83A3A"/>
+
+                <!-- Data Collection Setting-->
+                <!-- Data Collection -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Data Collection"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/extra_bold"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/txt_color"/>
+                    <!-- While app is running -->
+                    <RelativeLayout
+                        android:id="@+id/appIsRunningBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp">
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/appIsRunningFirstRow">
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:layout_width="35dp"
+                                android:layout_height="30dp"
+                                android:checked="true"
+                                android:clickable="false"
+                                android:focusable="false"
+                                app:buttonTint="@color/txt_color"
+                                android:id="@+id/appIsRunningRdBtn"/>
+                            <TextView
+                                android:id="@+id/runningTxt"
+                                android:layout_centerVertical="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/txt_color"
+                                android:textSize="15sp"
+                                android:fontFamily="@font/bold"
+                                android:layout_toEndOf="@id/appIsRunningRdBtn"
+                                android:textStyle="bold"
+                                android:text="@string/behavior_app_running"/>
+                        </RelativeLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/appIsRunningFirstRow"
+                            android:paddingLeft="35dp"
+                            android:fontFamily="@font/regular"
+                            android:textColor="@color/txt_color"
+                            android:text="Save data to the mobile phone while the application is running.(Recommended)"/>
+                    </RelativeLayout>
+                    <!-- While Monitoring Only -->
+                    <RelativeLayout
+                        android:id="@+id/whileMonitoringBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp">
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/whileMonitoringFirstRow">
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:layout_width="35dp"
+                                android:layout_height="30dp"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:checked="false"
+                                app:buttonTint="@color/txt_color"
+                                android:id="@+id/whileMonitoringRdBtn"/>
+                            <TextView
+                                android:id="@+id/monitoringTxt"
+                                android:layout_centerVertical="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/txt_color"
+                                android:textSize="15sp"
+                                android:fontFamily="@font/bold"
+                                android:layout_toEndOf="@id/whileMonitoringRdBtn"
+                                android:textStyle="bold"
+                                android:text="@string/behavior_app_monitoring"/>
+                        </RelativeLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/whileMonitoringFirstRow"
+                            android:paddingLeft="35dp"
+                            android:fontFamily="@font/regular"
+                            android:textColor="@color/txt_color"
+                            android:text="The application will only save data to the mobile phone when the user is monitoring the device in realtime."/>
+                    </RelativeLayout>
+                    <!-- Not running -->
+                    <RelativeLayout
+                        android:id="@+id/appIsNotRunningBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp">
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/appIsNotRunningFirstRow">
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:layout_width="35dp"
+                                android:layout_height="30dp"
+                                android:checked="false"
+                                android:clickable="false"
+                                android:focusable="false"
+                                app:buttonTint="@color/txt_color"
+                                android:id="@+id/appIsNotRunningRdBtn"/>
+                            <TextView
+                                android:id="@+id/notRunningTxt"
+                                android:layout_centerVertical="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/txt_color"
+                                android:textSize="15sp"
+                                android:fontFamily="@font/bold"
+                                android:layout_toEndOf="@id/appIsNotRunningRdBtn"
+                                android:textStyle="bold"
+                                android:text="@string/behavior_app_even_not_running"/>
+                        </RelativeLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/appIsNotRunningFirstRow"
+                            android:paddingLeft="35dp"
+                            android:fontFamily="@font/regular"
+                            android:textColor="@color/txt_color"
+                            android:text="WARNING: The app will collect data even the app is not running as long as the device is connected, this might cause significant drop of the overall performance of the mobile phone.(Not Recommended)"/>
+                    </RelativeLayout>
+                </LinearLayout>
+                <!-- Data Collection Behavior-->
+                <LinearLayout
+                    android:id="@+id/dataBehavior"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Data Collection Behavior"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/extra_bold"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/txt_color"/>
+                    <!-- All Data -->
+                    <RelativeLayout
+                        android:id="@+id/allBehaviorBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp">
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/allBehaviorFirstRow">
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:layout_width="35dp"
+                                android:layout_height="30dp"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:checked="true"
+                                app:buttonTint="@color/txt_color"
+                                android:id="@+id/allBehaviorRdBtn"/>
+                            <TextView
+                                android:layout_centerVertical="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/txt_color"
+                                android:textSize="15sp"
+                                android:fontFamily="@font/bold"
+                                android:id="@+id/allDataTxt"
+                                android:layout_toEndOf="@id/allBehaviorRdBtn"
+                                android:textStyle="bold"
+                                android:text="All Data"/>
+                        </RelativeLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/allBehaviorFirstRow"
+                            android:paddingLeft="35dp"
+                            android:fontFamily="@font/regular"
+                            android:textColor="@color/txt_color"
+                            android:text="All data will be save to the mobile phone while the user is monitoring the device in realtime."/>
+                    </RelativeLayout>
+                    <!-- Per Device -->
+                    <RelativeLayout
+                        android:id="@+id/perDeviceBehaviorBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp">
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/perDeviceBehaviorFirstRow">
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:layout_width="35dp"
+                                android:layout_height="30dp"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:checked="false"
+                                app:buttonTint="@color/txt_color"
+                                android:id="@+id/perDeviceBehaviorRdBtn"/>
+                            <TextView
+                                android:layout_centerVertical="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/txt_color"
+                                android:textSize="15sp"
+                                android:fontFamily="@font/bold"
+                                android:id="@+id/perDeviceTxt"
+                                android:layout_toEndOf="@id/perDeviceBehaviorRdBtn"
+                                android:textStyle="bold"
+                                android:text="Per Device"/>
+                        </RelativeLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/perDeviceBehaviorFirstRow"
+                            android:paddingLeft="35dp"
+                            android:fontFamily="@font/regular"
+                            android:textColor="@color/txt_color"
+                            android:text="The application will only save the data coming from the selected device while monitoring in realtime."/>
+                    </RelativeLayout>
+                    <!-- Per Sensor on device -->
+                    <RelativeLayout
+                        android:id="@+id/perSensorBehaviorBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp">
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/perSensorBehaviorFirstRow">
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:layout_width="35dp"
+                                android:layout_height="30dp"
+                                android:checked="false"
+                                android:clickable="false"
+                                android:focusable="false"
+                                app:buttonTint="@color/txt_color"
+                                android:id="@+id/perSensorBehaviorRdBtn"/>
+                            <TextView
+                                android:layout_centerVertical="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/txt_color"
+                                android:textSize="15sp"
+                                android:fontFamily="@font/bold"
+                                android:id="@+id/perSensorTxt"
+                                android:layout_toEndOf="@id/perSensorBehaviorRdBtn"
+                                android:textStyle="bold"
+                                android:text="Per Sensor on Device"/>
+                        </RelativeLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/perSensorBehaviorFirstRow"
+                            android:paddingLeft="35dp"
+                            android:fontFamily="@font/regular"
+                            android:textColor="@color/txt_color"
+                            android:text="The application will only save data of the selected sensor on device."/>
+                    </RelativeLayout>
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/saveBtn"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginBottom="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:text="Save"
+                        android:fontFamily="@font/bold"
+                        android:textColor="@color/white"
+                        android:background="@drawable/shape_square_btn"/>
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
