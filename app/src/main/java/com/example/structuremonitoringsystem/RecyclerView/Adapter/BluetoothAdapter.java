@@ -12,9 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.structuremonitoringsystem.Bluetooth.BluetoothConnection;
+import com.example.structuremonitoringsystem.LocalDatabase.DatabaseDefaultSettings;
+import com.example.structuremonitoringsystem.Settings;
 import com.example.structuremonitoringsystem.Testing.BluetoothTerminalTest;
 import com.example.structuremonitoringsystem.R;
-import com.example.structuremonitoringsystem.RecyclerView.Item.BluetoothItem;
+import com.example.structuremonitoringsystem.Item.BluetoothItem;
 import com.example.structuremonitoringsystem.RecyclerView.ViewHolder.BluetoothViewHolder;
 
 import java.util.List;
@@ -24,8 +26,7 @@ public class BluetoothAdapter extends RecyclerView.Adapter<BluetoothViewHolder> 
     Context context;
     List<BluetoothItem> items;
     BluetoothConnection bluetoothConnection;
-
-
+    DatabaseDefaultSettings defaultSettings;
     public BluetoothAdapter(Context context, List<BluetoothItem> items) {
         this.context = context;
         this.items = items;
@@ -40,6 +41,8 @@ public class BluetoothAdapter extends RecyclerView.Adapter<BluetoothViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull BluetoothViewHolder holder, int position) {
         bluetoothConnection = new BluetoothConnection();
+        defaultSettings = new DatabaseDefaultSettings(context);
+
         String selectedDeviceMAC = items.get(position).getDeviceMac();
         String selectedDeviceName = items.get(position).getDeviceName();
 
@@ -50,10 +53,8 @@ public class BluetoothAdapter extends RecyclerView.Adapter<BluetoothViewHolder> 
         holder.deviceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, BluetoothTerminalTest.class);
-                intent.putExtra("UUID", uuid);
-                intent.putExtra("MAC", selectedDeviceMAC);
-                intent.putExtra("name", selectedDeviceName);
+                Intent intent = new Intent(context, Settings.class);
+                defaultSettings.updateDefaultMac(selectedDeviceMAC);
                 startActivity(context, intent, null);
             }
         });
