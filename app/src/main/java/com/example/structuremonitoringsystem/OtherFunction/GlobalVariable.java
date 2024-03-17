@@ -1,5 +1,10 @@
 package com.example.structuremonitoringsystem.OtherFunction;
 
+import android.view.View;
+import android.view.WindowInsets;
+
+import androidx.viewpager.widget.ViewPager;
+
 import com.example.structuremonitoringsystem.Bluetooth.BluetoothConnection;
 
 import java.util.Random;
@@ -59,6 +64,46 @@ public class GlobalVariable {
         Random random = new Random();
         return min + (max - min) * random.nextDouble();
     }
+
+    public static String[] getLoggingBehavior() {
+        String loggingBehavior[] = new String[]{
+                "While App is Running",
+                "While Monitoring Only",
+                "Collect Data Even the App is NOT Running"};
+        return loggingBehavior;
+    }
+
+    public static String[] getLoggingType() {
+        String loggingType[] = new String[]{
+                "All Data",
+                "Per Device",
+                "Per Sensor on Device"};
+        return loggingType;
+    }
+    public int hideSystemBars(){
+
+
+        return View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+    }
+
+    public void hideSystemBars(View decorView){
+
+        decorView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+            @Override
+            public WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
+                // Perform your actions here when system UI visibility changes
+                decorView.setSystemUiVisibility(hideSystemBars());
+                return windowInsets;
+            }
+        });
+
+    }
+
 
 }
 
