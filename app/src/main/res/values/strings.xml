@@ -11,5 +11,6 @@
     <string name="incorrect_warning"><b>WARNING:</b> the PIN is incorrect. Please try again.</string>
     <string name="cancel"><u>Cancel</u></string>
     <string name="try_again"><u>Try Again</u></string>
+    <string name="template_note"><i>Note: confirming this will permanently change the <b>thickness, width, and height</b> of the template this will also take effect even the selected template is the default template.</i></string>
 
 </resources>
