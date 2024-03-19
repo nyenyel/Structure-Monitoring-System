@@ -27,6 +27,9 @@
         android:theme="@style/Theme.StructureMonitoringSystem"
         tools:targetApi="31">
         <activity
+            android:name=".ListOfSensorPerDevice"
+            android:exported="false" />
+        <activity
             android:name=".ChangePIN"
             android:exported="false" />
         <activity
