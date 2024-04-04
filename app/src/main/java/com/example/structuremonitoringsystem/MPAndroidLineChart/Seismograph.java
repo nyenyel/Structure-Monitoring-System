@@ -17,18 +17,27 @@ import java.util.List;
 public class Seismograph{
 
     private LineChart chart;
+    private String title, sensor;
 
-    public Seismograph(LineChart chart){
+    public Seismograph(LineChart chart, String title){
+        this.title = title;
         this.chart = chart;
     };
 
+    public Seismograph(LineChart chart, String title, String sensor){
+        this.title = title;
+        this.chart = chart;
+        this.sensor = sensor;
+    };
 
     //initializing the data logging line graph
-    public void dataLoggingSeismograph(ArrayList<Entry> yValues){
+    public void dataLoggingSeismograph(ArrayList<Entry> values){
 
         chart.setDragEnabled(true);
         chart.setScaleEnabled(false);
-        LineDataSet lineDataSet1 = new LineDataSet(yValues, "Data Set 1");
+        chart.getDescription().setEnabled(true);
+        chart.getDescription().setText(sensor);
+        LineDataSet lineDataSet1 = new LineDataSet(values, title);
 
         lineDataSet1.setFillAlpha(110);
 
@@ -53,7 +62,7 @@ public class Seismograph{
     public void realTimeSeismograph(){
 
         chart.getDescription().setEnabled(true);
-        chart.getDescription().setText("Real Time Chart");
+        chart.getDescription().setText(title);
 
         chart.setTouchEnabled(false);
         chart.setDragEnabled(true);

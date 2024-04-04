@@ -46,6 +46,7 @@ public class Popups {
             @Override
             public void onClick(View view) {
                 dialog.cancel();
+
             }
         });
 
@@ -53,6 +54,7 @@ public class Popups {
             @Override
             public void onClick(View view) {
                 dialog.cancel();
+
             }
         });
 
@@ -62,6 +64,7 @@ public class Popups {
                 defaultSettings.updateLoggingBehavior(behavior);
                 defaultSettings.updateLoggingType(type);
                 dialog.cancel();
+
             }
         });
 
@@ -87,6 +90,7 @@ public class Popups {
             @Override
             public void onClick(View view) {
                 dialog.cancel();
+
             }
         });
 
@@ -94,6 +98,7 @@ public class Popups {
             @Override
             public void onClick(View view) {
                 dialog.cancel();
+
             }
         });
 
@@ -102,6 +107,7 @@ public class Popups {
             public void onClick(View view) {
                 defaultSettings.resetToDefaultData();
                 dialog.cancel();
+
             }
         });
 
@@ -127,8 +133,73 @@ public class Popups {
             @Override
             public void onClick(View view) {
                 dialog.cancel();
+
             }
         });
+
+        cancelBtnOutside.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+
+            }
+        });
+
+    }
+
+    public void bluetoothFailed(){
+        dialog = new Dialog(context);
+        dialog.setContentView(R.layout.popup_bt_failed);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(getDrawable(context, R.drawable.bg_black_transparent_10));
+        }
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true); //Optional
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.getWindow().getAttributes().windowAnimations = R.anim.fade_in; //Setting the animations to dialog
+        dialog.show();
+
+        cancelBtn = dialog.findViewById(R.id.cancelBtn);
+        cancelBtnOutside = dialog.findViewById(R.id.cancelBtnTwo);
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+
+            }
+        });
+
+        cancelBtnOutside.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+
+            }
+        });
+
+    }
+
+    public void selectSensor(SensorSelectionListener listener) {
+        RelativeLayout accelBtn, gyroBtn;
+        TextView accel, gyro;
+        dialog = new Dialog(context);
+        dialog.setContentView(R.layout.popup_sensor);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(getDrawable(context, R.drawable.bg_black_transparent_10));
+        }
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true); //Optional
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.getWindow().getAttributes().windowAnimations = R.anim.fade_in; //Setting the animations to dialog
+        dialog.show();
+
+        cancelBtnOutside = dialog.findViewById(R.id.cancelBtnTwo);
+        accel = dialog.findViewById(R.id.accelText);
+        gyro = dialog.findViewById(R.id.gyroTxt);
+
+        accelBtn = dialog.findViewById(R.id.accelBtn);
+        gyroBtn = dialog.findViewById(R.id.gyroBtn);
 
         cancelBtnOutside.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,6 +208,26 @@ public class Popups {
             }
         });
 
+        accelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onSensorSelected(accel.getText().toString().trim());
+                dialog.dismiss();
+            }
+        });
 
+        gyroBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onSensorSelected(gyro.getText().toString().trim());
+                dialog.dismiss();
+            }
+        });
     }
+
+    public interface SensorSelectionListener {
+        void onSensorSelected(String sensor);
+    }
+
+
 }

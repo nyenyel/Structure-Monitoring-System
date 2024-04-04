@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item
-            android:title="Dashboard"
-            android:id="@+id/navDashboard"
-            android:icon="@drawable/ic_dashboard_outlined"/>
 
         <item
             android:title="Realtime Monitoring"
@@ -36,6 +32,10 @@
     </group>
 
     <group android:checkableBehavior="single">
+        <item android:title="Excel"
+            android:id="@+id/navExcel"
+            android:icon="@drawable/ic_excel"/>
+
         <item
             android:title="Settings"
             android:id="@+id/navSettings"

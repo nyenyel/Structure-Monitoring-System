@@ -3,6 +3,7 @@ package com.example.structuremonitoringsystem.Testing;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.example.structuremonitoringsystem.Arduino.Formula;
 import com.example.structuremonitoringsystem.Arduino.HC05Bluetooth;
 import com.example.structuremonitoringsystem.Bluetooth.BluetoothConnection;
+import com.example.structuremonitoringsystem.LocalDatabase.DatabaseDefaultSettings;
 import com.example.structuremonitoringsystem.MPAndroidLineChart.Seismograph;
 import com.example.structuremonitoringsystem.OpenGL.OpenGLView;
 import com.example.structuremonitoringsystem.R;
@@ -43,14 +45,15 @@ public class BluetoothTerminalTest extends AppCompatActivity {
         openGLView.init(this, 30,10,20);
         openGLView.rotateObject(1,1,1,1,2);
 
-        String mac = getIntent().getStringExtra("MAC");
+        DatabaseDefaultSettings defaultSettings = new DatabaseDefaultSettings(this);
+        String mac =defaultSettings.getDefaultMac();
         String name = getIntent().getStringExtra("name");
 
         bluetoothConnection = new BluetoothConnection();
-        hc05Bluetooth = new HC05Bluetooth();
-        seismographX = new Seismograph(realtimeChartX);
-        seismographY = new Seismograph(realtimeChartY);
-        seismographZ = new Seismograph(realtimeChartZ);
+        hc05Bluetooth = new HC05Bluetooth(this);
+        seismographX = new Seismograph(realtimeChartX, "Accelerometer X Axis");
+        seismographY = new Seismograph(realtimeChartY, "Accelerometer X Axis");
+        seismographZ = new Seismograph(realtimeChartZ, "Accelerometer X Axis");
 
         //set the ui for the graph
         seismographX.realTimeSeismograph();
@@ -62,7 +65,7 @@ public class BluetoothTerminalTest extends AppCompatActivity {
         // Create an instance of DisplacementCalculator with your desired alpha value
         Formula calculator = new Formula(0.7f); // Adjust alpha as needed
 
-// Start receiving data in a separate thread
+        // Start receiving data in a separate thread
         hc05Bluetooth.receiveData(bluetoothSocket, new HC05Bluetooth.DataListener() {
             @Override
             public void onDataReceived(final String data) {
@@ -70,9 +73,9 @@ public class BluetoothTerminalTest extends AppCompatActivity {
                 // Splits the data to x y z
                 String receivedData[] = data.trim().split(",");
 
-                double x = Double.parseDouble(receivedData[0]);
-                double y = Double.parseDouble(receivedData[1]);
-                double z = Double.parseDouble(receivedData[2]);
+                double x = Double.parseDouble(receivedData[3]);
+                double y = Double.parseDouble(receivedData[4]);
+                double z = Double.parseDouble(receivedData[5]);
 
                 // Calculate displacement for x-axis using the DisplacementCalculator
                 final float displacementX = calculator.displacement(x);
@@ -99,6 +102,7 @@ public class BluetoothTerminalTest extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 bluetoothConnection.bluetoothDc(bluetoothSocket);
+
             }
         });
 
@@ -108,6 +112,7 @@ public class BluetoothTerminalTest extends AppCompatActivity {
                 bluetoothConnection.bluetoothDc(bluetoothSocket);
                 Intent intent = new Intent(BluetoothTerminalTest.this, ObjectList.class);
                 startActivity(intent);
+
             }
         });
     }

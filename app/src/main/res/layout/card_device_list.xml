@@ -62,7 +62,7 @@
 
     <RelativeLayout
         android:visibility="gone"
-        android:id="@+id/clickState"
+        android:id="@+id/clickedState"
         android:layout_below="@+id/initialState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

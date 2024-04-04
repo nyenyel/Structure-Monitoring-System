@@ -23,7 +23,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseDefaultSettings;
+import com.example.structuremonitoringsystem.LocalDatabase.DatabaseLogging;
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseObjectSize;
+import com.example.structuremonitoringsystem.MPAndroidLineChart.XYZGraphs;
 import com.example.structuremonitoringsystem.OtherFunction.GlobalVariable;
 import com.example.structuremonitoringsystem.OtherFunction.NavigationBar;
 import com.example.structuremonitoringsystem.OtherFunction.Popups;
@@ -63,6 +65,11 @@ public class Settings extends AppCompatActivity {
 
         decorView = getWindow().getDecorView();
         globalVariable.hideSystemBars(decorView);
+
+        DatabaseLogging databaseLogging = new DatabaseLogging(this);
+
+        XYZGraphs xyzGraphs = new XYZGraphs(this, Settings.this);
+        xyzGraphs.startCollectingData(databaseLogging);
 
         defaultSettings = new DatabaseDefaultSettings(this);
         objectSize = new DatabaseObjectSize(this);
@@ -191,6 +198,7 @@ public class Settings extends AppCompatActivity {
                 allBehaviorRdBtn.setChecked(true);
                 perDeviceBehaviorRdBtn.setChecked(false);
                 perSensorBehaviorRdBtn.setChecked(false);
+
             }
         });
         whileMonitoringBtn.setOnClickListener(new View.OnClickListener() {
@@ -204,6 +212,7 @@ public class Settings extends AppCompatActivity {
                 allBehaviorRdBtn.setChecked(true);
                 perDeviceBehaviorRdBtn.setChecked(false);
                 perSensorBehaviorRdBtn.setChecked(false);
+
             }
         });
         appIsNotRunningBtn.setOnClickListener(new View.OnClickListener() {
@@ -217,6 +226,7 @@ public class Settings extends AppCompatActivity {
                 allBehaviorRdBtn.setChecked(true);
                 perDeviceBehaviorRdBtn.setChecked(false);
                 perSensorBehaviorRdBtn.setChecked(false);
+
             }
         });
         allBehaviorBtn.setOnClickListener(new View.OnClickListener() {
@@ -225,6 +235,7 @@ public class Settings extends AppCompatActivity {
                 allBehaviorRdBtn.setChecked(true);
                 perDeviceBehaviorRdBtn.setChecked(false);
                 perSensorBehaviorRdBtn.setChecked(false);
+
             }
         });
         perDeviceBehaviorBtn.setOnClickListener(new View.OnClickListener() {
@@ -233,6 +244,7 @@ public class Settings extends AppCompatActivity {
                 allBehaviorRdBtn.setChecked(false);
                 perDeviceBehaviorRdBtn.setChecked(true);
                 perSensorBehaviorRdBtn.setChecked(false);
+
             }
         });
         perSensorBehaviorBtn.setOnClickListener(new View.OnClickListener() {
@@ -241,6 +253,7 @@ public class Settings extends AppCompatActivity {
                 allBehaviorRdBtn.setChecked(false);
                 perDeviceBehaviorRdBtn.setChecked(false);
                 perSensorBehaviorRdBtn.setChecked(true);
+
             }
         });
         defaultMacBtn.setOnClickListener(new View.OnClickListener() {
@@ -248,6 +261,7 @@ public class Settings extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Settings.this, SelectDefaultBluetooth.class);
                 startActivity(intent);
+
             }
         });
         defaultTemplateBtn.setOnClickListener(new View.OnClickListener() {
@@ -255,6 +269,7 @@ public class Settings extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Settings.this, SelectDefaultTemplate.class);
                 startActivity(intent);
+
             }
         });
         changePinBtn.setOnClickListener(new View.OnClickListener() {
@@ -262,6 +277,7 @@ public class Settings extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Settings.this, ChangePIN.class);
                 startActivity(intent);
+
             }
         });
         saveBtn.setOnClickListener(new View.OnClickListener() {
@@ -289,12 +305,14 @@ public class Settings extends AppCompatActivity {
                 }
 
                 popups.saveConfirmationPopupWindow(defaultSettings, behavior, type);
+
             }
         });
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 popups.resetConfirmationPopupWindow(defaultSettings);
+
             }
         });
 

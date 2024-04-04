@@ -5,7 +5,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Dashboard"
+    tools:context=".RTMonitoring"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
@@ -13,26 +13,27 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/navbarView"
-        app:headerLayout="@layout/navbar_header"
         app:menu="@menu/navbar"
-        android:background="@drawable/bg_square_with_no_edge"
-        android:layout_gravity="start"/>
+        app:headerLayout="@layout/navbar_header"
+        android:layout_gravity="start"
+        android:background="@drawable/bg_square_with_no_edge"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="Dasboard"/>
+            android:id="@+id/toolbar"
+            app:title="Realtime Monitoring"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/recyclerView"
-            android:layout_below="@+id/toolbar"/>
+            android:padding="10dp"
+            android:layout_below="@+id/toolbar"
+            android:id="@+id/recyclerView"/>
     </RelativeLayout>
-
 
 </androidx.drawerlayout.widget.DrawerLayout>

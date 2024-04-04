@@ -59,6 +59,7 @@ public class BluetoothTest extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(BluetoothTest.this, CreateObject.class);
                 startActivity(intent);
+
             }
         });
 

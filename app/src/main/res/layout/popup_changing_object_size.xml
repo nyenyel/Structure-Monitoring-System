@@ -51,6 +51,7 @@
 
                 <RelativeLayout
                     android:id="@+id/firstCol"
+                    android:layout_below="@+id/openGLView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <RelativeLayout
@@ -76,6 +77,7 @@
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
                         android:layout_marginTop="10dp"
+                        android:id="@+id/tempName"
                         android:hint="Template Title"
                         android:fontFamily="@font/regular"
                         android:textColor="@color/txt_color"
@@ -109,6 +111,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingStart="15dp"
+                            android:id="@+id/height"
                             android:paddingTop="5dp"
                             android:paddingBottom="5dp"
                             android:layout_marginTop="10dp"
@@ -130,7 +133,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Height"
+                                android:text="Width"
                                 android:padding="1dp"
                                 android:background="@drawable/bg_square_with_no_edge"
                                 android:layout_marginStart="10dp"
@@ -145,7 +148,8 @@
                             android:paddingBottom="5dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="5dp"
-                            android:hint="Height"
+                            android:id="@+id/width"
+                            android:hint="Width"
                             android:fontFamily="@font/regular"
                             android:textColor="@color/txt_color"
                             android:background="@drawable/shape_no_fill"/>
@@ -162,7 +166,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Height"
+                                android:text="Thickness"
                                 android:padding="1dp"
                                 android:background="@drawable/bg_square_with_no_edge"
                                 android:layout_marginStart="10dp"
@@ -176,7 +180,8 @@
                             android:paddingTop="5dp"
                             android:paddingBottom="5dp"
                             android:layout_marginTop="10dp"
-                            android:hint="Height"
+                            android:id="@+id/thickness"
+                            android:hint="Thickness"
                             android:fontFamily="@font/regular"
                             android:textColor="@color/txt_color"
                             android:background="@drawable/shape_no_fill"/>

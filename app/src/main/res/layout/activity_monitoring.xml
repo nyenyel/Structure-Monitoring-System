@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Monitoring"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/navbarView"
+        app:menu="@menu/navbar"
+        app:headerLayout="@layout/navbar_header"
+        android:background="@drawable/bg_square_with_no_edge"
+        android:layout_gravity="start"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar"
+            app:title="Realtime Monitoring"/>
+        <com.example.structuremonitoringsystem.OpenGL.OpenGLView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/openGLView"
+            android:layout_below="@+id/toolbar"
+            />
+        <RelativeLayout
+            android:layout_below="@+id/openGLView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <com.github.mikephil.charting.charts.LineChart
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:id="@+id/realtimeSeismographX"/>
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:id="@+id/realtimeSeismographY"
+                    android:layout_below="@+id/realtimeSeismographX"/>
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:id="@+id/realtimeSeismographZ"
+                    android:layout_below="@+id/realtimeSeismographY"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

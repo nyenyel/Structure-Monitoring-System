@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:id="@+id/layout"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_black_transparent_10"
+        android:id="@+id/cancelBtnTwo"/>
+    <RelativeLayout
+        android:layout_centerInParent="true"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/shape_square"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/templateName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please Select a Sensor"
+                android:textColor="@color/txt_color"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_below="@+id/templateName"
+                android:layout_marginTop="15dp"
+                android:id="@+id/accelBtn"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_marginEnd="5dp"
+                    android:id="@+id/icSensor"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_sensors"/>
+
+                <TextView
+                    android:layout_toEndOf="@+id/icSensor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bold"
+                    android:textColor="@color/txt_color"
+                    android:textSize="20sp"
+                    android:text="Accelerometer"
+                    android:id="@+id/accelText"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_below="@+id/accelBtn"
+                android:layout_marginTop="15dp"
+                android:id="@+id/gyroBtn"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_marginEnd="5dp"
+                    android:id="@+id/icSensor2"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_sensors"/>
+
+                <TextView
+                    android:layout_toEndOf="@+id/icSensor2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bold"
+                    android:textColor="@color/txt_color"
+                    android:textSize="20sp"
+                    android:text="Gyroscope"
+                    android:id="@+id/gyroTxt"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

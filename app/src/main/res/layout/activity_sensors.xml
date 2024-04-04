@@ -41,13 +41,13 @@
             android:padding="15dp"/>
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:id="@+id/addBtn"
             android:src="@drawable/ic_add"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_margin="15dp"/>
+            android:layout_margin="20dp"/>
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

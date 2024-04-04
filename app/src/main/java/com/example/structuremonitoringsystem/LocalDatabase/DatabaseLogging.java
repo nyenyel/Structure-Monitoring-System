@@ -13,12 +13,13 @@ public class DatabaseLogging extends SQLiteOpenHelper {
 
     private Context context;
 
-    private static String DATABASE_NAME = "Devices.db";
+    private static String DATABASE_NAME = "Logs.db";
 
     private static String TABLE_NAME = "data_logs";
-    private static String COL_DEVICE_ID = "device_id";
-    private static String COL_SENSOR_TYPE = "_sensor";
-    private static String COL_DATE = "_date";
+    private static String COL_YEAR = "_year";
+    private static String COL_MONTH ="_month";
+    private static String COL_WEEK ="_week";
+    private static String COL_DAY ="_day";
     private static String COL_TIME = "_time";
     private static String COL_XYZ_DATA = "xyz_data";
     public DatabaseLogging(Context context){
@@ -29,9 +30,10 @@ public class DatabaseLogging extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE "+ TABLE_NAME
-                + " ("+ COL_DEVICE_ID + " INTEGER, "
-                + COL_SENSOR_TYPE + " TEXT, "
-                + COL_DATE + " TEXT, "
+                + " (" + COL_YEAR + " INTEGER, "
+                + COL_MONTH + " INTEGER, "
+                + COL_WEEK + " INTEGER, "
+                + COL_DAY + " INTEGER, "
                 + COL_TIME + " TEXT, "
                 + COL_XYZ_DATA + " TEXT);";
         db.execSQL(query);
@@ -47,16 +49,18 @@ public class DatabaseLogging extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(COL_DEVICE_ID, item.getDeviceId());
-        contentValues.put(COL_SENSOR_TYPE, item.getSensorType());
-        contentValues.put(COL_DATE, item.getDates());
-        contentValues.put(COL_TIME, item.getTimes());
+        contentValues.put(COL_DAY, item.getDay());
+        contentValues.put(COL_WEEK, item.getWeek());
+        contentValues.put(COL_MONTH, item.getMonth());
+        contentValues.put(COL_YEAR, item.getYear());
+
+        contentValues.put(COL_TIME, item.getTime());
         contentValues.put(COL_XYZ_DATA, item.getXyzData());
 
         long result = db.insert(TABLE_NAME, null, contentValues);
-        if(result == -1){
-            Log.e("Data Progress", "PIN insertion Failed");
-        }else{ Log.e("Data Progress", "PIN insertion Success");}
+//        if(result == -1){
+//            Log.e("Data Progress", "XYZ insertion Failed");
+//        }else{ Log.e("Data Progress", "XYZ insertion Success");}
     }
 
     public Cursor getAllData(){
@@ -69,28 +73,59 @@ public class DatabaseLogging extends SQLiteOpenHelper {
         }
         return cursor;
     }
-    public Cursor getDataPerDevice(String deviceID){
-        String query = "SELECT * FROM "+ TABLE_NAME + " WHERE "+ COL_DEVICE_ID +"="+deviceID;
+
+    public Cursor yearlyLog(int year){
+        Cursor cursor = null;
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE "+ COL_YEAR + "="+year;
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = null;
         if(db != null){
             cursor = db.rawQuery(query, null);
         }
         return cursor;
     }
 
-    public Cursor getDataPerSensor(String deviceID, String sensorType){
-        String query = "SELECT * FROM "+ TABLE_NAME + " WHERE "+ COL_DEVICE_ID +"=" + deviceID +" AND "+ COL_SENSOR_TYPE + sensorType;
+    public Cursor monthlyLog(int year, int month){
+        Cursor cursor = null;
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE "
+                + COL_YEAR + "=" + year + " AND "
+                + COL_MONTH + "=" + month;
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = null;
         if(db != null){
             cursor = db.rawQuery(query, null);
         }
         return cursor;
     }
 
+    public Cursor weeklyLog(int year, int month, int week){
+        Cursor cursor = null;
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE "
+                + COL_YEAR + "=" + year + " AND "
+                + COL_MONTH + "=" + month + " AND "
+                + COL_WEEK + "=" + week;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+    public Cursor dailyLog(int year, int month, int week, int day){
+        Cursor cursor = null;
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE "
+                + COL_YEAR + "=" + year + " AND "
+                + COL_MONTH + "=" + month + " AND "
+                + COL_WEEK + "=" + week + " AND "
+                + COL_DAY + "=" + day;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
     public void clearAllDataLogging(){
         SQLiteDatabase db = this.getReadableDatabase();
         db.delete(TABLE_NAME, null, null);

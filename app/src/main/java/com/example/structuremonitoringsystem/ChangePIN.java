@@ -70,6 +70,7 @@ public class ChangePIN extends AppCompatActivity {
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
                 pinAL.createPIN("2");
+              ;
             }
         });
 
@@ -80,6 +81,7 @@ public class ChangePIN extends AppCompatActivity {
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
                 pinAL.createPIN("3");
+
             }
         });
 
@@ -90,6 +92,7 @@ public class ChangePIN extends AppCompatActivity {
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
                 pinAL.createPIN("4");
+
             }
         });
 
@@ -100,6 +103,7 @@ public class ChangePIN extends AppCompatActivity {
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
                 pinAL.createPIN("5");
+
             }
         });
 
@@ -110,6 +114,7 @@ public class ChangePIN extends AppCompatActivity {
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
                 pinAL.createPIN("6");
+
             }
         });
 
@@ -120,6 +125,7 @@ public class ChangePIN extends AppCompatActivity {
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
                 pinAL.createPIN("7");
+
             }
         });
 
@@ -130,6 +136,7 @@ public class ChangePIN extends AppCompatActivity {
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
                 pinAL.createPIN("8");
+
             }
         });
 
@@ -139,6 +146,7 @@ public class ChangePIN extends AppCompatActivity {
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
                 pinAL.createPIN("9");
+
             }
         });
 
@@ -149,6 +157,7 @@ public class ChangePIN extends AppCompatActivity {
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
                 pinAL.createPIN("0");
+
             }
         });
 
@@ -158,6 +167,7 @@ public class ChangePIN extends AppCompatActivity {
                 pinAL.backspace();
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.INVISIBLE);
+
             }
         });
 

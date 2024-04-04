@@ -1,6 +1,8 @@
 package com.example.structuremonitoringsystem;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 
 import androidx.activity.EdgeToEdge;
@@ -11,6 +13,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.structuremonitoringsystem.LocalDatabase.DatabaseLogging;
+import com.example.structuremonitoringsystem.MPAndroidLineChart.XYZGraphs;
 import com.example.structuremonitoringsystem.OtherFunction.NavigationBar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -32,5 +36,10 @@ public class Manual extends AppCompatActivity {
 
         NavigationBar navigationBar = new NavigationBar(drawerLayout, navigationView, toolbar);
         navigationBar.setNavbar(this);
+
+        DatabaseLogging databaseLogging = new DatabaseLogging(this);
+
+        XYZGraphs xyzGraphs = new XYZGraphs(this, Manual.this);
+        xyzGraphs.startCollectingData(databaseLogging);
     }
 }

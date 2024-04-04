@@ -62,6 +62,7 @@ public class ObjectList extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ObjectList.this, CreateObject.class);
                 startActivity(intent);
+
             }
         });
 

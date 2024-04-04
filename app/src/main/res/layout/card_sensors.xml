@@ -9,7 +9,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_square"
         android:elevation="1dp"
-        android:padding="15dp">
+        android:padding="15dp"
+        android:layout_marginBottom="10dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -23,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sensor Name"
+            android:id="@+id/sensorText"
             android:layout_toEndOf="@id/sensorIcon"
             android:fontFamily="@font/bold"
             android:textSize="20sp"

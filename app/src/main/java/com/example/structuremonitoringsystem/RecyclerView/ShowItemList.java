@@ -2,16 +2,22 @@ package com.example.structuremonitoringsystem.RecyclerView;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.structuremonitoringsystem.Bluetooth.BluetoothConnection;
 import com.example.structuremonitoringsystem.Item.BluetoothItem;
+import com.example.structuremonitoringsystem.Item.DeviceItem;
 import com.example.structuremonitoringsystem.Item.ObjectItem;
+import com.example.structuremonitoringsystem.Item.SensorItem;
+import com.example.structuremonitoringsystem.LocalDatabase.DatabaseDevice;
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseObjectSize;
 import com.example.structuremonitoringsystem.RecyclerView.Adapter.BluetoothAdapter;
 import com.example.structuremonitoringsystem.RecyclerView.Adapter.ObjectAdapter;
+import com.example.structuremonitoringsystem.RecyclerView.Adapter.RTDeviceAdapter;
+import com.example.structuremonitoringsystem.RecyclerView.Adapter.SensorMonitoringAdapter;
 import com.example.structuremonitoringsystem.Testing.ObjectList;
 
 import java.util.ArrayList;
@@ -68,6 +74,47 @@ public class ShowItemList {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(new ObjectAdapter(context.getApplicationContext(), objectItems));
+
+    }
+
+    public void showRTDevices(RecyclerView recyclerView){
+        List<DeviceItem> list= new ArrayList<DeviceItem>();
+        DatabaseDevice databaseDevice = new DatabaseDevice(context);
+
+        Cursor deviceList = databaseDevice.getDevices();
+        try {
+            if (deviceList != null && deviceList.moveToFirst()){
+                do {
+
+                    String id = deviceList.getString(deviceList.getColumnIndexOrThrow("_id"));
+                    String name = deviceList.getString(deviceList.getColumnIndexOrThrow("device_name"));
+                    String deviceSensorListID = deviceList.getString(deviceList.getColumnIndexOrThrow("sensor_list_id")).toString();
+
+                    Log.e("Striiiing", ""+id +name+deviceSensorListID);
+                    DeviceItem deviceItem = new DeviceItem(name, id, deviceSensorListID);
+                    list.add(deviceItem);
+                }while (deviceList.moveToNext());
+            }
+        }finally {
+            if (deviceList != null){deviceList.close();}
+        }
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(new RTDeviceAdapter(context.getApplicationContext(), list));
+
+    }
+
+    public void showSensor(RecyclerView recyclerView, String id, String log){
+        List<SensorItem> list= new ArrayList<SensorItem>();
+
+        SensorItem sensorItem1 = new SensorItem("Accelerometer", id, log);
+        SensorItem sensorItem2 = new SensorItem("Gyroscope", id, log);
+        list.add(sensorItem1);
+        list.add(sensorItem2);
+
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(new SensorMonitoringAdapter(context.getApplicationContext(), list));
 
     }
 }
