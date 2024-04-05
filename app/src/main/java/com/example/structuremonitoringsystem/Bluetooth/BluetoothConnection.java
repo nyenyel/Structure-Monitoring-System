@@ -12,6 +12,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,13 +37,18 @@ public class BluetoothConnection {
     public void test(){
         Log.e("Bluetooth Devices", "You have no permission");
     }
-    public String getDeviceNameList(Context context) {
+    public String getDeviceNameList(Context context, Activity activity) {
 
         BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
+        if (!(ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED)) {
             // Request Bluetooth permission
-            ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.BLUETOOTH}, REQUEST_BLUETOOTH_PERMISSION);
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_BLUETOOTH_PERMISSION);
+
             return "";
+
         } else {
             // Permission already granted, proceed with Bluetooth operations
             String bluetoothAddress = "" + btAdapter.getBondedDevices();
@@ -56,19 +62,24 @@ public class BluetoothConnection {
             }
 //            Log.e("Global Variable", ""+blListName);
 //            Log.e("Global Variable", "Data Added");
+            Log.e("aaaa", blListName);
             return blListName.substring(1);
-
         }
     }
 
-    public String getDeviceMACList(Context context) {
+    public String getDeviceMACList(Context context, Activity activity) {
 
         BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
+        if (!(ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED)) {
             // Request Bluetooth permission
-            ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.BLUETOOTH}, REQUEST_BLUETOOTH_PERMISSION);
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_BLUETOOTH_PERMISSION);
+
             return "";
-        } else {
+
+        }  else {
             // Permission already granted, proceed with Bluetooth operations
             String bluetoothAddress = "" + btAdapter.getBondedDevices();
             String blListMAC = squareBracketRemover(bluetoothAddress);

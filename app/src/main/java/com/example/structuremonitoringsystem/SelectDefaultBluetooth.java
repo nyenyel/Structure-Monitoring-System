@@ -42,6 +42,6 @@ public class SelectDefaultBluetooth extends AppCompatActivity {
         navigationBar.setNavbar(this);
 
         showItemList = new ShowItemList(SelectDefaultBluetooth.this);
-        showItemList.showListOfBluetooth(recyclerView);
+        showItemList.showListOfBluetooth(recyclerView, SelectDefaultBluetooth.this);
     }
 }

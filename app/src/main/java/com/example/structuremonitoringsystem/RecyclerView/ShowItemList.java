@@ -1,5 +1,6 @@
 package com.example.structuremonitoringsystem.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
@@ -31,20 +32,25 @@ public class ShowItemList {
         this.context = context;
     }
 
-    public void showListOfBluetooth(RecyclerView recyclerView){
+    public void showListOfBluetooth(RecyclerView recyclerView, Activity activity){
         bluetoothConnection = new BluetoothConnection();
 
-        String getDeviceNames = bluetoothConnection.getDeviceNameList(context);
-        String getDeviceMAC = bluetoothConnection.getDeviceMACList(context);
+        String getDeviceNames = bluetoothConnection.getDeviceNameList(context, activity);
+        String getDeviceMAC = bluetoothConnection.getDeviceMACList(context, activity);
 
         String[] deviceName = getDeviceNames.split(",");
         String[] deviceMAC = getDeviceMAC.split(",");
 
+        Log.e("MAC", getDeviceMAC);
+        Log.e("Names", getDeviceNames);
+
         List<BluetoothItem> deviceItemList = new ArrayList<BluetoothItem>();
 
         //converts the array to list
-        for (int x = 0; x < deviceName.length; x++) {
-            deviceItemList.add(new BluetoothItem(deviceName[x], deviceMAC[x]));
+        int x = 0;
+        for (String dev : deviceName) {
+            deviceItemList.add(new BluetoothItem(dev, deviceMAC[x]));
+            x++;
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
