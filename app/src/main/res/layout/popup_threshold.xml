@@ -61,6 +61,8 @@
                             />
                     </RelativeLayout>
                     <EditText
+                        android:inputType="numberDecimal"
+                        android:id="@+id/thresholdInp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingStart="15dp"

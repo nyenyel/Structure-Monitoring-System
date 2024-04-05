@@ -5,8 +5,10 @@ import static androidx.appcompat.content.res.AppCompatResources.getDrawable;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,10 +24,58 @@ public class Popups {
     TextView cancelBtn;
     AppCompatButton confirmBtn;
     RelativeLayout cancelBtnOutside;
+    EditText threshold;
     public Popups(Context context) {
         this.context = context;
     }
 
+    public void editThreshold(DatabaseDefaultSettings defaultSettings){
+
+        dialog = new Dialog(context);
+
+        dialog.setContentView(R.layout.popup_threshold);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(getDrawable(context, R.drawable.bg_black_transparent_10));
+        }
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true); //Optional
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.getWindow().getAttributes().windowAnimations = R.anim.slide_up; //Setting the animations to dialog
+        dialog.show();
+
+        threshold = dialog.findViewById(R.id.thresholdInp);
+        cancelBtn = dialog.findViewById(R.id.cancelBtn);
+        confirmBtn = dialog.findViewById(R.id.confirmBtn);
+        cancelBtnOutside = dialog.findViewById(R.id.cancelBtnTwo);
+
+        confirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String  hold =threshold.getText().toString();
+                Log.e("Pak", hold);
+                defaultSettings.updateThreshold(threshold.getText().toString());
+                dialog.cancel();
+            }
+        });
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+
+            }
+        });
+
+
+        cancelBtnOutside.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+
+            }
+        });
+
+
+    }
     public void saveConfirmationPopupWindow(DatabaseDefaultSettings defaultSettings, String behavior, String type){
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.popup_save_changes);
@@ -50,6 +100,7 @@ public class Popups {
             }
         });
 
+
         cancelBtnOutside.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,6 +108,8 @@ public class Popups {
 
             }
         });
+
+
 
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override

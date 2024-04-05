@@ -47,7 +47,7 @@ public class Settings extends AppCompatActivity {
             btMacTxt, resetBtn, templateNameTxt;
     RelativeLayout appIsRunningBtn, whileMonitoringBtn, appIsNotRunningBtn,
             allBehaviorBtn, perDeviceBehaviorBtn, perSensorBehaviorBtn,
-            defaultMacBtn, defaultTemplateBtn, changePinBtn;
+            defaultMacBtn, defaultTemplateBtn, changePinBtn, defaultThreshold;
     LinearLayout dataBehavior;
     private String behavior = "";
     private String type = "";
@@ -120,6 +120,7 @@ public class Settings extends AppCompatActivity {
         defaultMacBtn = findViewById(R.id.defaultMacBtn);
         defaultTemplateBtn = findViewById(R.id.defaultTemplateBtn);
         changePinBtn = findViewById(R.id.changePINBtn);
+        defaultThreshold = findViewById(R.id.defaultThresholdBtn);
 
         String tempMon = monitoringTxt.getText().toString();
         String tempRunning = runningTxt.getText().toString();;
@@ -320,6 +321,13 @@ public class Settings extends AppCompatActivity {
             public void onClick(View view) {
                 popups.resetConfirmationPopupWindow(defaultSettings);
 
+            }
+        });
+
+        defaultThreshold.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popups.editThreshold(defaultSettings);
             }
         });
 
