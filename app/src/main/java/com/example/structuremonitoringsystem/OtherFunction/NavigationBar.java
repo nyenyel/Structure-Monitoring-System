@@ -104,7 +104,7 @@ public class NavigationBar {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
 
-                Intent intent = new Intent(activity, DeviceSetup.class);
+                Intent intent = new Intent(activity, Manual.class);
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 return true;

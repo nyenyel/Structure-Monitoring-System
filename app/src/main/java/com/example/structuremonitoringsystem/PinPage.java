@@ -1,5 +1,6 @@
 package com.example.structuremonitoringsystem;
 
+import android.bluetooth.BluetoothManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -33,13 +34,13 @@ public class PinPage extends AppCompatActivity {
         setContentView(R.layout.activity_pin_page);
 
         DatabaseLogging databaseLogging = new DatabaseLogging(this);
-
+        BluetoothManager bluetoothManager = getSystemService(BluetoothManager.class);
         XYZGraphs xyzGraphs = new XYZGraphs(this, PinPage.this);
         xyzGraphs.startCollectingData(databaseLogging);
 
         view = getWindow().getDecorView();
         popups = new Popups(this);
-        pinAL = new PINActionListener(PinPage.this,view,69);
+        pinAL = new PINActionListener(PinPage.this,view,69, bluetoothManager);
 
         oneBtn = findViewById(R.id.one);
         twoBtn = findViewById(R.id.two);

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="@color/bg">
 
     <RelativeLayout
@@ -18,8 +19,8 @@
 
             <ImageView
                 android:id="@+id/logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
@@ -132,7 +133,7 @@
                     android:fontFamily="@font/regular"
                     android:text="1"
                     android:textColor="@color/txt_color"
-                    android:textSize="50sp" />
+                    android:textSize="30sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/two"
@@ -144,7 +145,7 @@
                     android:fontFamily="@font/regular"
                     android:text="2"
                     android:textColor="@color/txt_color"
-                    android:textSize="50sp" />
+                    android:textSize="30sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/three"
@@ -155,7 +156,7 @@
                     android:fontFamily="@font/regular"
                     android:text="3"
                     android:textColor="@color/txt_color"
-                    android:textSize="50sp" />
+                    android:textSize="30sp" />
 
             </RelativeLayout>
 
@@ -175,7 +176,7 @@
                     android:fontFamily="@font/regular"
                     android:text="4"
                     android:textColor="@color/txt_color"
-                    android:textSize="50sp" />
+                    android:textSize="30sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/five"
@@ -187,7 +188,7 @@
                     android:fontFamily="@font/regular"
                     android:text="5"
                     android:textColor="@color/txt_color"
-                    android:textSize="50sp" />
+                    android:textSize="30sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/six"
@@ -198,7 +199,7 @@
                     android:fontFamily="@font/regular"
                     android:text="6"
                     android:textColor="@color/txt_color"
-                    android:textSize="50sp" />
+                    android:textSize="30sp" />
 
             </RelativeLayout>
 
@@ -218,7 +219,7 @@
                     android:fontFamily="@font/regular"
                     android:text="7"
                     android:textColor="@color/txt_color"
-                    android:textSize="50sp" />
+                    android:textSize="30sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/eight"
@@ -230,7 +231,7 @@
                     android:fontFamily="@font/regular"
                     android:text="8"
                     android:textColor="@color/txt_color"
-                    android:textSize="50sp" />
+                    android:textSize="30sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/nine"
@@ -241,7 +242,7 @@
                     android:fontFamily="@font/regular"
                     android:text="9"
                     android:textColor="@color/txt_color"
-                    android:textSize="50sp" />
+                    android:textSize="30sp" />
 
             </RelativeLayout>
 
@@ -270,12 +271,12 @@
                     android:fontFamily="@font/regular"
                     android:text="0"
                     android:textColor="@color/txt_color"
-                    android:textSize="50sp" />
+                    android:textSize="30sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/backspace"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="50px"
                     android:layout_toRightOf="@id/zero"

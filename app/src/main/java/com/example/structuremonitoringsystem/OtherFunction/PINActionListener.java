@@ -1,5 +1,9 @@
 package com.example.structuremonitoringsystem.OtherFunction;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -10,16 +14,21 @@ import android.widget.Toast;
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseDefaultSettings;
 import com.example.structuremonitoringsystem.R;
 import com.example.structuremonitoringsystem.RealtimeMonitoring;
+import com.example.structuremonitoringsystem.SelectDefaultBluetooth;
 import com.example.structuremonitoringsystem.Settings;
 
 public class PINActionListener {
 
+
+
     Context context;
     View view;
     Popups popups;
+    Class aClass;
     TextView instruction;
     ImageView circle;
     String currentPIN = "";
+    BluetoothManager bluetoothManager;
     private int tries = 0;
     private int counter = 0;
     private int code = 0;
@@ -44,8 +53,18 @@ public class PINActionListener {
         this.code = code;
     }
 
+    public PINActionListener(Context context, View view, int code, BluetoothManager bluetoothManager) {
+        popups = new Popups(context);
+        this.context = context;
+        this.view = view;
+        this.code = code;
+        this.bluetoothManager = bluetoothManager;
+    }
+
 
     public void createPIN(String input){
+
+        android.bluetooth.BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
 
         if(currentPIN.length() < 4 ) {
             currentPIN = currentPIN + input;
@@ -56,8 +75,18 @@ public class PINActionListener {
             boolean pinIsCorrect = settings.PINIsCorrect(currentPIN);
             if (code == 69) {
                 if(pinIsCorrect){
-                    Intent intent = new Intent(context, RealtimeMonitoring.class);
-                    context.startActivity(intent);
+                    if (!bluetoothAdapter.isEnabled()) {
+                        for(int x = 0; x< 4; x++){
+                            backspace();
+                            circle = getCircleToFill(currentPIN);
+                            fillVisibility(circle, View.INVISIBLE);
+                        }
+                        popups.bluetoothFailed();
+
+                    }else {
+                        Intent intent = new Intent(context, RealtimeMonitoring.class);
+                        context.startActivity(intent);
+                    }
                     return;
                 }else {
                     popups.incorrectPINPopupWindow();

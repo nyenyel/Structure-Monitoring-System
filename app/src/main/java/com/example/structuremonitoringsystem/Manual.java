@@ -37,9 +37,9 @@ public class Manual extends AppCompatActivity {
         NavigationBar navigationBar = new NavigationBar(drawerLayout, navigationView, toolbar);
         navigationBar.setNavbar(this);
 
-        DatabaseLogging databaseLogging = new DatabaseLogging(this);
-
-        XYZGraphs xyzGraphs = new XYZGraphs(this, Manual.this);
-        xyzGraphs.startCollectingData(databaseLogging);
+//        DatabaseLogging databaseLogging = new DatabaseLogging(this);
+//
+//        XYZGraphs xyzGraphs = new XYZGraphs(this, Manual.this);
+//        xyzGraphs.startCollectingData(databaseLogging);
     }
 }

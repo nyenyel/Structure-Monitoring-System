@@ -1,9 +1,12 @@
 package com.example.structuremonitoringsystem;
 
 import android.bluetooth.BluetoothSocket;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +30,7 @@ import com.google.android.material.navigation.NavigationView;
 public class Sensors extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    ImageView addBtn;
     Toolbar toolbar;
     BluetoothConnection bluetoothConnection;
     BluetoothSocket bluetoothSocket;
@@ -53,7 +57,7 @@ public class Sensors extends AppCompatActivity {
         navigationView = findViewById(R.id.navbarView);
         toolbar = findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.recyclerView);
-
+        addBtn = findViewById(R.id.addBtn);
         setSupportActionBar(toolbar);
 
         NavigationBar navigationBar = new NavigationBar(drawerLayout, navigationView, toolbar);
@@ -65,7 +69,16 @@ public class Sensors extends AppCompatActivity {
 //        Log.e("Number of Device", "" + x);
 
         ShowItemList showItemList = new ShowItemList(Sensors.this);
-        showItemList.showSensor(recyclerView, "device1", "fuck you");
+        showItemList.showRTDevices(recyclerView);
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Sensors.this, DeviceSetup.class);
+                intent.putExtra("key", "hehe");
+                startActivity(intent);
+            }
+        });
 
     }
 }

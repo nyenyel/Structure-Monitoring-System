@@ -1,5 +1,6 @@
 package com.example.structuremonitoringsystem;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.structuremonitoringsystem.LocalDatabase.DatabaseDefaultSettings;
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseDevice;
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseSensor;
 import com.example.structuremonitoringsystem.OtherFunction.Popups;
@@ -34,6 +36,9 @@ public class DeviceSetup extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_device_setup);
 
+        DatabaseDefaultSettings defaultSettings = new DatabaseDefaultSettings(this);
+        defaultSettings.seedDefaultData();
+
         popups = new Popups(DeviceSetup.this);
 
         databaseDevice = new DatabaseDevice(this);
@@ -43,6 +48,10 @@ public class DeviceSetup extends AppCompatActivity {
         deviceName = findViewById(R.id.deviceName);
         numOfData = findViewById(R.id.numOfData);
         selectSensor = findViewById(R.id.firstCol);
+        Intent intent = getIntent();
+        String temp = intent.getStringExtra("key");
+
+
 
         finBtn = findViewById(R.id.finishBtn);
 
@@ -58,6 +67,14 @@ public class DeviceSetup extends AppCompatActivity {
                 }
                 String sensorListID = databaseDevice.addDevice(dName);
                 databaseSensor.addSensor(sName, sensorListID, 0);
+                if(temp.equals("hehe")){
+                    Intent intent = new Intent(DeviceSetup.this, Sensors.class);
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(DeviceSetup.this, PinPage.class);
+                    startActivity(intent);
+                }
             }
         });
 

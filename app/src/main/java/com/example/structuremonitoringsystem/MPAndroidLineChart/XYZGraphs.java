@@ -464,7 +464,6 @@ public class XYZGraphs {
 
         DatabaseDefaultSettings defaultSettings = new DatabaseDefaultSettings(context);
         String mac =defaultSettings.getDefaultMac();
-        float threshold = Float.parseFloat(defaultSettings.getThreshold());
 
 
         int position[] = new int[3];

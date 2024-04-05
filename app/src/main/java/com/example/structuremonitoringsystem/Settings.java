@@ -1,6 +1,7 @@
 package com.example.structuremonitoringsystem;
 
 import android.app.Dialog;
+import android.bluetooth.BluetoothManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -29,12 +30,12 @@ import com.example.structuremonitoringsystem.MPAndroidLineChart.XYZGraphs;
 import com.example.structuremonitoringsystem.OtherFunction.GlobalVariable;
 import com.example.structuremonitoringsystem.OtherFunction.NavigationBar;
 import com.example.structuremonitoringsystem.OtherFunction.Popups;
+import com.example.structuremonitoringsystem.RecyclerView.Adapter.BluetoothAdapter;
 import com.google.android.material.navigation.NavigationView;
 
 public class Settings extends AppCompatActivity {
 
     NavigationView navigationView;
-
     GlobalVariable globalVariable = new GlobalVariable();
     Toolbar toolbar;
     View decorView;
@@ -62,6 +63,9 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_settings);
+
+        BluetoothManager bluetoothManager = getSystemService(BluetoothManager.class);
+        android.bluetooth.BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
 
         decorView = getWindow().getDecorView();
         globalVariable.hideSystemBars(decorView);
@@ -259,9 +263,12 @@ public class Settings extends AppCompatActivity {
         defaultMacBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Settings.this, SelectDefaultBluetooth.class);
-                startActivity(intent);
-
+                if (!bluetoothAdapter.isEnabled()) {
+                    popups.bluetoothFailed();
+                }else {
+                    Intent intent = new Intent(Settings.this, SelectDefaultBluetooth.class);
+                    startActivity(intent);
+                }
             }
         });
         defaultTemplateBtn.setOnClickListener(new View.OnClickListener() {
