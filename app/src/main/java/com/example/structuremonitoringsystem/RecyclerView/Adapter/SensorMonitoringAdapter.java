@@ -77,11 +77,13 @@ public class SensorMonitoringAdapter extends RecyclerView.Adapter<SensorViewHold
                         Intent intent = new Intent(context, Monitoring.class);
                         intent.putExtra("pos", position);
                         intent.putExtra("id", id);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(context, intent, null);
                     } else {
                         Intent intent = new Intent(context, DataLogs.class);
                         intent.putExtra("pos", position);
                         intent.putExtra("sensor", sensorName);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(context, intent, null);
                     }
                 }
@@ -89,6 +91,7 @@ public class SensorMonitoringAdapter extends RecyclerView.Adapter<SensorViewHold
                     Intent intent = new Intent(context, Gyroscope.class);
                     intent.putExtra("pos", position);
                     intent.putExtra("sensor", sensorName);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(context, intent, null);
                 }
 //                Intent intent = new Intent(context, Monitoring.class);

@@ -56,6 +56,7 @@ public class Seismograph{
 
 
         chart.setData(lineData);
+        chart.invalidate();
     }
 
     //initializing the realtime line graph

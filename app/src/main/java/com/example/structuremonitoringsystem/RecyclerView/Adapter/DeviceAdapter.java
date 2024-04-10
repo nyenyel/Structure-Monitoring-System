@@ -5,6 +5,7 @@ import static androidx.core.content.ContextCompat.startActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.structuremonitoringsystem.Item.DeviceItem;
 import com.example.structuremonitoringsystem.Item.ObjectItem;
+import com.example.structuremonitoringsystem.LocalDatabase.DatabaseDevice;
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseObjectSize;
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseSensor;
 import com.example.structuremonitoringsystem.OtherFunction.Popups;
@@ -46,9 +48,11 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull DeviceViewHolder holder, int position) {
         sensors = new DatabaseSensor(context);
+        DatabaseDevice databaseDevice = new DatabaseDevice(context);
 //
         Popups popups = new Popups(context);
         String deviceID = items.get(position).getDeviceID();
+//        String id = String.valueOf(deviceID.charAt(deviceID.length() - 1));
         String deviceName = items.get(position).getDeviceName();
         String sensorListID = items.get(position).getSensorListID();
         int count = sensors.getNumOfSensors(sensorListID);
@@ -73,26 +77,13 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceViewHolder> {
         holder.rltBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popups.selectSensor(new Popups.SensorSelectionListener() {
-                    @Override
-                    public void onSensorSelected(String sensor) {
-                        DatabaseSensor databaseSensor = new DatabaseSensor(context);
-                        databaseSensor.addSensor(temp, deviceID, 3);
-                    }
-                });
-
-
-
+                popups.renameDevice(databaseDevice, deviceID,deviceName);
             }
         });
 
         holder.logHistoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, RTMonitoring.class);
-                intent.putExtra("idList", sensorListID);
-                intent.putExtra("key", "log");
-                startActivity(context, intent, null);
             }
         });
     }

@@ -2,6 +2,8 @@ package com.example.structuremonitoringsystem.Bluetooth;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -119,6 +121,7 @@ public class BluetoothConnection {
     public BluetoothSocket bluetoothCn(Context context, String deviceMAC){
         BluetoothSocket bluetoothSocket = null;
         Popups popups = new Popups(context);
+
         try {
             BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
             BluetoothDevice bluetoothDevice = bluetoothAdapter.getRemoteDevice(deviceMAC);
@@ -145,7 +148,7 @@ public class BluetoothConnection {
                     }
                     count++;
                     Log.e("Counter", count+"");
-                } while (count < 2);
+                } while (count < 1);
 
                 // Check if the BluetoothSocket is connected
                 if (bluetoothSocket != null && bluetoothSocket.isConnected()) {
@@ -165,6 +168,7 @@ public class BluetoothConnection {
 
             popups.bluetoothFailed();
         }
+
         return bluetoothSocket;
     }
 

@@ -18,8 +18,10 @@ import com.example.structuremonitoringsystem.LocalDatabase.DatabaseObjectSize;
 import com.example.structuremonitoringsystem.RecyclerView.Adapter.BluetoothAdapter;
 import com.example.structuremonitoringsystem.RecyclerView.Adapter.DeviceAdapter;
 import com.example.structuremonitoringsystem.RecyclerView.Adapter.ObjectAdapter;
+import com.example.structuremonitoringsystem.RecyclerView.Adapter.ObjectConfigAdapter;
 import com.example.structuremonitoringsystem.RecyclerView.Adapter.RTDeviceAdapter;
 import com.example.structuremonitoringsystem.RecyclerView.Adapter.SensorMonitoringAdapter;
+import com.example.structuremonitoringsystem.RecyclerView.Adapter.ViewSensorMonitoringAdapter;
 import com.example.structuremonitoringsystem.Testing.ObjectList;
 
 import java.util.ArrayList;
@@ -135,7 +137,7 @@ public class ShowItemList {
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(new DeviceAdapter(context.getApplicationContext(), list));
+        recyclerView.setAdapter(new DeviceAdapter(context, list));
 
     }
     public void showSensor(RecyclerView recyclerView, String id, String log){
@@ -149,6 +151,47 @@ public class ShowItemList {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(new SensorMonitoringAdapter(context.getApplicationContext(), list));
+
+    }
+
+    public void showViewSensor(RecyclerView recyclerView, String id, String log){
+        List<SensorItem> list= new ArrayList<SensorItem>();
+
+        SensorItem sensorItem1 = new SensorItem("Accelerometer", id, log);
+        SensorItem sensorItem2 = new SensorItem("Gyroscope", id, log);
+        list.add(sensorItem1);
+        list.add(sensorItem2);
+
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(new ViewSensorMonitoringAdapter(context.getApplicationContext(), list));
+    }
+
+
+    public void showListOfTemplatesConfig(RecyclerView recyclerView){
+        List<ObjectItem> objectItems= new ArrayList<ObjectItem>();
+        DatabaseObjectSize databaseObjectSize = new DatabaseObjectSize(context);
+
+        Cursor objectList = databaseObjectSize.readAllData();
+        try {
+            if (objectList != null && objectList.moveToFirst()){
+                do {
+                    String id = objectList.getString(objectList.getColumnIndexOrThrow("_id"));
+                    String name = objectList.getString(objectList.getColumnIndexOrThrow("template_name"));
+                    String width = objectList.getString(objectList.getColumnIndexOrThrow("_width"));
+                    String height = objectList.getString(objectList.getColumnIndexOrThrow("_height"));
+                    String thickness = objectList.getString(objectList.getColumnIndexOrThrow("_thickness"));
+
+                    ObjectItem currentTemplate = new ObjectItem(width, height, thickness, name, id);
+                    objectItems.add(currentTemplate);
+                }while (objectList.moveToNext());
+            }
+        }finally {
+            if (objectList != null){objectList.close();}
+        }
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(new ObjectConfigAdapter(context, objectItems));
 
     }
 }

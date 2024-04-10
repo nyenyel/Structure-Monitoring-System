@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/toolbar"
-                app:title="Sensors"/>
+                app:title="Compatible Sensors"/>
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -41,6 +41,7 @@
             android:padding="15dp"/>
 
         <ImageView
+            android:visibility="gone"
             android:id="@+id/addBtn"
             android:layout_width="75dp"
             android:layout_height="75dp"

@@ -362,7 +362,7 @@ public class DatabaseDefaultSettings extends SQLiteOpenHelper {
         setLoggingBehavior(behavior[0]);
         setLoggingType(type[0]);
         setDefaultBluetoothMac("na");
-        setThreshold("1");
+        setThreshold("0.1");
     }
 
     public void resetToDefaultData(){
@@ -374,7 +374,7 @@ public class DatabaseDefaultSettings extends SQLiteOpenHelper {
         updateLoggingBehavior(behavior[0]);
         updateLoggingType(type[0]);
         updateDefaultMac("na");
-        updateThreshold("1");
+        updateThreshold("0.1");
     }
 
 }

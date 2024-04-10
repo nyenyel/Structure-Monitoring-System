@@ -68,7 +68,7 @@ public class DeviceSetup extends AppCompatActivity {
                 String sensorListID = databaseDevice.addDevice(dName);
                 databaseSensor.addSensor(sName, sensorListID, 0);
                 if(temp.equals("hehe")){
-                    Intent intent = new Intent(DeviceSetup.this, Sensors.class);
+                    Intent intent = new Intent(DeviceSetup.this, Device.class);
                     startActivity(intent);
                 }
                 else {

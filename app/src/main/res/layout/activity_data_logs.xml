@@ -31,7 +31,460 @@
             android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <RelativeLayout
+                android:id="@+id/filterHolder"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:background="@drawable/shape_square"
+                        android:layout_width="wrap_content"
+                        android:elevation="2dp"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                        android:id="@+id/initialState"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/icFilter"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_filter"/>
+                            <TextView
+                                android:layout_centerVertical="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/txt_color"
+                                android:layout_marginStart="5dp"
+                                android:layout_toEndOf="@+id/icFilter"
+                                android:text="Logging Filter"
+                                android:fontFamily="@font/bold"/>
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_dropdown"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/holderHolder"
+                        android:visibility="gone"
+                        android:layout_below="@id/initialState"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/holderHolder2">
+
+                            <RelativeLayout
+                                android:id="@+id/radioBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp">
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
+                                    android:orientation="vertical">
+
+                                    <!-- While app is running -->
+                                    <RelativeLayout
+                                        android:id="@+id/allBtn"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="5dp">
+
+                                        <RelativeLayout
+                                            android:id="@+id/appIsRunningFirstRow"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content">
+
+                                            <androidx.appcompat.widget.AppCompatRadioButton
+                                                android:id="@+id/allRdBtn"
+                                                android:layout_width="35dp"
+                                                android:layout_height="30dp"
+                                                android:checked="true"
+                                                android:clickable="false"
+                                                android:focusable="false"
+                                                app:buttonTint="@color/txt_color" />
+
+                                            <TextView
+                                                android:id="@+id/allTxt"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerVertical="true"
+                                                android:layout_toEndOf="@id/allRdBtn"
+                                                android:fontFamily="@font/bold"
+                                                android:text="All"
+                                                android:textColor="@color/txt_color"
+                                                android:textSize="15sp"
+                                                android:textStyle="bold" />
+                                        </RelativeLayout>
+
+                                    </RelativeLayout>
+                                    <!-- While Monitoring Only -->
+                                    <RelativeLayout
+                                        android:id="@+id/dailyBtn"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="5dp">
+
+                                        <RelativeLayout
+                                            android:id="@+id/whileMonitoringFirstRow"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content">
+
+                                            <androidx.appcompat.widget.AppCompatRadioButton
+                                                android:id="@+id/dailyRdBtn"
+                                                android:layout_width="35dp"
+                                                android:layout_height="30dp"
+                                                android:checked="false"
+                                                android:clickable="false"
+                                                android:focusable="false"
+                                                app:buttonTint="@color/txt_color" />
+
+                                            <TextView
+                                                android:id="@+id/dailyTxt"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerVertical="true"
+                                                android:layout_toEndOf="@id/dailyRdBtn"
+                                                android:fontFamily="@font/bold"
+                                                android:text="Daily"
+                                                android:textColor="@color/txt_color"
+                                                android:textSize="15sp"
+                                                android:textStyle="bold" />
+                                        </RelativeLayout>
+                                    </RelativeLayout>
+                                    <!-- Not running -->
+                                    <RelativeLayout
+                                        android:id="@+id/weeklyBtn"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="5dp">
+
+                                        <RelativeLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content">
+
+                                            <androidx.appcompat.widget.AppCompatRadioButton
+                                                android:id="@+id/weeklyRdBtn"
+                                                android:layout_width="35dp"
+                                                android:layout_height="30dp"
+                                                android:checked="false"
+                                                android:clickable="false"
+                                                android:focusable="false"
+                                                app:buttonTint="@color/txt_color" />
+
+                                            <TextView
+                                                android:id="@+id/weeklyTxt"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerVertical="true"
+                                                android:layout_toEndOf="@id/weeklyRdBtn"
+                                                android:fontFamily="@font/bold"
+                                                android:text="Weekly"
+                                                android:textColor="@color/txt_color"
+                                                android:textSize="15sp"
+                                                android:textStyle="bold" />
+                                        </RelativeLayout>
+                                    </RelativeLayout>
+                                    <RelativeLayout
+                                        android:id="@+id/monthlyBtn"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="5dp">
+
+                                        <RelativeLayout
+                                            android:id="@+id/appIsNotRunningFirstRow"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content">
+
+                                            <androidx.appcompat.widget.AppCompatRadioButton
+                                                android:id="@+id/monthlyRdBtn"
+                                                android:layout_width="35dp"
+                                                android:layout_height="30dp"
+                                                android:checked="false"
+                                                android:clickable="false"
+                                                android:focusable="false"
+                                                app:buttonTint="@color/txt_color" />
+
+                                            <TextView
+                                                android:id="@+id/monthlyTxt"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerVertical="true"
+                                                android:layout_toEndOf="@id/monthlyRdBtn"
+                                                android:fontFamily="@font/bold"
+                                                android:text="Monthly"
+                                                android:textColor="@color/txt_color"
+                                                android:textSize="15sp"
+                                                android:textStyle="bold" />
+                                        </RelativeLayout>
+                                    </RelativeLayout>
+                                </LinearLayout>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_centerVertical="true"
+                                android:id="@+id/inputHolder"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                android:layout_toEndOf="@+id/radioBtn">
+
+                                <!--Daily Filter-->
+                                <RelativeLayout
+                                    android:id="@+id/dailyHolder"
+                                    android:visibility="gone"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <!-- Day input -->
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:id="@+id/dayBtnD"
+                                        android:layout_height="wrap_content">
+                                        <RelativeLayout
+                                            android:id="@+id/dayInpHolderD"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content">
+                                            <RelativeLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:elevation="1dp">
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Day"
+                                                    android:padding="1dp"
+                                                    android:background="@drawable/bg_square_with_no_edge"
+                                                    android:layout_marginStart="10dp"
+                                                    android:fontFamily="@font/bold"
+                                                    android:textColor="@color/txt_color"
+                                                    />
+                                            </RelativeLayout>
+                                            <TextView
+                                                android:id="@+id/dayInpD"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:paddingStart="15dp"
+                                                android:clickable="true"
+                                                android:paddingTop="10dp"
+                                                android:inputType="numberDecimal"
+                                                android:paddingBottom="5dp"
+                                                android:layout_marginTop="10dp"
+                                                android:text="1"
+                                                android:fontFamily="@font/regular"
+                                                android:textColor="@color/txt_color"
+                                                android:background="@drawable/shape_no_fill"/>
+                                        </RelativeLayout>
+                                    </RelativeLayout>
+
+                                    <!-- Month input -->
+                                    <RelativeLayout
+                                        android:layout_marginTop="5dp"
+                                        android:layout_width="match_parent"
+                                        android:id="@+id/monthBtnD"
+                                        android:layout_below="@+id/dayBtnD"
+                                        android:layout_height="wrap_content">
+                                        <RelativeLayout
+                                            android:id="@+id/monthInpHolderD"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content">
+                                            <RelativeLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:elevation="1dp"
+                                                >
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Month"
+                                                    android:padding="1dp"
+                                                    android:background="@drawable/bg_square_with_no_edge"
+                                                    android:layout_marginStart="10dp"
+                                                    android:fontFamily="@font/bold"
+                                                    android:textColor="@color/txt_color"
+                                                    />
+                                            </RelativeLayout>
+                                            <TextView
+                                                android:id="@+id/monthInpD"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:paddingStart="15dp"
+                                                android:paddingTop="10dp"
+                                                android:inputType="numberDecimal"
+                                                android:paddingBottom="5dp"
+                                                android:layout_marginTop="10dp"
+                                                android:text="JAN"
+                                                android:fontFamily="@font/regular"
+                                                android:textColor="@color/txt_color"
+                                                android:background="@drawable/shape_no_fill"/>
+                                        </RelativeLayout>
+                                    </RelativeLayout>
+                                </RelativeLayout>
+                                <!--Weekly Filter-->
+                                <RelativeLayout
+                                    android:id="@+id/weeklyHolder"
+                                    android:visibility="gone"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <!-- Week input -->
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:id="@+id/weekBtnW"
+                                        android:layout_height="wrap_content">
+                                        <RelativeLayout
+                                            android:id="@+id/weekInpHolderW"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content">
+                                            <RelativeLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:elevation="1dp">
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Week"
+                                                    android:padding="1dp"
+                                                    android:background="@drawable/bg_square_with_no_edge"
+                                                    android:layout_marginStart="10dp"
+                                                    android:fontFamily="@font/bold"
+                                                    android:textColor="@color/txt_color"
+                                                    />
+                                            </RelativeLayout>
+                                            <TextView
+                                                android:id="@+id/weekInpW"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:paddingStart="15dp"
+                                                android:paddingTop="10dp"
+                                                android:inputType="numberDecimal"
+                                                android:paddingBottom="5dp"
+                                                android:layout_marginTop="10dp"
+                                                android:text="Week 1"
+                                                android:fontFamily="@font/regular"
+                                                android:textColor="@color/txt_color"
+                                                android:background="@drawable/shape_no_fill"/>
+                                        </RelativeLayout>
+                                    </RelativeLayout>
+
+                                    <!-- Month input -->
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:id="@+id/monthBtnW"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_below="@+id/weekBtnW"
+                                        android:layout_height="wrap_content">
+                                        <RelativeLayout
+                                            android:id="@+id/monthInpHolderW"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content">
+                                            <RelativeLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:elevation="1dp"
+                                                >
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Month"
+                                                    android:padding="1dp"
+                                                    android:background="@drawable/bg_square_with_no_edge"
+                                                    android:layout_marginStart="10dp"
+                                                    android:fontFamily="@font/bold"
+                                                    android:textColor="@color/txt_color"
+                                                    />
+                                            </RelativeLayout>
+                                            <TextView
+                                                android:id="@+id/monthInpW"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:paddingStart="15dp"
+                                                android:paddingTop="10dp"
+                                                android:inputType="numberDecimal"
+                                                android:paddingBottom="5dp"
+                                                android:layout_marginTop="10dp"
+                                                android:text="JAN"
+                                                android:fontFamily="@font/regular"
+                                                android:textColor="@color/txt_color"
+                                                android:background="@drawable/shape_no_fill"/>
+                                        </RelativeLayout>
+                                    </RelativeLayout>
+                                </RelativeLayout>
+                                <!--Monthly Filter-->
+                                <RelativeLayout
+                                    android:id="@+id/monthlyHolder"
+                                    android:visibility="gone"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <!-- Month input -->
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:id="@+id/monthBtnM"
+                                        android:layout_height="wrap_content">
+                                        <RelativeLayout
+                                            android:id="@+id/monthInpHolderM"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content">
+                                            <RelativeLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:elevation="1dp"
+                                                >
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Month"
+                                                    android:padding="1dp"
+                                                    android:background="@drawable/bg_square_with_no_edge"
+                                                    android:layout_marginStart="10dp"
+                                                    android:fontFamily="@font/bold"
+                                                    android:textColor="@color/txt_color"
+                                                    />
+                                            </RelativeLayout>
+                                            <TextView
+                                                android:id="@+id/monthInpM"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:paddingStart="15dp"
+                                                android:paddingTop="10dp"
+                                                android:inputType="numberDecimal"
+                                                android:paddingBottom="5dp"
+                                                android:layout_marginTop="10dp"
+                                                android:text="JAN"
+                                                android:fontFamily="@font/regular"
+                                                android:textColor="@color/txt_color"
+                                                android:background="@drawable/shape_no_fill"/>
+                                        </RelativeLayout>
+                                    </RelativeLayout>
+                                </RelativeLayout>
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/applyBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_below="@+id/holderHolder2"
+                            android:layout_alignParentEnd="true"
+                            android:background="@drawable/shape_square_btn"
+                            android:textColor="@color/white"
+                            android:layout_margin="10dp"
+                            android:text="Apply"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_below="@id/filterHolder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <com.github.mikephil.charting.charts.LineChart

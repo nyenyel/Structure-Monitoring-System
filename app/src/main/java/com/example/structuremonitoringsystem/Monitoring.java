@@ -1,5 +1,6 @@
 package com.example.structuremonitoringsystem;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import com.example.structuremonitoringsystem.LocalDatabase.DatabaseObjectSize;
 import com.example.structuremonitoringsystem.MPAndroidLineChart.XYZGraphs;
 import com.example.structuremonitoringsystem.OpenGL.OpenGLView;
 import com.example.structuremonitoringsystem.OtherFunction.NavigationBar;
+import com.example.structuremonitoringsystem.OtherFunction.Popups;
 import com.github.mikephil.charting.charts.LineChart;
 import com.google.android.material.navigation.NavigationView;
 
@@ -38,10 +40,16 @@ public class Monitoring extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_monitoring);
 
+        Popups popups = new Popups(this);
+        AlertDialog dialog = popups.loadingScreen();
+        dialog.show();
+        dialog.dismiss();
+
         DatabaseLogging databaseLogging = new DatabaseLogging(this);
         float width = 0;
         float height = 0;
         float thickness= 0;
+
         XYZGraphs xyzGraphs = new XYZGraphs(this, Monitoring.this);
         objectSize = new DatabaseObjectSize(this);
         Cursor cursor = objectSize.getDefaultObjectSize();
@@ -77,13 +85,7 @@ public class Monitoring extends AppCompatActivity {
         String id = intent.getStringExtra("id");
         String pos = intent.getStringExtra("pos");
 
-
-        try {
-            xyzGraphs.realtimeGraph(openGLView, realtimeChartX, realtimeChartY, realtimeChartZ, pos, databaseLogging);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-//        xyzGraphs.realtimeGraph(openGLView, realtimeChartX, realtimeChartY, realtimeChartZ, pos, databaseLogging);
+        xyzGraphs.realtimeGraph(openGLView, realtimeChartX, realtimeChartY, realtimeChartZ, pos, databaseLogging);
 
     }
 }

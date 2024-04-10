@@ -85,10 +85,9 @@ public class DatabaseLogging extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor monthlyLog(int year, int month){
+    public Cursor monthlyLog(String month){
         Cursor cursor = null;
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE "
-                + COL_YEAR + "=" + year + " AND "
                 + COL_MONTH + "=" + month;
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -98,10 +97,9 @@ public class DatabaseLogging extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor weeklyLog(int year, int month, int week){
+    public Cursor weeklyLog(String month, String week){
         Cursor cursor = null;
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE "
-                + COL_YEAR + "=" + year + " AND "
                 + COL_MONTH + "=" + month + " AND "
                 + COL_WEEK + "=" + week;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -112,12 +110,10 @@ public class DatabaseLogging extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor dailyLog(int year, int month, int week, int day){
+    public Cursor dailyLog( String month, String day){
         Cursor cursor = null;
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE "
-                + COL_YEAR + "=" + year + " AND "
                 + COL_MONTH + "=" + month + " AND "
-                + COL_WEEK + "=" + week + " AND "
                 + COL_DAY + "=" + day;
         SQLiteDatabase db = this.getReadableDatabase();
 

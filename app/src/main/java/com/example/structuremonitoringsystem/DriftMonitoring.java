@@ -1,5 +1,6 @@
 package com.example.structuremonitoringsystem;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.example.structuremonitoringsystem.MPAndroidLineChart.XYZGraphs;
 import com.example.structuremonitoringsystem.OpenGL.OpenGLView;
 import com.example.structuremonitoringsystem.OtherFunction.NavigationBar;
 import com.example.structuremonitoringsystem.OtherFunction.Notification;
+import com.example.structuremonitoringsystem.OtherFunction.Popups;
 import com.github.mikephil.charting.charts.LineChart;
 import com.google.android.material.navigation.NavigationView;
 
@@ -44,7 +46,6 @@ public class DriftMonitoring extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_drift_monitoring);
-
 
         DatabaseLogging databaseLogging = new DatabaseLogging(this);
         float width = 0;
@@ -99,6 +100,7 @@ public class DriftMonitoring extends AppCompatActivity {
         String pos1 = "0,1,2";
         String pos2 = "3,4,5";
 
+
         xyzGraphs.realtimeGraph(openGLViewD1, realtimeChartX1, realtimeChartY1, realtimeChartZ1, pos1,
                                 openGLViewD2, realtimeChartX, realtimeChartY, realtimeChartZ, pos2,
                                 databaseLogging);
@@ -123,5 +125,6 @@ public class DriftMonitoring extends AppCompatActivity {
                 notification.notifyDrift("69");
             }
         });
+
     }
 }

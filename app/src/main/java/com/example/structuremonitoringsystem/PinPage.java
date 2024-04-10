@@ -35,12 +35,14 @@ public class PinPage extends AppCompatActivity {
 
         DatabaseLogging databaseLogging = new DatabaseLogging(this);
         BluetoothManager bluetoothManager = getSystemService(BluetoothManager.class);
+        android.bluetooth.BluetoothAdapter bluetoothAdapter   = bluetoothManager.getAdapter();
+
         XYZGraphs xyzGraphs = new XYZGraphs(this, PinPage.this);
         xyzGraphs.startCollectingData(databaseLogging);
 
         view = getWindow().getDecorView();
         popups = new Popups(this);
-        pinAL = new PINActionListener(PinPage.this,view,69, bluetoothManager);
+        pinAL = new PINActionListener(PinPage.this,view,69);
 
         oneBtn = findViewById(R.id.one);
         twoBtn = findViewById(R.id.two);
@@ -59,7 +61,7 @@ public class PinPage extends AppCompatActivity {
             public void onClick(View view) {
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
-                pinAL.createPIN("1");
+                pinAL.createPIN("1", bluetoothAdapter);
 
 
             }
@@ -70,7 +72,7 @@ public class PinPage extends AppCompatActivity {
             public void onClick(View view) {
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
-                pinAL.createPIN("2");
+                pinAL.createPIN("2",bluetoothAdapter);
 
             }
         });
@@ -81,7 +83,7 @@ public class PinPage extends AppCompatActivity {
 
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
-                pinAL.createPIN("3");
+                pinAL.createPIN("3",bluetoothAdapter);
 
             }
         });
@@ -92,7 +94,7 @@ public class PinPage extends AppCompatActivity {
 
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
-                pinAL.createPIN("4");
+                pinAL.createPIN("4",bluetoothAdapter);
 
             }
         });
@@ -103,7 +105,7 @@ public class PinPage extends AppCompatActivity {
 
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
-                pinAL.createPIN("5");
+                pinAL.createPIN("5",bluetoothAdapter);
 
             }
         });
@@ -114,7 +116,7 @@ public class PinPage extends AppCompatActivity {
 
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
-                pinAL.createPIN("6");
+                pinAL.createPIN("6",bluetoothAdapter);
 
             }
         });
@@ -125,7 +127,7 @@ public class PinPage extends AppCompatActivity {
 
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
-                pinAL.createPIN("7");
+                pinAL.createPIN("7",bluetoothAdapter);
 
             }
         });
@@ -136,7 +138,7 @@ public class PinPage extends AppCompatActivity {
 
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
-                pinAL.createPIN("8");
+                pinAL.createPIN("8",bluetoothAdapter);
             }
         });
 
@@ -145,7 +147,7 @@ public class PinPage extends AppCompatActivity {
             public void onClick(View view) {
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
-                pinAL.createPIN("9");
+                pinAL.createPIN("9",bluetoothAdapter);
 
             }
         });
@@ -156,7 +158,7 @@ public class PinPage extends AppCompatActivity {
 
                 circle = pinAL.getCircleToFill(pinAL.getCurrentPIN());
                 pinAL.fillVisibility(circle, View.VISIBLE);
-                pinAL.createPIN("0");
+                pinAL.createPIN("0",bluetoothAdapter);
 
             }
         });

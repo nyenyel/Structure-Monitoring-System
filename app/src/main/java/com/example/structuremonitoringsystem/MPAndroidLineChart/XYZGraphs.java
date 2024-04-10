@@ -101,11 +101,26 @@ public class XYZGraphs {
 
 
                 // Splits the data to x y z
+                // Splits the data to x y z
                 String receivedData[] = data.trim().split(",");
+                double tempX = 0;
+                double tempY = 0;
+                double tempZ = 0;
 
-                double x = Double.parseDouble(receivedData[position[0]]);
-                double y = Double.parseDouble(receivedData[position[1]]);
-                double z = Double.parseDouble(receivedData[position[2]]);
+                try{
+                    tempX = Double.parseDouble(receivedData[position[0]]);
+                    tempY = Double.parseDouble(receivedData[position[1]]);
+                    tempZ = Double.parseDouble(receivedData[position[2]]);
+                }catch (NumberFormatException n){
+                    tempX = 0;
+                    tempY = 0;
+                    tempZ = 0;
+                }
+
+
+                double x = tempX;
+                double y = tempY;
+                double z = tempZ;
 
                 // Calculate displacement for x-axis using the DisplacementCalculator
                 final float displacementX = calculator.displacement(x);
@@ -146,7 +161,7 @@ public class XYZGraphs {
     }
 
 
-    public void plotDataLogs(LineChart x, LineChart y, LineChart z, String pos, DatabaseLogging logging, String sensor){
+    public void plotDataLogs(LineChart x, LineChart y, LineChart z, String pos, Cursor cursor, String sensor){
 
         int position[] = new int[3];
         String temp[] = pos.trim().split(",");
@@ -165,7 +180,6 @@ public class XYZGraphs {
 
 
 
-        Cursor cursor = logging.getAllData();
         try {
             if (cursor != null && cursor.moveToFirst()){
                 float counter = 0;
@@ -190,12 +204,19 @@ public class XYZGraphs {
                                 counter++;
                             } catch (NumberFormatException e) {
                                 Log.e("PlotDataLogs", "NumberFormatException: "+  e.getMessage());
+                                dataX.add(new Entry(counter, (float) 0));
+                                dataY.add(new Entry(counter, (float) 0));
+                                dataZ.add(new Entry(counter, (float) 0));
                             }
                         } else {
                             Log.e("PlotDataLogs", "Invalid position indices");
+                            dataX.add(new Entry(counter, (float) 0));
+                            dataY.add(new Entry(counter, (float) 0));
+                            dataZ.add(new Entry(counter, (float) 0));
                         }
                     } else {
                         Log.e("PlotDataLogs", "Empty or null dataValues");
+
                     }
                 } while (cursor.moveToNext());
             }
@@ -292,6 +313,8 @@ public class XYZGraphs {
                 float zDistance = zDisplacement - zDisplacement2;
 
                 if (xDistance > threshold || yDistance > threshold || zDistance > threshold){
+
+
                     Notification notification = new Notification(activity, context);
                     notification.notifyDrift(" X = " + xDistance +
                                                     " Y = " + yDistance +
@@ -384,15 +407,44 @@ public class XYZGraphs {
 
                 // Splits the data to x y z
                 String receivedData[] = data.trim().split(",");
+                double tempX = 0;
+                double tempY = 0;
+                double tempZ = 0;
 
-                double x = Double.parseDouble(receivedData[position[0]]);
-                double y = Double.parseDouble(receivedData[position[1]]);
-                double z = Double.parseDouble(receivedData[position[2]]);
+                try{
+                    tempX = Double.parseDouble(receivedData[position[0]]);
+                    tempY = Double.parseDouble(receivedData[position[1]]);
+                    tempZ = Double.parseDouble(receivedData[position[2]]);
+                }catch (NumberFormatException n){
+                    tempX = 0;
+                    tempY = 0;
+                    tempZ = 0;
+                }
+
+
+                double x = tempX;
+                double y = tempY;
+                double z = tempZ;
 
                 //2nd device--------------------------------------------------------
-                double x2 = Double.parseDouble(receivedData[position2[0]]);
-                double y2 = Double.parseDouble(receivedData[position2[1]]);
-                double z2 = Double.parseDouble(receivedData[position2[2]]);
+
+                //2nd device--------------------------------------------------------
+                double tempX2 = 0;
+                double tempY2 = 0;
+                double tempZ2 = 0;
+
+                try{
+                    tempX2 = Double.parseDouble(receivedData[position2[0]]);
+                    tempY2 = Double.parseDouble(receivedData[position2[1]]);
+                    tempZ2 = Double.parseDouble(receivedData[position2[2]]);
+                }catch (NumberFormatException n){
+                    tempX2 = 0;
+                    tempY2 = 0;
+                    tempZ2 = 0;
+                }
+                double x2 = tempX2;
+                double y2 = tempY2;
+                double z2 = tempZ2;
                 //------------------------------------------------------------------
 
                 // Calculate displacement for x-axis using the DisplacementCalculator

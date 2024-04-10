@@ -53,18 +53,12 @@ public class PINActionListener {
         this.code = code;
     }
 
-    public PINActionListener(Context context, View view, int code, BluetoothManager bluetoothManager) {
-        popups = new Popups(context);
-        this.context = context;
-        this.view = view;
-        this.code = code;
-        this.bluetoothManager = bluetoothManager;
-    }
 
 
-    public void createPIN(String input){
 
-        android.bluetooth.BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
+    public void createPIN(String input, android.bluetooth.BluetoothAdapter bluetoothAdapter){
+
+//      android.bluetooth.BluetoothAdapter bluetoothAdapter   = bluetoothManager.getAdapter();
 
         if(currentPIN.length() < 4 ) {
             currentPIN = currentPIN + input;

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_marginTop="10dp"
+    android:padding="10dp"
+    android:id="@+id/templateBtn"
+    android:background="@drawable/shape_square"
+    android:elevation="1dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:id="@+id/initialState">
+
+            <RelativeLayout
+                android:id="@+id/openGLHolder"
+                android:layout_toStartOf="@+id/configHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_square_red"
+                android:padding="3dp">
+
+                <com.example.structuremonitoringsystem.OpenGL.OpenGLView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:id="@+id/openGLView"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/configHolder"
+                android:visibility="gone"
+                android:layout_marginStart="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true">
+
+                    <RelativeLayout
+                        android:id="@+id/editBtn"
+                        android:layout_marginBottom="5dp"
+                        android:padding="10dp"
+                        android:background="@drawable/shape_no_fill"
+                        android:layout_width="140dp"
+
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/icEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_edit"
+                            android:layout_marginEnd="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Edit Template"
+                            android:textColor="@color/txt_color"
+                            android:fontFamily="@font/bold"
+                            android:layout_toEndOf="@id/icEdit"
+                            android:layout_centerVertical="true"/>
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/deleteBtn"
+                        android:layout_centerVertical="true"
+                        android:padding="10dp"
+                        android:layout_below="@+id/editBtn"
+                        android:background="@drawable/shape_no_fill_red"
+                        android:layout_width="140dp"
+
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/icDel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_trash"
+                            android:layout_marginEnd="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Delete Temp."
+                            android:textColor="#DC4646"
+                            android:fontFamily="@font/bold"
+                            android:layout_toEndOf="@id/icDel"
+                            android:layout_centerVertical="true"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_height="60dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp">
+                <RelativeLayout
+                    android:layout_width="2dp"
+                    android:id="@+id/line1"
+                    android:layout_height="60dp"
+                    android:background="@color/txt_color"/>
+
+                <RelativeLayout
+                    android:layout_toEndOf="@+id/line1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp">
+                    <TextView
+                        android:textColor="@color/txt_color"
+                        android:textSize="12sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/heightText"
+                        android:text="Height"/>
+
+
+
+                    <TextView
+                        android:id="@+id/heightValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3.0"
+                        android:textSize="30sp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="3sp"
+                        android:textColor="@color/txt_color"/>
+
+                    <TextView
+                        android:textColor="@color/txt_color"
+                        android:id="@+id/measurement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="cm"
+                        android:textSize="15sp"
+                        android:layout_toEndOf="@+id/heightValue"
+                        android:layout_alignParentBottom="true"
+                        android:paddingBottom="5dp"
+                        />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp">
+                <RelativeLayout
+                    android:layout_width="2dp"
+                    android:id="@+id/line2"
+                    android:layout_height="60dp"
+                    android:background="@color/txt_color"/>
+
+                <RelativeLayout
+                    android:layout_toEndOf="@+id/line2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp">
+                    <TextView
+                        android:textSize="12sp"
+                        android:textColor="@color/txt_color"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/widthText"
+                        android:text="Width"/>
+
+                    <TextView
+                        android:id="@+id/widthValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/txt_color"
+                        android:text="3.0"
+                        android:textSize="30sp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="3sp" />
+
+                    <TextView
+                        android:id="@+id/measurement2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/txt_color"
+                        android:text="cm"
+                        android:textSize="15sp"
+                        android:layout_toEndOf="@+id/widthValue"
+                        android:layout_alignParentBottom="true"
+                        android:paddingBottom="5dp"
+                        />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="2dp"
+                    android:id="@+id/line3"
+                    android:layout_height="60dp"
+                    android:background="@color/txt_color"/>
+
+                <RelativeLayout
+                    android:layout_toEndOf="@+id/line3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp">
+                    <TextView
+                        android:textSize="12sp"
+                        android:textColor="@color/txt_color"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/thicknessText"
+                        android:text="Width"/>
+
+                    <TextView
+                        android:id="@+id/thicknessValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3.0"
+                        android:textSize="30sp"
+                        android:textColor="@color/txt_color"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="3sp" />
+
+                    <TextView
+                        android:id="@+id/measurement3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="cm"
+                        android:textColor="@color/txt_color"
+                        android:textSize="15sp"
+                        android:layout_toEndOf="@+id/thicknessValue"
+                        android:layout_alignParentBottom="true"
+                        android:paddingBottom="5dp"
+                        />
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tempName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textAlignment="textEnd"
+        android:paddingBottom="5dp"
+        android:textColor="@color/txt_color"
+        android:textStyle="bold"
+        android:text="Template Name"/>
+</RelativeLayout>

@@ -55,6 +55,7 @@ public class BluetoothAdapter extends RecyclerView.Adapter<BluetoothViewHolder> 
             public void onClick(View view) {
                 Intent intent = new Intent(context, Settings.class);
                 defaultSettings.updateDefaultMac(selectedDeviceMAC);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(context, intent, null);
 
             }

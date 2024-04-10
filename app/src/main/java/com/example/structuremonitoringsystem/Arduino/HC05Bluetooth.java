@@ -18,7 +18,7 @@ public class HC05Bluetooth {
     }
 
     public void receiveData(final BluetoothSocket bluetoothSocket, final DataListener listener) {
-        Popups popups = new Popups(context);
+//        Popups popups = new Popups(context);
 //        Thread thread = new Thread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -86,11 +86,11 @@ public class HC05Bluetooth {
                 } catch (IOException e) {
                     // Handle IOException gracefully
                     e.printStackTrace();
-                    popups.bluetoothFailed();
+//                    popups.bluetoothFailed();
                 } catch (Exception e) {
                     // Handle any other unexpected exceptions
                     e.printStackTrace();
-                    popups.bluetoothFailed();
+//                    popups.bluetoothFailed();
                 } finally {
                     // Close the input stream if it was opened
                     if (inputStream != null) {
@@ -103,7 +103,13 @@ public class HC05Bluetooth {
                 }
             }
         });
-        thread.start();
+        if(bluetoothSocket.isConnected()){
+            thread.start();
+        }else{
+            Popups popups = new Popups(context);
+            popups.bluetoothFailed();
+        }
+
     }
 
     public int getNumOfDevice(BluetoothSocket bluetoothSocket){

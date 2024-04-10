@@ -45,8 +45,8 @@ public class ObjectTemplate extends AppCompatActivity {
         NavigationBar navigationBar = new NavigationBar(drawerLayout, navigationView, toolbar);
         navigationBar.setNavbar(this);
 
-        ShowItemList showItemList = new ShowItemList(ObjectTemplate.this);
-        showItemList.showListOfTemplates(recyclerView);
+        ShowItemList showItemList = new ShowItemList(this);
+        showItemList.showListOfTemplatesConfig(recyclerView);
 
         DatabaseLogging databaseLogging = new DatabaseLogging(this);
 

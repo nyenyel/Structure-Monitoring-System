@@ -44,10 +44,10 @@ public class Settings extends AppCompatActivity {
     DrawerLayout drawerLayout;
     TextView runningTxt, monitoringTxt, notRunningTxt,
             allDataTxt, perDeviceTxt, perSensorTxt,
-            btMacTxt, resetBtn, templateNameTxt;
+            btMacTxt, resetBtn, templateNameTxt, currentThreshold;
     RelativeLayout appIsRunningBtn, whileMonitoringBtn, appIsNotRunningBtn,
             allBehaviorBtn, perDeviceBehaviorBtn, perSensorBehaviorBtn,
-            defaultMacBtn, defaultTemplateBtn, changePinBtn;
+            defaultMacBtn, defaultTemplateBtn, changePinBtn ,defaultThresholdBtn;
     LinearLayout dataBehavior;
     private String behavior = "";
     private String type = "";
@@ -104,6 +104,7 @@ public class Settings extends AppCompatActivity {
         perDeviceTxt = findViewById(R.id.perDeviceTxt);
         btMacTxt = findViewById(R.id.btMacAddress);
         templateNameTxt = findViewById(R.id.templateName);
+        currentThreshold = findViewById(R.id.thresholdTxt);
 
         appIsRunningRdBtn = findViewById(R.id.appIsRunningRdBtn);
         whileMonitoringRdBtn = findViewById(R.id.whileMonitoringRdBtn);
@@ -119,6 +120,7 @@ public class Settings extends AppCompatActivity {
 
         defaultMacBtn = findViewById(R.id.defaultMacBtn);
         defaultTemplateBtn = findViewById(R.id.defaultTemplateBtn);
+        defaultThresholdBtn= findViewById(R.id.defaultThresholdBtn);
         changePinBtn = findViewById(R.id.changePINBtn);
 
         String tempMon = monitoringTxt.getText().toString();
@@ -323,6 +325,13 @@ public class Settings extends AppCompatActivity {
             }
         });
 
+        defaultThresholdBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popups.editThreshold(defaultSettings);
+            }
+        });
+
         NavigationBar navigationBar = new NavigationBar(drawerLayout, navigationView, toolbar);
         navigationBar.setNavbar(this);
 
@@ -332,6 +341,7 @@ public class Settings extends AppCompatActivity {
 
         btMacTxt.setText(mac);
         templateNameTxt.setText(tempName);
+        currentThreshold.setText(defaultSettings.getThreshold() + "m");
     }
 
     @Override

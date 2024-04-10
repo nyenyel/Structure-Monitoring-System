@@ -45,7 +45,6 @@ public class Sensors extends AppCompatActivity {
         setContentView(R.layout.activity_sensors);
 
         DatabaseLogging databaseLogging = new DatabaseLogging(this);
-        DatabaseSensor sensor = new DatabaseSensor(this);
 
         XYZGraphs xyzGraphs = new XYZGraphs(this, Sensors.this);
         xyzGraphs.startCollectingData(databaseLogging);
@@ -63,22 +62,9 @@ public class Sensors extends AppCompatActivity {
         NavigationBar navigationBar = new NavigationBar(drawerLayout, navigationView, toolbar);
         navigationBar.setNavbar(this);
 
-//        bluetoothSocket = bluetoothConnection.bluetoothCn(this, new DatabaseDefaultSettings(this).getDefaultMac());
-//
-//        int x = hc05Bluetooth.getNumOfDevice(bluetoothSocket);
-//        Log.e("Number of Device", "" + x);
-
         ShowItemList showItemList = new ShowItemList(Sensors.this);
-        showItemList.showRTDevices(recyclerView);
+        showItemList.showViewSensor(recyclerView, "","");
 
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Sensors.this, DeviceSetup.class);
-                intent.putExtra("key", "hehe");
-                startActivity(intent);
-            }
-        });
 
     }
 }

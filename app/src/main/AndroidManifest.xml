@@ -9,16 +9,16 @@
 
     <uses-permission
         android:name="android.permission.BLUETOOTH"
-        android:maxSdkVersion="30" />
+        android:maxSdkVersion="34" />
     <uses-permission
         android:name="android.permission.BLUETOOTH_ADMIN"
-        android:maxSdkVersion="30" />
+        android:maxSdkVersion="34" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32"
+        android:maxSdkVersion="34"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
@@ -31,7 +31,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StructureMonitoringSystem"
-        tools:targetApi="31">
+        tools:targetApi="34">
+        <activity
+            android:name=".Device"
+            android:exported="false" />
         <activity
             android:name=".SplashScreen"
             android:exported="true">
@@ -58,8 +61,7 @@
             android:exported="false" />
         <activity
             android:name=".DeviceSetup"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".CreateObject"
             android:exported="false" />

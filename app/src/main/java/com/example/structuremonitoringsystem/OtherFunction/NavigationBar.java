@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.structuremonitoringsystem.ConvertToExcel;
+import com.example.structuremonitoringsystem.Device;
 import com.example.structuremonitoringsystem.DeviceSetup;
 import com.example.structuremonitoringsystem.DriftMonitoring;
 import com.example.structuremonitoringsystem.Manual;
@@ -41,9 +42,10 @@ public class NavigationBar {
         toggle.syncState();
         Menu menu = navigationView.getMenu();
 
-        MenuItem rtMonitoring, driftMonitoring, sensors, objectTemp, manual, settings,convertToExcel;
+        MenuItem rtMonitoring, driftMonitoring,device, sensors, objectTemp, manual, settings,convertToExcel;
         rtMonitoring = menu.findItem(R.id.navRealtimeMonitoring);
         driftMonitoring = menu.findItem(R.id.navDrift);
+        device = menu.findItem(R.id.navDevice);
         sensors = menu.findItem(R.id.navSensor);
         objectTemp = menu.findItem(R.id.navObject);
         manual = menu.findItem(R.id.navManual);
@@ -115,6 +117,15 @@ public class NavigationBar {
             public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
 
                 Intent intent = new Intent(activity, Settings.class);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                return true;
+            }
+        });
+        device.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
+                Intent intent = new Intent(activity, Device.class);
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 return true;

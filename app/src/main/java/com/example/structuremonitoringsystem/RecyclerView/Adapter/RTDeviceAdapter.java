@@ -72,6 +72,7 @@ public class RTDeviceAdapter extends RecyclerView.Adapter<RTDeviceViewHolder> {
                 Intent intent = new Intent(context, RTMonitoring.class);
                 intent.putExtra("idList", sensorListID);
                 intent.putExtra("key", "fuck you");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(context, intent, null);
 
             }
@@ -83,6 +84,7 @@ public class RTDeviceAdapter extends RecyclerView.Adapter<RTDeviceViewHolder> {
                 Intent intent = new Intent(context, RTMonitoring.class);
                 intent.putExtra("idList", sensorListID);
                 intent.putExtra("key", "log");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(context, intent, null);
             }
         });
