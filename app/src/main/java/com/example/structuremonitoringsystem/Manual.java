@@ -1,10 +1,15 @@
 package com.example.structuremonitoringsystem;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -50,31 +55,45 @@ public class Manual extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ++counter;
-                if(counter == 2){
-                    tutorial1.setVisibility(View.GONE);
-                    tutorial2.setVisibility(View.VISIBLE);
+                if (counter == 2) {
+                    animateFadeOutAndSlideUp(tutorial1, tutorial2);
                 } else if (counter == 3) {
-                    tutorial2.setVisibility(View.GONE);
-                    tutorial3.setVisibility(View.VISIBLE);
-                }
-                else if (counter == 4) {
-                    tutorial3.setVisibility(View.GONE);
-                    tutorial4.setVisibility(View.VISIBLE);
-                }
-                else if (counter == 5) {
-                    tutorial4.setVisibility(View.GONE);
-                    tutorial5.setVisibility(View.VISIBLE);
-                }
-                else if (counter == 6) {
-                    tutorial5.setVisibility(View.GONE);
-                    tutorial6.setVisibility(View.VISIBLE);
+                    animateFadeOutAndSlideUp(tutorial2, tutorial3);
+                } else if (counter == 4) {
+                    animateFadeOutAndSlideUp(tutorial3, tutorial4);
+                } else if (counter == 5) {
+                    animateFadeOutAndSlideUp(tutorial4, tutorial5);
+                } else if (counter == 6) {
+                    animateFadeOutAndSlideUp(tutorial5, tutorial6);
                     section.setText("Bluetooth Setup");
-                }else{
+                } else {
                     Intent intent = new Intent(Manual.this, RealtimeMonitoring.class);
                     startActivity(intent);
                 }
             }
         });
 
+    }
+
+
+    private void animateFadeOutAndSlideUp(final ImageView fadeOutView, final ImageView slideUpView) {
+        ObjectAnimator fadeOutAnimator = ObjectAnimator.ofFloat(fadeOutView, View.ALPHA, 1.0f, 0.0f);
+        fadeOutAnimator.setDuration(200);
+
+        final int originalHeight = slideUpView.getHeight();
+        TranslateAnimation slideUpAnimation = new TranslateAnimation(0, 0, 0, -originalHeight);
+        slideUpAnimation.setDuration(500);
+        slideUpAnimation.setFillAfter(true);
+
+        fadeOutAnimator.start();
+        slideUpView.startAnimation(slideUpAnimation);
+
+        fadeOutAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                fadeOutView.setVisibility(View.GONE);
+                slideUpView.setVisibility(View.VISIBLE);
+            }
+        });
     }
 }

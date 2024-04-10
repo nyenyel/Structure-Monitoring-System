@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:padding="20dp">
         <TextView
-            android:layout_marginStart="20dp"
+
             android:id="@+id/gettingStarted"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             android:textColor="@color/txt_color"/>
 
         <TextView
-            android:layout_marginStart="20dp"
+
             android:id="@+id/section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
