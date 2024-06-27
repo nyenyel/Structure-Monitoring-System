@@ -28,6 +28,22 @@
             app:title="Object Template"
             android:id="@+id/toolbar"/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerView"
+            android:padding="15dp"
+            android:layout_below="@+id/toolbar"/>
+
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:id="@+id/addBtn"
+            android:src="@drawable/ic_add"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="20dp"/>
+
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

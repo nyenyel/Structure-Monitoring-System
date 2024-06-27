@@ -1,46 +1,24 @@
 package com.example.structuremonitoringsystem.Item;
 
 public class DataLogsItem {
-    String deviceId, sensorType, dates, times, xyzData;
+    String time, xyzData;
+    int day, week, month, year;
 
-    public DataLogsItem(String deviceId, String deviceType, String dates, String times, String xyzData) {
-        this.deviceId = deviceId;
-        this.sensorType = deviceType;
-        this.dates = dates;
-        this.times = times;
+    public DataLogsItem(String time, String xyzData, int day, int week, int month, int year) {
+        this.time = time;
         this.xyzData = xyzData;
+        this.day = day;
+        this.week = week;
+        this.month = month;
+        this.year = year;
     }
 
-    public String getDeviceId() {
-        return deviceId;
+    public String getTime() {
+        return time;
     }
 
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
-
-    public String getSensorType() {
-        return sensorType;
-    }
-
-    public void setSensorType(String deviceType) {
-        this.sensorType = deviceType;
-    }
-
-    public String getDates() {
-        return dates;
-    }
-
-    public void setDates(String dates) {
-        this.dates = dates;
-    }
-
-    public String getTimes() {
-        return times;
-    }
-
-    public void setTimes(String times) {
-        this.times = times;
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getXyzData() {
@@ -49,5 +27,37 @@ public class DataLogsItem {
 
     public void setXyzData(String xyzData) {
         this.xyzData = xyzData;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getWeek() {
+        return week;
+    }
+
+    public void setWeek(int week) {
+        this.week = week;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 }

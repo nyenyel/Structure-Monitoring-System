@@ -72,7 +72,7 @@
                         android:id="@+id/measurement"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="in"
+                        android:text="cm"
                         android:textSize="15sp"
                         android:layout_toEndOf="@+id/heightValue"
                         android:layout_alignParentBottom="true"
@@ -119,7 +119,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/txt_color"
-                        android:text="in"
+                        android:text="cm"
                         android:textSize="15sp"
                         android:layout_toEndOf="@+id/widthValue"
                         android:layout_alignParentBottom="true"
@@ -164,7 +164,7 @@
                         android:id="@+id/measurement3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="in"
+                        android:text="cm"
                         android:textColor="@color/txt_color"
                         android:textSize="15sp"
                         android:layout_toEndOf="@+id/thicknessValue"
@@ -179,6 +179,7 @@
 
     <TextView
         android:id="@+id/tempName"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

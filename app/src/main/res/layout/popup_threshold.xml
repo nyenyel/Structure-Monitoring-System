@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:id="@+id/layout"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_black_transparent_10"
+        android:id="@+id/cancelBtnTwo"/>
+    <RelativeLayout
+        android:layout_centerInParent="true"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/shape_square"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/changingData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Threshold in meter:"
+                android:textColor="@color/txt_color"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_below="@+id/changingData"
+                android:layout_marginTop="15dp"
+                android:id="@+id/inputHolder"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/firstCol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="1dp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Threshold"
+                            android:padding="1dp"
+                            android:background="@drawable/bg_square_with_no_edge"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/bold"
+                            android:textColor="@color/txt_color"
+                            />
+                    </RelativeLayout>
+                    <EditText
+                        android:id="@+id/thresholdInp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="15dp"
+                        android:paddingTop="5dp"
+                        android:inputType="numberDecimal"
+                        android:paddingBottom="5dp"
+                        android:layout_marginTop="10dp"
+                        android:hint="Ex. 0.24"
+                        android:fontFamily="@font/regular"
+                        android:textColor="@color/txt_color"
+                        android:background="@drawable/shape_no_fill"/>
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/buttonHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/inputHolder"
+                android:layout_marginTop="10dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/confirmBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/shape_square_btn"
+                    android:text="Confirm"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/cancelBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="30dp"
+                    android:layout_toStartOf="@id/confirmBtn"
+                    android:text="@string/cancel"
+                    android:textColor="@color/txt_color" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -37,8 +37,8 @@ public class LineChartView extends AppCompatActivity {
         exportBtn = (AppCompatButton) findViewById(R.id.exportData);
 
         //setting what the graph will handle
-        dataLogSeismograph = new Seismograph(logSeismograph);
-        realtimeSeismograph = new Seismograph(rlSeismograph);
+        dataLogSeismograph = new Seismograph(logSeismograph, "Accelerometer X Axis");
+        realtimeSeismograph = new Seismograph(rlSeismograph, "Accelerometer X Axis");
         exportDataToExcel = new ExportDataToExcel(LineChartView.this);
 
         //random values of data logging
@@ -66,6 +66,7 @@ public class LineChartView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 realtimeSeismograph.addRealtimeEntry(0);
+
             }
 
         });
@@ -74,6 +75,7 @@ public class LineChartView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 realtimeSeismograph.addRealtimeEntry(globalVariable.getRandomDouble(-10, 10));
+
             }
         });
 
@@ -81,6 +83,7 @@ public class LineChartView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 exportDataToExcel.exportData(yValues);
+
             }
         });
     }

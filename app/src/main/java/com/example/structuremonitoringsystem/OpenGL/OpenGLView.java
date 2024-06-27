@@ -33,19 +33,21 @@ public class OpenGLView extends GLSurfaceView {
 //        init(context);
     }
 
-    public void init(Context context, float width, float height, float thickness){
-        setEGLContextClientVersion(2);
-        setPreserveEGLContextOnPause(true);
+    public void init(Context context, float width, float height, float thickness) {
+        if (renderer == null) { // Check if the renderer is already set
+            setEGLContextClientVersion(2);
+            setPreserveEGLContextOnPause(true);
 
+            setObjectSize(width, height, thickness);
+            // Pass the context to the OpenGLRenderer constructor
+            renderer = new OpenGLRenderer(context, width, height, thickness);
+            setRenderer(renderer);
 
-        setObjectSize(width,height ,thickness);
-        // Pass the context to the OpenGLRenderer constructor
-        renderer = new OpenGLRenderer(context, width, height, thickness);
-        setRenderer(renderer);
-
-        // Render the view only when there is a change in the drawing data
-        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+            // Render the view only when there is a change in the drawing data
+            setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+        }
     }
+
 
 
     public void moveObject(float x, float y, float z){

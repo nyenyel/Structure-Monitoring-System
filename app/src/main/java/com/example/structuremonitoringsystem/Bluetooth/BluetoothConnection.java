@@ -2,6 +2,8 @@ package com.example.structuremonitoringsystem.Bluetooth;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -12,11 +14,13 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.structuremonitoringsystem.Item.BluetoothItem;
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseDefaultSettings;
+import com.example.structuremonitoringsystem.OtherFunction.Popups;
 import com.example.structuremonitoringsystem.Testing.BluetoothTest;
 
 import java.io.IOException;
@@ -35,13 +39,18 @@ public class BluetoothConnection {
     public void test(){
         Log.e("Bluetooth Devices", "You have no permission");
     }
-    public String getDeviceNameList(Context context) {
+    public String getDeviceNameList(Context context, Activity activity) {
 
         BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
+        if (!(ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED)) {
             // Request Bluetooth permission
-            ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.BLUETOOTH}, REQUEST_BLUETOOTH_PERMISSION);
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_BLUETOOTH_PERMISSION);
+
             return "";
+
         } else {
             // Permission already granted, proceed with Bluetooth operations
             String bluetoothAddress = "" + btAdapter.getBondedDevices();
@@ -55,19 +64,24 @@ public class BluetoothConnection {
             }
 //            Log.e("Global Variable", ""+blListName);
 //            Log.e("Global Variable", "Data Added");
+            Log.e("aaaa", blListName);
             return blListName.substring(1);
-
         }
     }
 
-    public String getDeviceMACList(Context context) {
+    public String getDeviceMACList(Context context, Activity activity) {
 
         BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
+        if (!(ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED)) {
             // Request Bluetooth permission
-            ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.BLUETOOTH}, REQUEST_BLUETOOTH_PERMISSION);
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_BLUETOOTH_PERMISSION);
+
             return "";
-        } else {
+
+        }  else {
             // Permission already granted, proceed with Bluetooth operations
             String bluetoothAddress = "" + btAdapter.getBondedDevices();
             String blListMAC = squareBracketRemover(bluetoothAddress);
@@ -105,30 +119,56 @@ public class BluetoothConnection {
     }
 
     public BluetoothSocket bluetoothCn(Context context, String deviceMAC){
-
-        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        BluetoothDevice bluetoothDevice = bluetoothAdapter.getRemoteDevice(deviceMAC);
         BluetoothSocket bluetoothSocket = null;
+        Popups popups = new Popups(context);
 
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
-            // Request Bluetooth permission
-            ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.BLUETOOTH}, REQUEST_BLUETOOTH_PERMISSION);
-        } else {
-            // Permission already granted, proceed with Bluetooth operations
+        try {
+            BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            BluetoothDevice bluetoothDevice = bluetoothAdapter.getRemoteDevice(deviceMAC);
 
-            int count = 0;
-            do {
-                //Confirm of the device is connected through Bluetooth
-                try {
-                    bluetoothSocket = bluetoothDevice.createRfcommSocketToServiceRecord(arduinoUUID);
-                    bluetoothSocket.connect();
-                } catch (IOException e) {
-                    e.printStackTrace();
+
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
+                // Request Bluetooth permission
+                ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.BLUETOOTH}, REQUEST_BLUETOOTH_PERMISSION);
+            } else {
+                // Permission already granted, proceed with Bluetooth operations
+
+                int count = 0;
+                do {
+                    // Attempt to connect to the Bluetooth device
+                    try {
+                        bluetoothSocket = bluetoothDevice.createRfcommSocketToServiceRecord(arduinoUUID);
+                        bluetoothSocket.connect();
+                        // Break the loop if connected successfully
+                        if (bluetoothSocket.isConnected()) {
+                            break;
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    count++;
+                    Log.e("Counter", count+"");
+                } while (count < 1);
+
+                // Check if the BluetoothSocket is connected
+                if (bluetoothSocket != null && bluetoothSocket.isConnected()) {
+                    // BluetoothSocket is connected, return it
+                    return bluetoothSocket;
+                } else {
+                    popups.bluetoothFailed();
+                    // BluetoothSocket is not connected after retrying, handle the situation accordingly
+                    // For example, you can log an error message or notify the user
                 }
-                count++;
-                Log.e("Counter", count+"");
-            }while (!bluetoothSocket.isConnected() && count < 4);
+            }
+
+            // Return the BluetoothSocket (which may be null if not connected)
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+            popups.bluetoothFailed();
         }
+
         return bluetoothSocket;
     }
 

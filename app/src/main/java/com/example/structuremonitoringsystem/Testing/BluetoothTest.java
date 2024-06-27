@@ -38,8 +38,8 @@ public class BluetoothTest extends AppCompatActivity {
 
         btConnection = new BluetoothConnection();
 
-        String getDeviceNames = btConnection.getDeviceNameList(BluetoothTest.this);
-        String getDeviceMAC = btConnection.getDeviceMACList(BluetoothTest.this);
+        String getDeviceNames = btConnection.getDeviceNameList(BluetoothTest.this, BluetoothTest.this);
+        String getDeviceMAC = btConnection.getDeviceMACList(BluetoothTest.this,BluetoothTest.this);
 //
         String[] deviceName = getDeviceNames.split(",");
         String[] deviceMAC = getDeviceMAC.split(",");
@@ -59,6 +59,7 @@ public class BluetoothTest extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(BluetoothTest.this, CreateObject.class);
                 startActivity(intent);
+
             }
         });
 

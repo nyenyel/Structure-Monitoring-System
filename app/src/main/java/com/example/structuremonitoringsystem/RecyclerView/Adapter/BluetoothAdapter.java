@@ -48,14 +48,16 @@ public class BluetoothAdapter extends RecyclerView.Adapter<BluetoothViewHolder> 
 
         holder.deviceName.setText(items.get(position).getDeviceName());
         holder.deviceMac.setText(selectedDeviceMAC);
-        String uuid = bluetoothConnection.deviceUUID(context, selectedDeviceMAC);
+//        String uuid = bluetoothConnection.deviceUUID(context, selectedDeviceMAC);
 
         holder.deviceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, Settings.class);
                 defaultSettings.updateDefaultMac(selectedDeviceMAC);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(context, intent, null);
+
             }
         });
     }

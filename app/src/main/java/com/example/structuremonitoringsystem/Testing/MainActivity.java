@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.e("Controller", "Up");
                 openGLView.moveObject(0, 0.02f, 0);
+
             }
         });
 
@@ -92,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.e("Controller", "Down");
                 openGLView.moveObject(0, -0.02f, 0);
+
             }
         });
         leftBtn.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.e("Controller", "Left");
                 openGLView.moveObject(-0.02f, 0, 0);
+
             }
         });
         rightBtn.setOnClickListener(new View.OnClickListener() {
@@ -106,11 +109,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.e("Controller", "Right");
                 openGLView.moveObject(0.02f, 0, 0f);
+
             }
         });
         centerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
             }
         });
@@ -131,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
 //                    a = 360f;
 //                }
                 openGLView.rotateObject(x, y , z, a, 2f);
+
 
             }
         });
@@ -196,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openGLView.rotateObject(0, 0, 0f, 0f, 2f);
+
             }
         });
         rotate45Btn.setOnClickListener(new View.OnClickListener() {
@@ -215,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
 //                    a = 360f;
 //                }
                 openGLView.rotateObject(x, y , z, a, 2f);
+
             }
 
         });
@@ -235,7 +243,6 @@ public class MainActivity extends AppCompatActivity {
 //                    a = -360;
 //                }
                 openGLView.rotateObject(x, y , z, a, 2f);
-
 
             }
         });

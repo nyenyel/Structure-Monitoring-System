@@ -21,6 +21,8 @@ public class DatabaseDefaultSettings extends SQLiteOpenHelper {
     public static String ID_NAME_LOGGING = "logging";
     public static String ID_NAME_BEHAVIOR = "behavior";
     public static String ID_NAME_MAC = "mac";
+    public static String ID_THRESHOLD= "threshold";
+    public static String ID_IS_INITIAL_RUN= "initial";
 
     public DatabaseDefaultSettings(Context context){
         super(context, DATABASE_NAME, null,1);
@@ -249,7 +251,108 @@ public class DatabaseDefaultSettings extends SQLiteOpenHelper {
         }
     }
 
+    public void setInitial(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
 
+        contentValues.put(COL_ID, ID_IS_INITIAL_RUN);
+        contentValues.put(COL_VALUE, "0");
+
+        long result = db.insert(TABLE_NAME, null, contentValues);
+        if(result == -1){
+            Log.e("Data Progress", "Bluetooth insertion Failed");
+        }else{ Log.e("Data Progress", "Bluetooth insertion Success");}
+    }
+
+    public String getInitial(){
+        String initialVal ="";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_ID + " = " + "\""+ID_IS_INITIAL_RUN+"\"";
+
+        if (db != null){cursor = db.rawQuery(query, null);}
+        try {
+            if (cursor != null && cursor.moveToFirst()){
+                do {
+                    initialVal = cursor.getString(cursor.getColumnIndexOrThrow(COL_VALUE));
+                }while (cursor.moveToNext());
+            }
+        }finally {
+            if (cursor != null){cursor.close();}
+        }
+
+        return initialVal;
+    }
+
+    public void updateInitial(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(COL_VALUE, "1");
+
+        int rowsAffected = db.update(TABLE_NAME, contentValues, COL_ID + " = ?", new String[]{ID_IS_INITIAL_RUN});
+
+        if (rowsAffected == 0) {
+            Log.e("Data Progress", "Logging Type update Failed");
+        } else {
+            Log.e("Data Progress", "Logging Type update Success");
+        }
+
+    }
+
+
+    public void setThreshold(String threshold){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(COL_ID, ID_THRESHOLD);
+        contentValues.put(COL_VALUE, threshold);
+
+        long result = db.insert(TABLE_NAME, null, contentValues);
+        if(result == -1){
+            Log.e("Data Progress", "Bluetooth insertion Failed");
+        }else{ Log.e("Data Progress", "Bluetooth insertion Success");}
+    }
+
+    public String getThreshold(){
+        String defaultThreshold ="";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_ID + " = " + "\""+ID_THRESHOLD+"\"";
+
+        if (db != null){cursor = db.rawQuery(query, null);}
+        try {
+            if (cursor != null && cursor.moveToFirst()){
+                do {
+                    defaultThreshold = cursor.getString(cursor.getColumnIndexOrThrow(COL_VALUE));
+                }while (cursor.moveToNext());
+            }
+        }finally {
+            if (cursor != null){cursor.close();}
+        }
+
+        return defaultThreshold;
+    }
+
+    public void updateThreshold(String threshold){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(COL_VALUE, threshold);
+
+        int rowsAffected = db.update(TABLE_NAME, contentValues, COL_ID + " = ?", new String[]{ID_THRESHOLD});
+
+        if (rowsAffected == 0) {
+            Log.e("Data Progress", "Logging Type update Failed");
+        } else {
+            Log.e("Data Progress", "Logging Type update Success");
+        }
+
+    }
     public void seedDefaultData(){
         GlobalVariable globalVariable = new GlobalVariable();
         String[] behavior = globalVariable.getLoggingBehavior();
@@ -259,6 +362,7 @@ public class DatabaseDefaultSettings extends SQLiteOpenHelper {
         setLoggingBehavior(behavior[0]);
         setLoggingType(type[0]);
         setDefaultBluetoothMac("na");
+        setThreshold("0.1");
     }
 
     public void resetToDefaultData(){
@@ -270,6 +374,7 @@ public class DatabaseDefaultSettings extends SQLiteOpenHelper {
         updateLoggingBehavior(behavior[0]);
         updateLoggingType(type[0]);
         updateDefaultMac("na");
+        updateThreshold("0.1");
     }
 
 }

@@ -12,5 +12,10 @@
     <string name="cancel"><u>Cancel</u></string>
     <string name="try_again"><u>Try Again</u></string>
     <string name="template_note"><i>Note: confirming this will permanently change the <b>thickness, width, and height</b> of the template this will also take effect even the selected template is the default template.</i></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="note_sensors"><b>Note:</b> please indicate the total number of data being sent by the first Sensor.(Ex. <b>x Axis, y Axis, and z Axis</b> will be <b><u>3 data</u></b>)</string>
+    <string name="bluetooth_failed"><b>WARNING:</b> the bluetooth failed to connect. Please restart the device, turn your Bluetooth On, or try again.</string>
+    <string name="delete_warning"><b>WARNING:</b> confirming this message <b>delete</b> the selected Template. Are you want to continue?</string>
 
 </resources>

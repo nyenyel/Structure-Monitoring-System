@@ -126,6 +126,90 @@
                         android:layout_centerVertical="true"/>
 
                 </RelativeLayout>
+                <!-- Default Threshold-->
+                <RelativeLayout
+                    android:id="@+id/defaultThresholdBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_square"
+                    android:elevation="1dp"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:id="@+id/trshdTextHolder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/thresholdTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/bold"
+                            android:text="Current Threshold"
+                            android:textColor="@color/txt_color"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/thresholdTxt"
+                            android:fontFamily="@font/regular"
+                            android:text="Current Threshold in Meter"
+                            android:textColor="@color/txt_color"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_right" />
+
+                </RelativeLayout>
+                <!-- Automatic Data Deletion-->
+                <RelativeLayout
+                    android:id="@+id/dataDeletionBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_square"
+                    android:elevation="1dp"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:id="@+id/dataDeletionTextHolder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/dataDeletionTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/bold"
+                            android:text="7 Days"
+                            android:textColor="@color/txt_color"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/dataDeletionTxt"
+                            android:fontFamily="@font/regular"
+                            android:text="Days before saved data is deleted"
+                            android:textColor="@color/txt_color"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_right" />
+
+                </RelativeLayout>
                 <!-- Change PIN-->
                 <RelativeLayout
                     android:id="@+id/changePINBtn"

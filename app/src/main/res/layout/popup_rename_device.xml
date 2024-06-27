@@ -33,7 +33,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/templateName"
+                android:id="@+id/currentName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/changingData"
@@ -44,7 +44,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_below="@+id/templateName"
+                android:layout_below="@+id/currentName"
                 android:layout_marginTop="15dp"
                 android:id="@+id/inputHolder"
                 android:layout_height="wrap_content">
@@ -76,6 +76,7 @@
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
                         android:layout_marginTop="10dp"
+                        android:id="@+id/newDevNameInp"
                         android:hint="Device Name"
                         android:fontFamily="@font/regular"
                         android:textColor="@color/txt_color"

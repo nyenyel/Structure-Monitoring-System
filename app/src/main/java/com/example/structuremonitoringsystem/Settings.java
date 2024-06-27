@@ -1,6 +1,7 @@
 package com.example.structuremonitoringsystem;
 
 import android.app.Dialog;
+import android.bluetooth.BluetoothManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -23,16 +24,18 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseDefaultSettings;
+import com.example.structuremonitoringsystem.LocalDatabase.DatabaseLogging;
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseObjectSize;
+import com.example.structuremonitoringsystem.MPAndroidLineChart.XYZGraphs;
 import com.example.structuremonitoringsystem.OtherFunction.GlobalVariable;
 import com.example.structuremonitoringsystem.OtherFunction.NavigationBar;
 import com.example.structuremonitoringsystem.OtherFunction.Popups;
+import com.example.structuremonitoringsystem.RecyclerView.Adapter.BluetoothAdapter;
 import com.google.android.material.navigation.NavigationView;
 
 public class Settings extends AppCompatActivity {
 
     NavigationView navigationView;
-
     GlobalVariable globalVariable = new GlobalVariable();
     Toolbar toolbar;
     View decorView;
@@ -41,10 +44,10 @@ public class Settings extends AppCompatActivity {
     DrawerLayout drawerLayout;
     TextView runningTxt, monitoringTxt, notRunningTxt,
             allDataTxt, perDeviceTxt, perSensorTxt,
-            btMacTxt, resetBtn, templateNameTxt;
+            btMacTxt, resetBtn, templateNameTxt, currentThreshold;
     RelativeLayout appIsRunningBtn, whileMonitoringBtn, appIsNotRunningBtn,
             allBehaviorBtn, perDeviceBehaviorBtn, perSensorBehaviorBtn,
-            defaultMacBtn, defaultTemplateBtn, changePinBtn;
+            defaultMacBtn, defaultTemplateBtn, changePinBtn ,defaultThresholdBtn;
     LinearLayout dataBehavior;
     private String behavior = "";
     private String type = "";
@@ -61,8 +64,16 @@ public class Settings extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_settings);
 
+        BluetoothManager bluetoothManager = getSystemService(BluetoothManager.class);
+        android.bluetooth.BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
+
         decorView = getWindow().getDecorView();
         globalVariable.hideSystemBars(decorView);
+
+        DatabaseLogging databaseLogging = new DatabaseLogging(this);
+
+        XYZGraphs xyzGraphs = new XYZGraphs(this, Settings.this);
+        xyzGraphs.startCollectingData(databaseLogging);
 
         defaultSettings = new DatabaseDefaultSettings(this);
         objectSize = new DatabaseObjectSize(this);
@@ -93,6 +104,7 @@ public class Settings extends AppCompatActivity {
         perDeviceTxt = findViewById(R.id.perDeviceTxt);
         btMacTxt = findViewById(R.id.btMacAddress);
         templateNameTxt = findViewById(R.id.templateName);
+        currentThreshold = findViewById(R.id.thresholdTxt);
 
         appIsRunningRdBtn = findViewById(R.id.appIsRunningRdBtn);
         whileMonitoringRdBtn = findViewById(R.id.whileMonitoringRdBtn);
@@ -108,6 +120,7 @@ public class Settings extends AppCompatActivity {
 
         defaultMacBtn = findViewById(R.id.defaultMacBtn);
         defaultTemplateBtn = findViewById(R.id.defaultTemplateBtn);
+        defaultThresholdBtn= findViewById(R.id.defaultThresholdBtn);
         changePinBtn = findViewById(R.id.changePINBtn);
 
         String tempMon = monitoringTxt.getText().toString();
@@ -191,6 +204,7 @@ public class Settings extends AppCompatActivity {
                 allBehaviorRdBtn.setChecked(true);
                 perDeviceBehaviorRdBtn.setChecked(false);
                 perSensorBehaviorRdBtn.setChecked(false);
+
             }
         });
         whileMonitoringBtn.setOnClickListener(new View.OnClickListener() {
@@ -204,6 +218,7 @@ public class Settings extends AppCompatActivity {
                 allBehaviorRdBtn.setChecked(true);
                 perDeviceBehaviorRdBtn.setChecked(false);
                 perSensorBehaviorRdBtn.setChecked(false);
+
             }
         });
         appIsNotRunningBtn.setOnClickListener(new View.OnClickListener() {
@@ -217,6 +232,7 @@ public class Settings extends AppCompatActivity {
                 allBehaviorRdBtn.setChecked(true);
                 perDeviceBehaviorRdBtn.setChecked(false);
                 perSensorBehaviorRdBtn.setChecked(false);
+
             }
         });
         allBehaviorBtn.setOnClickListener(new View.OnClickListener() {
@@ -225,6 +241,7 @@ public class Settings extends AppCompatActivity {
                 allBehaviorRdBtn.setChecked(true);
                 perDeviceBehaviorRdBtn.setChecked(false);
                 perSensorBehaviorRdBtn.setChecked(false);
+
             }
         });
         perDeviceBehaviorBtn.setOnClickListener(new View.OnClickListener() {
@@ -233,6 +250,7 @@ public class Settings extends AppCompatActivity {
                 allBehaviorRdBtn.setChecked(false);
                 perDeviceBehaviorRdBtn.setChecked(true);
                 perSensorBehaviorRdBtn.setChecked(false);
+
             }
         });
         perSensorBehaviorBtn.setOnClickListener(new View.OnClickListener() {
@@ -241,13 +259,18 @@ public class Settings extends AppCompatActivity {
                 allBehaviorRdBtn.setChecked(false);
                 perDeviceBehaviorRdBtn.setChecked(false);
                 perSensorBehaviorRdBtn.setChecked(true);
+
             }
         });
         defaultMacBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Settings.this, SelectDefaultBluetooth.class);
-                startActivity(intent);
+                if (!bluetoothAdapter.isEnabled()) {
+                    popups.bluetoothFailed();
+                }else {
+                    Intent intent = new Intent(Settings.this, SelectDefaultBluetooth.class);
+                    startActivity(intent);
+                }
             }
         });
         defaultTemplateBtn.setOnClickListener(new View.OnClickListener() {
@@ -255,6 +278,7 @@ public class Settings extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Settings.this, SelectDefaultTemplate.class);
                 startActivity(intent);
+
             }
         });
         changePinBtn.setOnClickListener(new View.OnClickListener() {
@@ -262,6 +286,7 @@ public class Settings extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Settings.this, ChangePIN.class);
                 startActivity(intent);
+
             }
         });
         saveBtn.setOnClickListener(new View.OnClickListener() {
@@ -289,12 +314,21 @@ public class Settings extends AppCompatActivity {
                 }
 
                 popups.saveConfirmationPopupWindow(defaultSettings, behavior, type);
+
             }
         });
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 popups.resetConfirmationPopupWindow(defaultSettings);
+
+            }
+        });
+
+        defaultThresholdBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popups.editThreshold(defaultSettings);
             }
         });
 
@@ -307,6 +341,7 @@ public class Settings extends AppCompatActivity {
 
         btMacTxt.setText(mac);
         templateNameTxt.setText(tempName);
+        currentThreshold.setText(defaultSettings.getThreshold() + "m");
     }
 
     @Override

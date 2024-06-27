@@ -99,6 +99,7 @@ public class CreateObject extends AppCompatActivity {
                     Log.e("Error", "Please Enter Data");
                 }
 
+
             }
         });
 
@@ -108,6 +109,7 @@ public class CreateObject extends AppCompatActivity {
 //                storeSingleData("2");
                 Intent intent = new Intent(CreateObject.this, LineChartView.class);
                 startActivity(intent);
+
             }
         });
 
@@ -116,6 +118,7 @@ public class CreateObject extends AppCompatActivity {
             public void onClick(View v) {
                 String getPIN = tempName.getText().toString();
                 pin.createPIN(getPIN);
+
             }
         });
 
@@ -124,6 +127,7 @@ public class CreateObject extends AppCompatActivity {
             public void onClick(View v) {
                 String getPIN = tempName.getText().toString();
                 pin.seedDefaultData();
+
             }
         });
 
@@ -134,6 +138,7 @@ public class CreateObject extends AppCompatActivity {
                 if(pin.PINIsCorrect(getPIN)){
                     Log.e("PIN Check", "PIN correct");
                 }else {Log.e("PIN Check", "PIN incorrect");}
+
             }
         });
     }

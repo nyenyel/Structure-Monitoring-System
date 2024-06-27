@@ -1,9 +1,6 @@
 package com.example.structuremonitoringsystem.OtherFunction;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +11,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.structuremonitoringsystem.Dashboard;
+import com.example.structuremonitoringsystem.ConvertToExcel;
+import com.example.structuremonitoringsystem.Device;
+import com.example.structuremonitoringsystem.DeviceSetup;
 import com.example.structuremonitoringsystem.DriftMonitoring;
 import com.example.structuremonitoringsystem.Manual;
 import com.example.structuremonitoringsystem.ObjectTemplate;
@@ -22,6 +21,7 @@ import com.example.structuremonitoringsystem.R;
 import com.example.structuremonitoringsystem.RealtimeMonitoring;
 import com.example.structuremonitoringsystem.Sensors;
 import com.example.structuremonitoringsystem.Settings;
+import com.example.structuremonitoringsystem.Testing.BluetoothTerminalTest;
 import com.google.android.material.navigation.NavigationView;
 
 public class NavigationBar {
@@ -42,20 +42,21 @@ public class NavigationBar {
         toggle.syncState();
         Menu menu = navigationView.getMenu();
 
-        MenuItem dashboard, rtMonitoring, driftMonitoring, sensors, objectTemp, manual, settings;
-        dashboard = menu.findItem(R.id.navDashboard);
+        MenuItem rtMonitoring, driftMonitoring,device, sensors, objectTemp, manual, settings,convertToExcel;
         rtMonitoring = menu.findItem(R.id.navRealtimeMonitoring);
         driftMonitoring = menu.findItem(R.id.navDrift);
+        device = menu.findItem(R.id.navDevice);
         sensors = menu.findItem(R.id.navSensor);
         objectTemp = menu.findItem(R.id.navObject);
         manual = menu.findItem(R.id.navManual);
         settings= menu.findItem(R.id.navSettings);
+        convertToExcel = menu.findItem(R.id.navExcel);
 
-        dashboard.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+
+        convertToExcel.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
-
-                Intent intent = new Intent(activity, Dashboard.class);
+                Intent intent = new Intent(activity, ConvertToExcel.class);
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 return true;
@@ -116,6 +117,15 @@ public class NavigationBar {
             public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
 
                 Intent intent = new Intent(activity, Settings.class);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                return true;
+            }
+        });
+        device.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
+                Intent intent = new Intent(activity, Device.class);
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 return true;

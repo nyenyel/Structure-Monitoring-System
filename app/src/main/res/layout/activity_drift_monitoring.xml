@@ -19,6 +19,8 @@
         app:menu="@menu/navbar"/>
 
     <RelativeLayout
+
+        android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -27,6 +29,135 @@
             android:layout_height="wrap_content"
             android:id="@+id/toolbar"
             app:title="Drift Monitoring"/>
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar">
+            <RelativeLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_margin="2dp"
+                    android:padding="10dp"
+                    android:background="@drawable/shape_square"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="1dp"
+                    android:id="@+id/hideBtn">
+
+                    <ImageView
+                        android:id="@+id/ic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:src="@drawable/ic_hide"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/ic"
+                        android:textColor="@color/txt_color"
+                        android:fontFamily="@font/bold"
+                        android:text="3D Model"
+                        android:layout_centerVertical="true"
+                        />
+
+                    <ImageView
+                        android:id="@+id/arrowDown"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:rotation="0"
+                        android:src="@drawable/ic_dropdown"/>
+
+
+                </RelativeLayout>
+
+                <com.example.structuremonitoringsystem.OpenGL.OpenGLView
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:visibility="gone"
+                    android:layout_below="@+id/hideBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp"
+                    android:id="@+id/openGLViewD1" />
+
+                <com.example.structuremonitoringsystem.OpenGL.OpenGLView
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp"
+                    android:id="@+id/openGLViewD2"
+                    android:layout_below="@+id/openGLViewD1"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@+id/openGLViewD2">
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+                        <com.github.mikephil.charting.charts.LineChart
+
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:id="@+id/realtimeSeismographX1"/>
+
+                        <com.github.mikephil.charting.charts.LineChart
+
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:id="@+id/realtimeSeismographY1"
+                            android:layout_below="@+id/realtimeSeismographX1"/>
+
+                        <com.github.mikephil.charting.charts.LineChart
+
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:id="@+id/realtimeSeismographZ1"
+                            android:layout_below="@+id/realtimeSeismographY1"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+                        <com.github.mikephil.charting.charts.LineChart
+
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:id="@+id/realtimeSeismographX"/>
+
+                        <com.github.mikephil.charting.charts.LineChart
+
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:id="@+id/realtimeSeismographY"
+                            android:layout_below="@+id/realtimeSeismographX"/>
+
+                        <com.github.mikephil.charting.charts.LineChart
+
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:id="@+id/realtimeSeismographZ"
+                            android:layout_below="@+id/realtimeSeismographY"/>
+                    </RelativeLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </ScrollView>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="notif"
+            android:id="@+id/notif"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"/>
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

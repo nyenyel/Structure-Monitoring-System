@@ -1,29 +1,37 @@
 package com.example.structuremonitoringsystem.OtherFunction;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.structuremonitoringsystem.ChangePIN;
-import com.example.structuremonitoringsystem.Dashboard;
 import com.example.structuremonitoringsystem.LocalDatabase.DatabaseDefaultSettings;
 import com.example.structuremonitoringsystem.R;
+import com.example.structuremonitoringsystem.RealtimeMonitoring;
+import com.example.structuremonitoringsystem.SelectDefaultBluetooth;
 import com.example.structuremonitoringsystem.Settings;
 
 public class PINActionListener {
 
+
+
     Context context;
     View view;
     Popups popups;
+    Class aClass;
     TextView instruction;
     ImageView circle;
     String currentPIN = "";
+    BluetoothManager bluetoothManager;
     private int tries = 0;
     private int counter = 0;
+    private int code = 0;
     private String newPIN = "";
 
     private String instructions[] = new String[]{
@@ -38,15 +46,20 @@ public class PINActionListener {
         this.view = view;
     }
 
-    public PINActionListener(Context context, View view, int counter) {
+    public PINActionListener(Context context, View view, int code) {
         popups = new Popups(context);
         this.context = context;
         this.view = view;
-        this.counter = counter;
+        this.code = code;
     }
 
 
-    public void createPIN(String input){
+
+
+    public void createPIN(String input, android.bluetooth.BluetoothAdapter bluetoothAdapter){
+
+//      android.bluetooth.BluetoothAdapter bluetoothAdapter   = bluetoothManager.getAdapter();
+
         if(currentPIN.length() < 4 ) {
             currentPIN = currentPIN + input;
         }
@@ -54,6 +67,25 @@ public class PINActionListener {
         if(currentPIN.length() == 4){
             DatabaseDefaultSettings settings = new DatabaseDefaultSettings(context);
             boolean pinIsCorrect = settings.PINIsCorrect(currentPIN);
+            if (code == 69) {
+                if(pinIsCorrect){
+                    if (!bluetoothAdapter.isEnabled()) {
+                        for(int x = 0; x< 4; x++){
+                            backspace();
+                            circle = getCircleToFill(currentPIN);
+                            fillVisibility(circle, View.INVISIBLE);
+                        }
+                        popups.bluetoothFailed();
+
+                    }else {
+                        Intent intent = new Intent(context, RealtimeMonitoring.class);
+                        context.startActivity(intent);
+                    }
+                    return;
+                }else {
+                    popups.incorrectPINPopupWindow();
+                }
+            }
             if(counter == 0){
                 if (pinIsCorrect){
                     instruction = view.findViewById(R.id.instruction);
@@ -69,14 +101,7 @@ public class PINActionListener {
                 instruction = view.findViewById(R.id.instruction);
                 instruction.setText(instructions[2]);
                 counter++;
-            } else if (counter == 69) {
-                if(pinIsCorrect){
-                    Intent intent = new Intent(context, Dashboard.class);
-                    context.startActivity(intent);
-                }else {
-                    popups.incorrectPINPopupWindow();
-                }
-            } else{
+            }else{
                 if(currentPIN.equals(newPIN)){
                     settings.changePIN(currentPIN);
                     Intent intent = new Intent(context, Settings.class);

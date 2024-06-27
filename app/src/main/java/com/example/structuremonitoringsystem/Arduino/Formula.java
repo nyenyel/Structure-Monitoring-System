@@ -12,7 +12,7 @@ public class Formula {
         float filteredVelocity = filter.filter((float) velocityPerSec);
 
         // Define a threshold below which velocities are considered noise
-        double velocityThreshold = 0.1; // Adjust as needed
+        double velocityThreshold = 0.22; // Adjust as needed
 
         // Check if the filtered velocity exceeds the threshold
         if (Math.abs(filteredVelocity) <= velocityThreshold) {

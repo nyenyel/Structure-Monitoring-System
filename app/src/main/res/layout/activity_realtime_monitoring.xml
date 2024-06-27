@@ -27,6 +27,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/toolbar"
             app:title="Realtime Monitoring"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:layout_below="@+id/toolbar"
+            android:id="@+id/recyclerView"/>
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

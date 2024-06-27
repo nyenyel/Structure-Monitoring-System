@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:id="@+id/layout"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_black_transparent_10"
+        android:id="@+id/cancelBtnTwo"/>
+    <RelativeLayout
+        android:layout_centerInParent="true"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/shape_square"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/templateName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please Select a Week"
+                android:textColor="@color/txt_color"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@+id/templateName">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/accelBtn"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:textColor="@color/txt_color"
+                        android:textSize="20sp"
+                        android:text="Week 1"
+                        android:padding="10dp"
+                        android:id="@+id/weekOne"
+                        android:background="@drawable/shape_square"
+                        android:elevation="2dp"/>
+
+                    <TextView
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:textColor="@color/txt_color"
+                        android:textSize="20sp"
+                        android:text="Week 2"
+                        android:padding="10dp"
+                        android:id="@+id/weekTwo"
+                        android:background="@drawable/shape_square"
+                        android:elevation="2dp"/>
+                    <TextView
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:textColor="@color/txt_color"
+                        android:textSize="20sp"
+                        android:text="Week 3"
+                        android:padding="10dp"
+                        android:id="@+id/weekThree"
+                        android:background="@drawable/shape_square"
+                        android:elevation="2dp"/>
+
+                    <TextView
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:textColor="@color/txt_color"
+                        android:textSize="20sp"
+                        android:text="Week 4"
+                        android:padding="10dp"
+                        android:id="@+id/weekFour"
+                        android:background="@drawable/shape_square"
+                        android:elevation="2dp"/>
+
+                    <TextView
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:textColor="@color/txt_color"
+                        android:textSize="20sp"
+                        android:text="Week 5"
+                        android:padding="10dp"
+                        android:id="@+id/weekFive"
+                        android:background="@drawable/shape_square"
+                        android:elevation="2dp"/>
+                </LinearLayout>
+            </ScrollView>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>
