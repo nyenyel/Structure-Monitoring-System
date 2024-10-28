@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\v1\AuthController;
-use App\Http\Controllers\api\v1\BasicController\BannerController;
+use App\Http\Controllers\API\v1\BasicController\BannerController;
 use App\Http\Controllers\API\v1\BasicControllers\CollegeController;
 use App\Http\Controllers\API\v1\BasicControllers\IncidentController;
 use App\Http\Controllers\API\v1\BasicControllers\LibPositionController;
@@ -9,10 +9,10 @@ use App\Http\Controllers\API\v1\BasicControllers\PlayerController;
 use App\Http\Controllers\API\v1\BasicControllers\ScheduleController;
 use App\Http\Controllers\API\v1\BasicControllers\SportsController;
 use App\Http\Controllers\API\v1\BasicControllers\TeamController;
-use App\Http\Controllers\api\v1\BatchScheduleController;
+use App\Http\Controllers\API\v1\BatchScheduleController;
 use App\Http\Controllers\API\v1\TallyController;
 use App\Http\Controllers\API\v1\BasicController\UserController;
-use App\Http\Controllers\api\v1\SMSController;
+use App\Http\Controllers\API\v1\SMSController;
 use App\Http\Resources\UserRegistrationResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
