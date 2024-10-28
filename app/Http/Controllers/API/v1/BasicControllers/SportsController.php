@@ -1,0 +1,80 @@
+<?php
+
+namespace App\Http\Controllers\API\v1\BasicControllers;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Store\SportsStoreRequest;
+use App\Http\Requests\Update\SportsUpdateRequest;
+use App\Http\Resources\SportsResource;
+use App\Models\Sports\Sports;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+
+class SportsController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return SportsResource::collection(Sports::all());
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(SportsStoreRequest $request)
+    {
+        // Access the 'logo' file from the request
+        // if ($request->hasFile('team.logo')) {
+        $img = $request->file('logo'); // Correct way to access the file in an array
+
+        // Get the file's extension
+        $ext = $img->getClientOriginalExtension();
+
+        // Generate a random filename
+        $imageName = Str::random(20) . '.' . $ext;
+
+        // Move the file to the 'image' directory
+        $img->move(public_path('image'), $imageName);
+
+        $response = $request->validated();
+        // Store the URL or path in the database
+        $response['logo'] = asset('image/' . $imageName);
+
+    $sports = Sports::create($response);
+        return SportsResource::make($sports);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Sports $sport)
+    {
+        $sport->load(['position', 'team', 'schedule.firstTeam', 'schedule.secondTeam', 'schedule.winningTeam', 'schedule.sports', 'schedule.gameStatus']);
+        return SportsResource::make($sport);
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(SportsUpdateRequest $request, Sports $sport)
+    {
+        $sport->update($request->validated());
+        return SportsResource::make($sport);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Sports $sport)
+    {
+        $sport->delete();
+        return response()->noContent();
+    }
+}

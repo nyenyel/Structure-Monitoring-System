@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('incidents', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('desc');
+            $table->unsignedBigInteger('lib_incident_status_id');
+            $table->unsignedBigInteger('reported_by_id');
+            $table->foreign('lib_incident_status_id')->references('id')->on('lib_incident_statuses');
+            $table->foreign('reported_by_id')->references('id')->on('users');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('incidents');
+    }
+};
