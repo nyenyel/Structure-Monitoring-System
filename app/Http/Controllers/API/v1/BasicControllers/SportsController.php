@@ -55,7 +55,17 @@ class SportsController extends Controller
      */
     public function show(Sports $sport)
     {
-        $sport->load(['position', 'team', 'schedule.firstTeam', 'schedule.secondTeam', 'schedule.winningTeam', 'schedule.sports', 'schedule.gameStatus']);
+        $relation = [
+            'position', 
+            'team', 
+            'schedule',
+            'schedule.firstTeam', 
+            'schedule.secondTeam', 
+            'schedule.winningTeam', 
+            'schedule.sports', 
+            'schedule.gameStatus'
+        ];
+        $sport->load($relation);
         return SportsResource::make($sport);
     }
 

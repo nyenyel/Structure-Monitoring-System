@@ -19,8 +19,13 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $schedule = Schedule::whereNotNull(['date', 'time'], 'and')->with(['firstTeam', 'secondTeam', 'winningTeam', 'sports', 'gameStatus'])->get();
-        return ScheduleResource::collection($schedule);
+        $schedule = Schedule::whereHas('banner', function ($query) {
+                                $query->where('is_default', true);
+                            })
+                            ->whereNotNull(['date', 'time'], 'and')
+                            ->with(['firstTeam', 'secondTeam', 'winningTeam', 'sports', 'gameStatus'])
+                            ->get();
+            return ScheduleResource::collection($schedule);
     }
 
     public function show(Schedule $schedule)

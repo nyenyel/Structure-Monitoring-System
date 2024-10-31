@@ -18,18 +18,22 @@ return new class extends Migration
             $table->integer('match_no');
             $table->string('match_round');
             $table->string('referee_full_name')->default('');
+            $table->integer('first_team_score')->nullable();
+            $table->integer('second_team_score')->nullable();
             $table->unsignedBigInteger('next_match_id')->nullable();
             $table->unsignedBigInteger('first_team_id')->nullable();
             $table->unsignedBigInteger('second_team_id')->nullable();
             $table->unsignedBigInteger('winner_team_id')->nullable();
             $table->unsignedBigInteger('sports_id');
             $table->unsignedBigInteger('lib_game_statuses_id');
+            $table->unsignedBigInteger('banner')->nullable();
             $table->foreign('next_match_id')->references('id')->on('schedules');
             $table->foreign('first_team_id')->references('id')->on('teams');
             $table->foreign('second_team_id')->references('id')->on('teams');
             $table->foreign('winner_team_id')->references('id')->on('teams');
             $table->foreign('sports_id')->references('id')->on('sports');
             $table->foreign('lib_game_statuses_id')->references('id')->on('lib_game_statuses');
+            $table->foreign('banner')->references('id')->on('banners');
             $table->timestamps();
         });
     }

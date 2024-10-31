@@ -32,6 +32,8 @@ class ScheduleStoreRequest extends FormRequest
             'lib_game_statuses_id' => 'required|integer|exists:lib_game_statuses,id',
             'first_team_id' => 'sometimes|integer|nullable',
             'second_team_id'=> 'sometimes|integer|nullable',
+            'first_team_score' => 'sometimes|integer|nullable',
+            'second_team_score'=> 'sometimes|integer|nullable',
             'winner_team_id'=> 'sometimes|integer|nullable',
             'referee_full_name'=> 'sometimes|string',
         ];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ScheduleResource;
+use App\Models\Others\Banner;
 use App\Models\Sports\Schedule;
 use Exception;
 use Illuminate\Http\Request;
@@ -14,8 +15,11 @@ class BatchScheduleController extends Controller
 {
     public function batchSchedule(Request $request)
     {
+        // return response()->json(['data' => $request->all()]);
         // DB::beginTransaction();
+        $newData = '';
         try {
+            $banner = Banner::where('is_default', true)->first();
             $predictedNumOfMatch = 0;
             $numOfTeams = $request->sports['num_of_teams'];
             
@@ -51,6 +55,7 @@ class BatchScheduleController extends Controller
                 'second_team_id' => null,
                 'winner_team_id' => null,
                 'sports_id' => $request->sports['id'],
+                'banner' => $banner->id,
                 'lib_game_statuses_id' => 1,
                 'referee_full_name' => ''
             ];

@@ -3,6 +3,7 @@
 namespace App\Models\Sports;
 
 use App\Models\Library\LibGameStatus;
+use App\Models\Others\Banner;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,7 +24,10 @@ class Schedule extends Model
         'winner_team_id',
         'sports_id',
         'lib_game_statuses_id',
-        'referee_full_name'
+        'referee_full_name',
+        'first_team_score',
+        'second_team_score',
+        'banner'
     ];
     public function firstTeam(): BelongsTo
     {
@@ -49,5 +53,9 @@ class Schedule extends Model
     public function nextMatch(): BelongsTo
     {
         return $this->belongsTo(Schedule::class, 'next_match_id');
+    }
+    public function banner(): BelongsTo 
+    {
+        return $this->belongsTo(Banner::class, 'banner');
     }
 }

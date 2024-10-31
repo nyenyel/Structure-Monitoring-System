@@ -20,7 +20,10 @@ class Sports extends Model
 
     public function schedule():HasMany
     {
-        return $this->hasMany(Schedule::class,'sports_id');
+        return $this->hasMany(Schedule::class,'sports_id')
+                    ->whereHas('banner', function ($query) {
+                        $query->where('is_default', true);
+                    });
     }
     public function position(): HasMany
     {

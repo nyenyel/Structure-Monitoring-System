@@ -22,6 +22,8 @@ class ScheduleResource extends JsonResource
             'match_round' => $this->match_round,
             'next_match_id' => $this->next_match_id,
             'referee_full_name' => $this->referee_full_name,
+            'first_team_score' => $this->first_team_score,
+            'second_team_score' => $this->second_team_score,
             'sports' => $this->whenLoaded('sports', function () {
             return new SportsResource($this->sports);
             }),
