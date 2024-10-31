@@ -1,0 +1,40 @@
+[28-Oct-2024 11:57:25 America/Boise] PHP Warning:  require(/home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php on line 13
+[28-Oct-2024 11:57:25 America/Boise] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php83/root/usr/share/pear') in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php on line 13
+[28-Oct-2024 11:57:25 America/Boise] PHP Warning:  require(/home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php on line 13
+[28-Oct-2024 11:57:25 America/Boise] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php83/root/usr/share/pear') in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php on line 13
+[28-Oct-2024 11:57:27 America/Boise] PHP Warning:  require(/home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php on line 13
+[28-Oct-2024 11:57:27 America/Boise] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php83/root/usr/share/pear') in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php on line 13
+[28-Oct-2024 11:57:27 America/Boise] PHP Warning:  require(/home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php on line 13
+[28-Oct-2024 11:57:27 America/Boise] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php83/root/usr/share/pear') in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php on line 13
+[28-Oct-2024 11:57:27 America/Boise] PHP Warning:  require(/home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php on line 13
+[28-Oct-2024 11:57:27 America/Boise] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php83/root/usr/share/pear') in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php on line 13
+[28-Oct-2024 11:57:31 America/Boise] PHP Warning:  require(/home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php on line 13
+[28-Oct-2024 11:57:31 America/Boise] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php83/root/usr/share/pear') in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php on line 13
+[28-Oct-2024 11:57:31 America/Boise] PHP Warning:  require(/home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php on line 13
+[28-Oct-2024 11:57:31 America/Boise] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php83/root/usr/share/pear') in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php on line 13
+[28-Oct-2024 11:57:31 America/Boise] PHP Warning:  require(/home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php on line 13
+[28-Oct-2024 11:57:31 America/Boise] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php83/root/usr/share/pear') in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home1/howplzmy/public_html/api.sportstournamentmanagement.com/public/index.php on line 13
