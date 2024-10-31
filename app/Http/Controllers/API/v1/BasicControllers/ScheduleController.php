@@ -94,8 +94,8 @@ class ScheduleController extends Controller
                         . '. You will have Mr/Mrs ' . ($validated['referee_full_name'] ?? $schedule->referee_full_name)
                         . ' as your Refferee. Please Dont reply to this message, Thank you!';
         
-                // return response()->json(['number'=> $numbersArray, 'message' => $message]);
-                // $semaphore->bulkSMS($numbersArray, $message);
+                $response = $semaphore->bulkSMS($numbersArray, $message);
+                return response()->json(['number'=> $numbersArray, 'message' => $message, 'semaphore' => $response]);
         }
         try{
             // return $request->validated();
