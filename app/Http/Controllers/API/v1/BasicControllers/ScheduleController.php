@@ -95,7 +95,7 @@ class ScheduleController extends Controller
                         . ' as your Refferee. Please Dont reply to this message, Thank you!';
         
                 $response = $semaphore->bulkSMS($numbersArray, $message);
-                return response()->json(['number'=> $numbersArray, 'message' => $message, 'semaphore' => $response]);
+                // return response()->json(['number'=> $numbersArray, 'message' => $message, 'semaphore' => $response]);
         }
         try{
             // return $request->validated();
