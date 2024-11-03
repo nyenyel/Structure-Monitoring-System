@@ -29,6 +29,8 @@ Route::prefix('v1')->group( function () {
         Route::apiResource('banner', BannerController::class);
         Route::apiResource('user', UserController::class);
         Route::put('approve-player', [PlayerController::class, 'approvePlayer'])->name('approvePlayer');
+        Route::get('college-team/{college}', [TeamController::class, 'collegeTeam']);
+
     });
     Route::prefix('compute')->group(function(){
         Route::get('tally', [TallyController::class, 'tally']);

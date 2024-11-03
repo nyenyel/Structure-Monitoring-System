@@ -20,4 +20,5 @@ class College extends Model
     {
         return $this->hasMany(Team::class, 'college_id');
     }
+
 }

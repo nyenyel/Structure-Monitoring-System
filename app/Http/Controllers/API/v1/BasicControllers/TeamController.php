@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Store\TeamStoreRequest;
 use App\Http\Requests\Update\TeamUpdateRequest;
 use App\Http\Resources\TeamResource;
+use App\Models\Sports\College;
 use App\Models\Sports\Schedule;
 use App\Models\Sports\Team;
 use App\Models\Users\BasicInformation;
@@ -97,5 +98,12 @@ class TeamController extends Controller
         $team->delete();
         $team->coach->delete();
         return response()->noContent();
+    }
+
+    public function collegeTeam(College $college)
+    {
+        $team = $college->team;
+        $team->load(['sports', 'college', 'award', 'coach.gender', 'player.basicInformation.gender', 'player.position', 'player.status']);
+        return response()->json(['data' => $team]);
     }
 }
