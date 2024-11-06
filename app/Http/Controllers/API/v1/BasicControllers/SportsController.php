@@ -75,6 +75,7 @@ class SportsController extends Controller
      */
     public function update(SportsUpdateRequest $request, Sports $sport)
     {
+        $validated =
         $sport->update($request->validated());
         return SportsResource::make($sport);
     }

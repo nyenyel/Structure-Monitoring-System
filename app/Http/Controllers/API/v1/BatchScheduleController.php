@@ -22,7 +22,6 @@ class BatchScheduleController extends Controller
             $banner = Banner::where('is_default', true)->first();
             $predictedNumOfMatch = 0;
             $numOfTeams = $request->sports['num_of_teams'];
-            
             // Adjusting numOfTeams based on the input
             if ($numOfTeams == 3) {
                 $numOfTeams = 4;
@@ -36,6 +35,7 @@ class BatchScheduleController extends Controller
             $isNotEven = ($request->sports['num_of_teams'] % 2) == 1;
 
             $numberOfRounds = $this->calculateRounds($numOfTeams);
+            
             $tempNextMatchID = [];
             $counter = 1;
             $index = 0;
@@ -44,7 +44,7 @@ class BatchScheduleController extends Controller
             $numOfMatch = 1;
             $temp = 1;
             $teams = $request->team;
-
+            
             $template = [
                 'date' => null,
                 'time' => null,
@@ -59,16 +59,31 @@ class BatchScheduleController extends Controller
                 'lib_game_statuses_id' => 1,
                 'referee_full_name' => ''
             ];
-
+            
             $newData = $template;
-
+            
             $result = ['message' => 'success'];
             $tempData = false;
+            
+            if($predictedNumOfMatch === 1){
+                $newData['first_team_id'] = $teams['team-id-0'];
+                $newData['second_team_id'] = $teams['team-id-1'];
+                $newData['next_match_id'] = null;
+                $newData['match_no'] = $numOfMatch;
+                $newData['match_round'] = "Round " . $numberOfRounds;
+                
+                // Log::info("Creating match entry with first team only", ["newData" => $newData]);
+                $numOfMatch += 1;
+                Schedule::create($newData);
+                return response()->json($result);
+            }
 
             for ($x = $predictedNumOfMatch; $x > 0; $x--) {
                 $countInTwosMain = $counter % 2;
 
                 if ($x <= $numOfTeams / 2) {
+
+                    
                     if ($isNotEven) {
                         $tempData = $x <= ($request->sports['num_of_teams'] / 2) + 0.5;
                     } else {
