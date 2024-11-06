@@ -12,6 +12,7 @@ use App\Http\Controllers\API\v1\BasicControllers\TeamController;
 use App\Http\Controllers\API\v1\BatchScheduleController;
 use App\Http\Controllers\API\v1\TallyController;
 use App\Http\Controllers\API\v1\BasicController\UserController;
+use App\Http\Controllers\API\v1\SearchController;
 use App\Http\Controllers\API\v1\SMSController;
 use App\Http\Resources\UserRegistrationResource;
 use Illuminate\Http\Request;
@@ -30,6 +31,7 @@ Route::prefix('v1')->group( function () {
         Route::apiResource('user', UserController::class);
         Route::put('approve-player', [PlayerController::class, 'approvePlayer'])->name('approvePlayer');
         Route::get('college-team/{college}', [TeamController::class, 'collegeTeam']);
+        Route::put('search', [SearchController::class, 'search']);
 
     });
     Route::prefix('compute')->group(function(){
