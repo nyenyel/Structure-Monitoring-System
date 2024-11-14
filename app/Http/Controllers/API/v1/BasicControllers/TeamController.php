@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Store\TeamStoreRequest;
 use App\Http\Requests\Update\TeamUpdateRequest;
 use App\Http\Resources\TeamResource;
+use App\Models\Others\Banner;
 use App\Models\Sports\College;
 use App\Models\Sports\Schedule;
 use App\Models\Sports\Team;
@@ -21,7 +22,9 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Team::with(['sports', 'college', 'award', 'coach', 'player.basicInformation.gender', 'player.position'])->get();
+        $banner = Banner::where('is_default',  true)->first();
+        $teams = Team::where('banner', $banner->id)->get();
+        $teams->load(['sports', 'college', 'award', 'coach', 'player.basicInformation.gender', 'player.position']);
         return TeamResource::collection($teams);
     }
 
@@ -32,7 +35,7 @@ class TeamController extends Controller
     public function store(TeamStoreRequest $request)
     {
         $validated = $request->validated();
-
+        $banner = Banner::where('is_default', true)->first();
         // Access the 'logo' file from the request
         // if ($request->hasFile('team.logo')) {
         $img = $request->file('team.logo'); // Correct way to access the file in an array
@@ -55,7 +58,7 @@ class TeamController extends Controller
 
         // Add the coach_id to the team data
         $validated['team']['coach_id'] = $basicInformation->id;
-
+        $validated['team']['banner'] = $banner->id;
         // Create a new Team record
         $team = Team::create($validated['team']);
 

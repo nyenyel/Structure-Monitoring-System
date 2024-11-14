@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TeamResource;
+use App\Models\Others\Banner;
 use App\Models\Sports\College;
 use App\Models\Sports\Team;
 use Illuminate\Http\Request;
@@ -12,8 +13,12 @@ class TallyController extends Controller
 {
     public function tally(){
         $data = [];
-        $colleges = College::all();
-        $colleges->load(['team.award']);
+        $banner = Banner::where('is_default', true)->first();
+        
+        $colleges = College::with(['team' => function ($query) use ($banner){
+            $query->where('banner', $banner->id)->with('award');
+        }]);
+        // $colleges->load(['team.award']);
         foreach($colleges as $college){
             $name = $college->title . '('. $college->acronym.')';
             $teams = Team::where('college_id', $college->id)->get();
