@@ -17,7 +17,7 @@ class TallyController extends Controller
         
         $colleges = College::with(['team' => function ($query) use ($banner){
             $query->where('banner', $banner->id)->with('award');
-        }]);
+        }])->get();
         // $colleges->load(['team.award']);
         foreach($colleges as $college){
             $name = $college->title . '('. $college->acronym.')';

@@ -105,7 +105,8 @@ class TeamController extends Controller
 
     public function collegeTeam(College $college)
     {
-        $team = $college->team;
+        $banner = Banner::where('is_default', true)->first();
+        $team = $college->team()->where('banner', $banner->id)->get();
         $team->load(['sports', 'college', 'award', 'coach.gender', 'player.basicInformation.gender', 'player.position', 'player.status']);
         return response()->json(['data' => $team]);
     }
