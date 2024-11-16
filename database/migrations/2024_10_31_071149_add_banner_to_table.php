@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('schedules', function (Blueprint $table) {
-            $table->unsignedBigInteger('banner')->nullable()->after('match_round'); // Specify the correct column to place it after
-            $table->foreign('banner')->references('id')->on('banners');
+            // $table->unsignedBigInteger('banner')->nullable()->after('match_round'); // Specify the correct column to place it after
+            // $table->foreign('banner')->references('id')->on('banners');
         });
     }
 

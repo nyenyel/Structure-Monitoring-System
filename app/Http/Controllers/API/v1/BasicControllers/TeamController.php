@@ -59,6 +59,7 @@ class TeamController extends Controller
         // Add the coach_id to the team data
         $validated['team']['coach_id'] = $basicInformation->id;
         $validated['team']['banner'] = $banner->id;
+
         // Create a new Team record
         $team = Team::create($validated['team']);
 
