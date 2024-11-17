@@ -246,10 +246,11 @@ class BatchScheduleController extends Controller
 
     public function scheduledMatch($sportId){
         try{
-
+            $banner = Banner::where('is_default', true)->first();
             $records = Schedule::whereNotNull(['date','time'], 'and' )
                             ->whereNull(['winner_team_id'])
                             ->where('sports_id', $sportId)
+                            ->where('banner', $banner->id)
                             ->get();
             $records->load(['firstTeam', 'secondTeam', 'winningTeam', 'sports', 'gameStatus']);
 

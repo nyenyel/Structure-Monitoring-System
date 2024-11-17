@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Store\SportsStoreRequest;
 use App\Http\Requests\Update\SportsUpdateRequest;
 use App\Http\Resources\SportsResource;
+use App\Models\Others\Banner;
 use App\Models\Sports\Sports;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -55,9 +56,12 @@ class SportsController extends Controller
      */
     public function show(Sports $sport)
     {
+        $banner = Banner::where('is_default', true)->first();
         $relation = [
             'position', 
-            'team', 
+            'team' => function($query) use ($banner) {
+                $query->where('banner', $banner->id)->get();
+            }, 
             'schedule',
             'schedule.firstTeam', 
             'schedule.secondTeam', 
