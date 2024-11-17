@@ -102,7 +102,7 @@ class ScheduleController extends Controller
             $result = $schedule->update($request->validated());
             if($request->winner_team_id == null){
                 $schedule->load(['firstTeam', 'secondTeam', 'winningTeam', 'sports', 'gameStatus']);
-                // return ScheduleResource::make($schedule);
+                return ScheduleResource::make($schedule);
             } else {
                 if($schedule->nextMatch != null){
                     if($schedule->nextMatch->next_match_id === null){
