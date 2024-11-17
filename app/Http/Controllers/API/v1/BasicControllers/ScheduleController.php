@@ -102,7 +102,7 @@ class ScheduleController extends Controller
             $result = $schedule->update($request->validated());
             if($request->winner_team_id == null){
                 $schedule->load(['firstTeam', 'secondTeam', 'winningTeam', 'sports', 'gameStatus']);
-                return ScheduleResource::make($schedule);
+                // return ScheduleResource::make($schedule);
             } else {
                 if($schedule->nextMatch != null){
                     if($schedule->nextMatch->next_match_id === null){
@@ -149,7 +149,6 @@ class ScheduleController extends Controller
 
                 }
 
-                return response()->json(['message' => 'Data Updated']);
             }
         }catch (Exception $e){
             return response()->json([
@@ -158,6 +157,8 @@ class ScheduleController extends Controller
                 'line' => $e->getLine(), // Include the line number
                 'file' => $e->getFile() // Include the file name for context
             ], 500); // HTTP status code 500 for server errors
+        } finally {
+            return response()->json(['message' => 'Data Updated', 'semaphore' => $response]);
         }
     }
 
