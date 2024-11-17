@@ -21,7 +21,7 @@ class TallyController extends Controller
         // $colleges->load(['team.award']);
         foreach($colleges as $college){
             $name = $college->title . '('. $college->acronym.')';
-            $teams = Team::where('college_id', $college->id)->get();
+            $teams = $college->team;
             $temp = 0;
             $goldCounter = 0;
             $silverCounter = 0;
@@ -53,6 +53,6 @@ class TallyController extends Controller
                 'team' => TeamResource::collection($college->team)
             ];
         }
-        return json_encode( ['data' =>$data]); 
+        return response()->json( ['data' =>$data]); 
     }
 }
