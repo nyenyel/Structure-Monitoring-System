@@ -76,6 +76,9 @@ class BannerController extends Controller
      */
     public function destroy(Banner $banner)
     {
+        $banner->schedule->delete();
+        $banner->teams->player->delete();
+        $banner->teams->delete();
         $banner->delete();
         return json_encode(['message' => 'Deleted Succesfully']);
     }
