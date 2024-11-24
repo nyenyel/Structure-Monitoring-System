@@ -31,6 +31,11 @@ class PlayerStoreRequest extends FormRequest
             'player.position_id' => 'sometimes|integer|exists:lib_positions,id',
             'player.basic_information_id' => 'sometimes|integer',
             'player.lib_player_status_id' => 'required|integer',
+
+            'player.cor' => 'required',
+            'player.med_cert' => 'required',
+            'player.psa' => 'required',
+
             'info.first_name' => 'required|string',
             'info.middle_name' => 'required|string',
             'info.last_name' => 'required|string',

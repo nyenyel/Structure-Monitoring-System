@@ -37,7 +37,7 @@ class PlayerController extends Controller
         
         // $data = $request;
         // $data['player']['lib_player_status_id'] = 1;
-        // return $request;
+        return $request;
         $validated = $request->validated();
         $basicInformation = BasicInformation::create($validated['info']);
         $validated['player']['basic_information_id'] = $basicInformation->id;
