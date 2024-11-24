@@ -57,11 +57,11 @@ class PlayerController extends Controller
             $psaPath = $request->file('player.psa')->storeAs('psa', $psaFileName, 'public'); // Store in 'storage/app/public/psa'
             $validated['player']['psa'] = url("storage/psa/{$psaFileName}"); // Generate custom URL
         }
-        
+
         $basicInformation = BasicInformation::create($validated['info']);
         $validated['player']['basic_information_id'] = $basicInformation->id;
-        return $validated;
-        
+        // return $validated;
+
         $player = Player::create($validated['player']);
         $player->load($this->relationship);
         return new PlayerResource($player);
