@@ -76,10 +76,24 @@ class BannerController extends Controller
      */
     public function destroy(Banner $banner)
     {
-        $banner->schedule->delete();
-        $banner->teams->player->delete();
-        $banner->teams->delete();
+        // Ensure to load related models properly
+        $banner->load('schedule', 'teams.player'); // Adjust relationship to match your model
+        
+        // Delete related players first, then teams, then schedule
+        foreach ($banner->teams as $team) {
+            // Delete related players
+            $team->player()->delete();  // Assumes there's a 'player' relationship on Team
+            $team->delete();
+        }
+        
+        // Delete the schedule
+        $banner->schedule->each(function ($schedule) {
+            $schedule->delete();
+        });
+
+        // Finally delete the banner
         $banner->delete();
-        return json_encode(['message' => 'Deleted Succesfully']);
+
+        return response()->json(['message' => 'Deleted Successfully']);
     }
 }
