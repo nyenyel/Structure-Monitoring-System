@@ -39,22 +39,25 @@ class PlayerController extends Controller
         // $data = $request;
         // $data['player']['lib_player_status_id'] = 1;
 
-        $validated = $request->validated();
         // Store files and get their URLs
         if ($request->hasFile('player.cor')) {
-            $corPath = $request->file('player.cor')->store('cor', 'public');  // Store in 'storage/app/public/cor'
-            $validated['player']['cor'] = Storage::url($corPath);  // Save the URL to the database
+            $corFileName = 'cor_' . time() . '.pdf'; // Custom file name
+            $corPath = $request->file('player.cor')->storeAs('cor', $corFileName, 'public'); // Store in 'storage/app/public/cor'
+            $validated['player']['cor'] = url("storage/cor/{$corFileName}"); // Generate custom URL
         }
 
         if ($request->hasFile('player.med_cert')) {
-            $medCertPath = $request->file('player.med_cert')->store('med_cert', 'public');  // Store in 'storage/app/public/med_cert'
-            $validated['player']['med_cert'] = Storage::url($medCertPath);  // Save the URL to the database
+            $medCertFileName = 'med_cert_' . time() . '.pdf'; // Custom file name
+            $medCertPath = $request->file('player.med_cert')->storeAs('med_cert', $medCertFileName, 'public'); // Store in 'storage/app/public/med_cert'
+            $validated['player']['med_cert'] = url("storage/med_cert/{$medCertFileName}"); // Generate custom URL
         }
 
         if ($request->hasFile('player.psa')) {
-            $psaPath = $request->file('player.psa')->store('psa', 'public');  // Store in 'storage/app/public/psa'
-            $validated['player']['psa'] = Storage::url($psaPath);  // Save the URL to the database
+            $psaFileName = 'psa_' . time() . '.pdf'; // Custom file name
+            $psaPath = $request->file('player.psa')->storeAs('psa', $psaFileName, 'public'); // Store in 'storage/app/public/psa'
+            $validated['player']['psa'] = url("storage/psa/{$psaFileName}"); // Generate custom URL
         }
+        
         $basicInformation = BasicInformation::create($validated['info']);
         $validated['player']['basic_information_id'] = $basicInformation->id;
         return $validated;

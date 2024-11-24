@@ -17,6 +17,9 @@ class PlayerResource extends JsonResource
         return [
             'id'=> $this->id,
             'student_no' => $this->student_no,
+            'cor' => $this->cor,
+            'med_cert' => $this->med_cert,
+            'psa' => $this->psa,
             'team_id'=> new TeamResource($this->whenLoaded('team')),
             'position_id' => new PositionResource($this->whenLoaded('position')),
             'basic_information_id' => new BasicInformationResource($this->whenLoaded('basicInformation')),
