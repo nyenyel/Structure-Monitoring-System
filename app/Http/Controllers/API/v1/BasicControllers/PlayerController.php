@@ -74,6 +74,8 @@ class PlayerController extends Controller
             }
         }
 
+        Log::debug($validated['info']);
+
         $basicInformation = BasicInformation::create($validated['info']);
         $validated['player']['basic_information_id'] = $basicInformation->id;
         // return $validated;
