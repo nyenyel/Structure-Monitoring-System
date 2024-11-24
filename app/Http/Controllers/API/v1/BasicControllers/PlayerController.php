@@ -73,6 +73,8 @@ class PlayerController extends Controller
                 Log::error('Error storing PSA file: ' . $e->getMessage());
             }
         }
+        
+        Log::info("data", $validated['info']);
 
         Log::debug($validated['info']);
 
