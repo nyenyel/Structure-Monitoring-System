@@ -9,6 +9,7 @@ use App\Http\Resources\PlayerResource;
 use App\Models\Users\BasicInformation;
 use App\Models\Users\Player;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class PlayerController extends Controller
@@ -41,21 +42,36 @@ class PlayerController extends Controller
 
         // Store files and get their URLs
         if ($request->hasFile('player.cor')) {
-            $corFileName = 'cor_' . time() . '.pdf'; // Custom file name
-            $corPath = $request->file('player.cor')->storeAs('cor', $corFileName, 'public'); // Store in 'storage/app/public/cor'
-            $validated['player']['cor'] = url("storage/cor/{$corFileName}"); // Generate custom URL
+            try {
+                $corFileName = 'cor_' . time() . '.pdf'; // Custom file name
+                $corPath = $request->file('player.cor')->storeAs('cor', $corFileName, 'public'); // Store in 'storage/app/public/cor'
+                Log::debug("COR file stored at: {$corPath}");
+                $validated['player']['cor'] = url("storage/cor/{$corFileName}"); // Generate custom URL
+            } catch (\Exception $e) {
+                Log::error('Error storing COR file: ' . $e->getMessage());
+            }
         }
-
+        
         if ($request->hasFile('player.med_cert')) {
-            $medCertFileName = 'med_cert_' . time() . '.pdf'; // Custom file name
-            $medCertPath = $request->file('player.med_cert')->storeAs('med_cert', $medCertFileName, 'public'); // Store in 'storage/app/public/med_cert'
-            $validated['player']['med_cert'] = url("storage/med_cert/{$medCertFileName}"); // Generate custom URL
+            try {
+                $medCertFileName = 'med_cert_' . time() . '.pdf'; // Custom file name
+                $medCertPath = $request->file('player.med_cert')->storeAs('med_cert', $medCertFileName, 'public'); // Store in 'storage/app/public/med_cert'
+                Log::debug("Medical Certificate file stored at: {$medCertPath}");
+                $validated['player']['med_cert'] = url("storage/med_cert/{$medCertFileName}"); // Generate custom URL
+            } catch (\Exception $e) {
+                Log::error('Error storing Medical Certificate file: ' . $e->getMessage());
+            }
         }
-
+        
         if ($request->hasFile('player.psa')) {
-            $psaFileName = 'psa_' . time() . '.pdf'; // Custom file name
-            $psaPath = $request->file('player.psa')->storeAs('psa', $psaFileName, 'public'); // Store in 'storage/app/public/psa'
-            $validated['player']['psa'] = url("storage/psa/{$psaFileName}"); // Generate custom URL
+            try {
+                $psaFileName = 'psa_' . time() . '.pdf'; // Custom file name
+                $psaPath = $request->file('player.psa')->storeAs('psa', $psaFileName, 'public'); // Store in 'storage/app/public/psa'
+                Log::debug("PSA file stored at: {$psaPath}");
+                $validated['player']['psa'] = url("storage/psa/{$psaFileName}"); // Generate custom URL
+            } catch (\Exception $e) {
+                Log::error('Error storing PSA file: ' . $e->getMessage());
+            }
         }
 
         $basicInformation = BasicInformation::create($validated['info']);
