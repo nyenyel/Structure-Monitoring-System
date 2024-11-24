@@ -17,6 +17,9 @@ class Player extends Model
     protected $guarded = ['id'];
     protected $fillable = [
         'student_no',
+        'cor',
+        'med_cert',
+        'psa',
         'team_id',
         'position_id',
         'basic_information_id',

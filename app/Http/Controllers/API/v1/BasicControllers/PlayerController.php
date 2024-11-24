@@ -39,7 +39,7 @@ class PlayerController extends Controller
         
         // $data = $request;
         // $data['player']['lib_player_status_id'] = 1;
-
+        $validated =$request->validated();
         // Store files and get their URLs
         if ($request->hasFile('player.cor')) {
             try {
