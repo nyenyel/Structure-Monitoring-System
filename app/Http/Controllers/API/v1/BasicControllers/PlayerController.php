@@ -74,13 +74,10 @@ class PlayerController extends Controller
             }
         }
         
-        Log::info("data", $validated['info']);
-
-        Log::debug($validated['info']);
+        // return $validated;
 
         $basicInformation = BasicInformation::create($validated['info']);
         $validated['player']['basic_information_id'] = $basicInformation->id;
-        // return $validated;
 
         $player = Player::create($validated['player']);
         $player->load($this->relationship);
