@@ -17,7 +17,7 @@ class Banner extends Model
         'year',
         'image',
         'is_default',
-        'deleat',
+        'delete',
     ];
     public function schedule(): HasMany 
     {

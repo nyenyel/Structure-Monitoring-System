@@ -78,6 +78,7 @@ class BannerController extends Controller
     public function destroy(Banner $banner)
     {
         $banner->update(['delete', true]);
+        
 
         return response()->json(['message' => 'Deleted Successfully']);
     }
