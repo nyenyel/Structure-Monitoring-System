@@ -65,6 +65,10 @@ class SportsController extends Controller
             'team' => function($query) use ($banner) {
                 $query->where('banner', $banner->id)->get();
             }, 
+            'team.coach',
+            'team.college',
+            'team.sports',
+            'team.player',
             'schedule',
             'schedule.firstTeam', 
             'schedule.secondTeam', 
