@@ -8,6 +8,7 @@ use App\Http\Requests\Update\SportsUpdateRequest;
 use App\Http\Resources\SportsResource;
 use App\Models\Others\Banner;
 use App\Models\Sports\Sports;
+use Error;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,8 @@ class SportsController extends Controller
      */
     public function index()
     {
-        return SportsResource::collection(Sports::all());
+        $data = Sports::where('delete', false)->get();
+        return SportsResource::collection($data);
     }
 
     /**
@@ -89,7 +91,11 @@ class SportsController extends Controller
      */
     public function destroy(Sports $sport)
     {
-        $sport->delete();
+        try{
+            $sport->delete();
+        } catch (Error $e){
+            $sport->update(['delete' => true]);
+        }
         return response()->noContent();
     }
 }

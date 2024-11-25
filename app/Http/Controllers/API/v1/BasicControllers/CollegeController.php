@@ -7,6 +7,7 @@ use App\Http\Requests\Store\CollegeStoreRequest;
 use App\Http\Requests\Update\CollegeUpdateRequest;
 use App\Http\Resources\CollegeResource;
 use App\Models\Sports\College;
+use Error;
 use Illuminate\Console\View\Components\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -30,7 +31,8 @@ class CollegeController extends Controller
      */
     public function index()
     {
-        return CollegeResource::collection(College::all());
+        $data = College::where('delete', false)->get();
+        return CollegeResource::collection($data);
     }
 
     /**
@@ -84,8 +86,11 @@ class CollegeController extends Controller
      */
     public function destroy(College $college)
     {
-        $college->delete();
-
+        try{
+            $college->delete();
+        } catch(Error $e) {
+            $college->update(['delete' => true]);
+        }
         return response()->noContent();
     }
 }
