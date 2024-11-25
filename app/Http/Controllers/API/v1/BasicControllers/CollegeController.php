@@ -8,6 +8,7 @@ use App\Http\Requests\Update\CollegeUpdateRequest;
 use App\Http\Resources\CollegeResource;
 use App\Models\Sports\College;
 use Error;
+use Exception;
 use Illuminate\Console\View\Components\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -88,7 +89,7 @@ class CollegeController extends Controller
     {
         try{
             $college->delete();
-        } catch(Error $e) {
+        } catch(Exception $e) {
             $college->update(['delete' => true]);
         }
         return response()->noContent();

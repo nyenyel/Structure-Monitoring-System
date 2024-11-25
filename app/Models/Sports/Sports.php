@@ -29,7 +29,7 @@ class Sports extends Model
     }
     public function position(): HasMany
     {
-        return $this->hasMany(LibPosition::class, 'sports_id');
+        return $this->hasMany(LibPosition::class, 'sports_id')->where('delete', false);
     }
     public function team() : HasMany
     {

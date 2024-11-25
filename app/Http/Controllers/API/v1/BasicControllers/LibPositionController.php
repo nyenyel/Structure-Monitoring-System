@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Store\PoistionStoreRequest;
 use App\Http\Resources\PositionResource;
 use App\Models\Library\LibPosition;
+use Exception;
 use Illuminate\Http\Request;
 
 class LibPositionController extends Controller
@@ -56,7 +57,11 @@ class LibPositionController extends Controller
      */
     public function destroy(LibPosition $position)
     {
-        $position->delete();
+        try{
+            $position->delete();
+        } catch(Exception $e) {
+            $position->update(['delete' => true]);
+        }
         return response()->noContent();
     }
 }
