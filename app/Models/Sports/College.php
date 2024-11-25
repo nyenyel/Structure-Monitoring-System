@@ -14,7 +14,8 @@ class College extends Model
     protected $fillable = [
         'title',
         'acronym',
-        'logo'
+        'logo',
+        'delete'
     ];
     public function team(): HasMany
     {

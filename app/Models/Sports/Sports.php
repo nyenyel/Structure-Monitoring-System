@@ -16,6 +16,8 @@ class Sports extends Model
         'title',
         'venue',
         'logo',
+        'delete'
+
     ];
 
     public function schedule():HasMany

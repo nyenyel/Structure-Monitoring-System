@@ -27,7 +27,9 @@ class Schedule extends Model
         'referee_full_name',
         'first_team_score',
         'second_team_score',
-        'banner'
+        'banner',
+        'reason'
+
     ];
     public function firstTeam(): BelongsTo
     {

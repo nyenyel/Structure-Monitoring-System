@@ -15,7 +15,8 @@ class LibPosition extends Model
     protected $guarded = ['id'];
     protected $fillable = [
         'desc',
-        'sports_id'
+        'sports_id',
+        'delete'
     ];
     public function player(): HasMany
     {

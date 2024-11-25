@@ -36,6 +36,7 @@ class ScheduleStoreRequest extends FormRequest
             'second_team_score'=> 'sometimes|integer|nullable',
             'winner_team_id'=> 'sometimes|integer|nullable',
             'referee_full_name'=> 'sometimes|string',
+            'reason'=> 'sometimes|string',
         ];
     }
 }
