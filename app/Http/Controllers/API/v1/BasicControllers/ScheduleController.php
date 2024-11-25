@@ -69,7 +69,7 @@ class ScheduleController extends Controller
                     }
                 }
             }
-            
+
             if($schedule->secondTeam){
                 // Loop through second team's players and collect phone numbers
                 foreach ($schedule->secondTeam->player as $player) {
@@ -85,10 +85,11 @@ class ScheduleController extends Controller
             
             // If you want to convert the collection to an array, you can do so
             $numbersArray = $numbers->toArray();
-    
+            $firstTeamTitle = $schedule->firstTeam->title ?? 'NO OPONENT';
+            $secondTeamTitle = $schedule->secondTeam->title ?? '';
             $message = 'Testing: Your scheduled fight ' 
-                    . $schedule->firstTeam->title 
-                    . ' vs ' . $schedule->secondTeam->title . ' is now set on '
+                    . $firstTeamTitle
+                    . ' vs ' . $secondTeamTitle . ' is now set on '
                     .  $validated['date'] . ' at ' . $validated['time'] 
                     . '. You will have Mr/Mrs ' . ($validated['referee_full_name'] ?? $schedule->referee_full_name)
                     . ' as your Refferee. Please Dont reply to this message, Thank you!';
