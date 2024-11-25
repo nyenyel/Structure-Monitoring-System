@@ -9,6 +9,7 @@ use App\Http\Resources\SportsResource;
 use App\Models\Others\Banner;
 use App\Models\Sports\Sports;
 use Error;
+use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -93,7 +94,7 @@ class SportsController extends Controller
     {
         try{
             $sport->delete();
-        } catch (Error $e){
+        } catch (Exception $e){
             $sport->update(['delete' => true]);
         }
         return response()->noContent();
