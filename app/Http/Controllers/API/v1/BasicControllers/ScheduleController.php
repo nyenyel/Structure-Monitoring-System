@@ -86,7 +86,7 @@ class ScheduleController extends Controller
             // If you want to convert the collection to an array, you can do so
             $numbersArray = $numbers->toArray();
             $firstTeamTitle = $schedule->firstTeam->title ?? 'NO OPONENT';
-            $secondTeamTitle = $schedule->secondTeam->title ?? '';
+            $secondTeamTitle = $schedule->secondTeam->title ?? 'NO OPONENT';
             $message = 'Testing: Your scheduled fight ' 
                     . $firstTeamTitle
                     . ' vs ' . $secondTeamTitle . ' is now set on '
