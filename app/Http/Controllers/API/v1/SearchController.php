@@ -30,13 +30,17 @@ class SearchController extends Controller
         $teamID = strtolower($validated['team_id']);
 
         if($validated['type'] === 'College'){
-            $data = College::whereRaw('LOWER(acronym) LIKE ?', ["%{$term}%"])
-            ->orWhereRaw('LOWER(title) LIKE ?', ["%{$term}%"])
+            $data = College::where(function ($query) use ($term) {
+                $query->whereRaw('LOWER(acronym) LIKE ?', ["%{$term}%"])
+                      ->orWhereRaw('LOWER(title) LIKE ?', ["%{$term}%"]);
+            })
             ->where('delete', false)
             ->get();
         } else if($validated['type'] === 'Sport'){
-            $data = Sports::whereRaw('LOWER(venue) LIKE ?', ["%{$term}%"])
-            ->orWhereRaw('LOWER(title) LIKE ?', ["%{$term}%"])
+            $data = Sports::where(function ($query) use ($term) {
+                $query->whereRaw('LOWER(venue) LIKE ?', ["%{$term}%"])
+                      ->orWhereRaw('LOWER(title) LIKE ?', ["%{$term}%"]);
+            })
             ->where('delete', false)
             ->get();
         } else if($validated['type'] === 'team'){
