@@ -55,14 +55,21 @@ class ScheduleController extends Controller
             $semaphore = new SemaphoreService();
             // Collect the coach phone numbers
             $coachNumbers = collect([
-                $schedule->firstTeam->coach->phone_no,
+                $schedule->firstTeam->coach->phone_no ?? '09219298620',
                 $schedule->secondTeam->coach->phone_no ?? '09219298620',
             ]);
-
+    
             $playerNumbers = collect();
     
+            // Loop through first team's players and collect phone numbers
+            foreach ($schedule->firstTeam?->player as $player) {
+                if (isset($player->basicInformation)) {
+                    $playerNumbers->push($player->basicInformation->phone_no);
+                }
+            }
+            
             // Loop through second team's players and collect phone numbers
-            foreach ($schedule->secondTeam->player as $player) {
+            foreach ($schedule->secondTeam?->player as $player) {
                 if (isset($player->basicInformation)) {
                     $playerNumbers->push($player->basicInformation->phone_no);
                 }
