@@ -18,6 +18,7 @@ class ScheduleResource extends JsonResource
             'id' => $this->id,
             'date' => $this->date,
             'time' => $this->time,
+            'reason' => $this->reason,
             'match_no' => $this->match_no,
             'match_round' => $this->match_round,
             'next_match_id' => $this->next_match_id,
