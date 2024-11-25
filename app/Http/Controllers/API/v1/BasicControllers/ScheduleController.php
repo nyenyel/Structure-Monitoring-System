@@ -62,18 +62,23 @@ class ScheduleController extends Controller
             $playerNumbers = collect();
     
             // Loop through first team's players and collect phone numbers
-            foreach ($schedule->firstTeam?->player as $player) {
-                if (isset($player->basicInformation)) {
-                    $playerNumbers->push($player->basicInformation->phone_no);
+            if($schedule->firstTeam){
+                foreach ($schedule->firstTeam->player as $player) {
+                    if (isset($player->basicInformation)) {
+                        $playerNumbers->push($player->basicInformation->phone_no);
+                    }
                 }
             }
             
-            // Loop through second team's players and collect phone numbers
-            foreach ($schedule->secondTeam?->player as $player) {
-                if (isset($player->basicInformation)) {
-                    $playerNumbers->push($player->basicInformation->phone_no);
+            if($schedule->secondTeam){
+                // Loop through second team's players and collect phone numbers
+                foreach ($schedule->secondTeam->player as $player) {
+                    if (isset($player->basicInformation)) {
+                        $playerNumbers->push($player->basicInformation->phone_no);
+                    }
                 }
             }
+            
             
             // Combine both coach and player numbers
             $numbers = $coachNumbers->merge($playerNumbers);
