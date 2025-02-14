@@ -20,6 +20,8 @@ class Player extends Model
         'cor',
         'med_cert',
         'psa',
+        'age',
+        'scua',
         'team_id',
         'position_id',
         'basic_information_id',
