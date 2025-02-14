@@ -80,7 +80,8 @@ class PlayerController extends Controller
 
             $basicInformation = BasicInformation::create($validated['info']);
             $validated['player']['basic_information_id'] = $basicInformation->id;
-
+            $validated['player']['scua'] = $validated['player']['scua'] === "true" ? true:false;
+            
             $player = Player::create($validated['player']);
             $player->load($this->relationship);
             return new PlayerResource($player);
