@@ -8,9 +8,11 @@ use App\Http\Requests\Update\PlayerUpdateRequest;
 use App\Http\Resources\PlayerResource;
 use App\Models\Users\BasicInformation;
 use App\Models\Users\Player;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use League\CommonMark\Exception\IOException;
 
 class PlayerController extends Controller
 {
@@ -36,7 +38,7 @@ class PlayerController extends Controller
      */
     public function store(PlayerStoreRequest $request)
     {
-        
+        try{
         // $data = $request;
         // $data['player']['lib_player_status_id'] = 1;
         $validated =$request->validated();
@@ -82,6 +84,10 @@ class PlayerController extends Controller
         $player = Player::create($validated['player']);
         $player->load($this->relationship);
         return new PlayerResource($player);
+        
+        } catch (IOException $e){
+            Log::error($e);
+        }
     }
 
     /**
