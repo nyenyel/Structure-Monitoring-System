@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $data = User::all();
-        $data->load(['basicInformation', 'role']);
+        $data->load(['basicInformation', 'role', 'college']);
         return UserRegistrationResource::collection($data);
     }
 
