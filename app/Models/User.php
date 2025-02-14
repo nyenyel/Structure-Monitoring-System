@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Library\LibRole;
+use App\Models\Sports\College;
 use App\Models\Sports\Incident;
 use App\Models\Users\BasicInformation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -66,5 +67,9 @@ class User extends Authenticatable
     public function role () : BelongsTo
     {
         return $this->belongsTo(LibRole::class, 'lib_role_id');
+    }
+    public function college () : BelongsTo
+    {
+        return $this->belongsTo(College::class, 'college_id');
     }
 }

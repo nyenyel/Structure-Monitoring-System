@@ -21,6 +21,7 @@ class UserRegistrationResource extends JsonResource
             // 'token' => $this->token,
             'role' => new LibraryResource($this->whenLoaded('role')),
             'basic_information' => new BasicInformationResource($this->whenLoaded('basicInformation')),
+            'college' => new CollegeResource($this->whenLoaded('college')),
             'incident'=> IncidentResource::collection($this->whenLoaded('incident')),
         ];
     }

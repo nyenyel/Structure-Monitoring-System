@@ -35,7 +35,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->load(['role', 'basicInformation.gender']);
+        $user->load(['role', 'basicInformation.gender', 'college']);
         return UserRegistrationResource::make($user);
     }
 
