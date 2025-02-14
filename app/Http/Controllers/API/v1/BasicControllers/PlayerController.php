@@ -38,7 +38,6 @@ class PlayerController extends Controller
      */
     public function store(PlayerStoreRequest $request)
     {
-        try{
         // $data = $request;
         // $data['player']['lib_player_status_id'] = 1;
         $validated =$request->validated();
@@ -77,16 +76,17 @@ class PlayerController extends Controller
         }
         
         // return $validated;
+        try{
 
-        $basicInformation = BasicInformation::create($validated['info']);
-        $validated['player']['basic_information_id'] = $basicInformation->id;
+            $basicInformation = BasicInformation::create($validated['info']);
+            $validated['player']['basic_information_id'] = $basicInformation->id;
 
-        $player = Player::create($validated['player']);
-        $player->load($this->relationship);
-        return new PlayerResource($player);
+            $player = Player::create($validated['player']);
+            $player->load($this->relationship);
+            return new PlayerResource($player);
         
         } catch (IOException $e){
-            Log::error($e);
+            Log::error("error: ". $e);
         }
     }
 
