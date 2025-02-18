@@ -51,6 +51,6 @@ Route::prefix('auth')->group(function (){
 
 Route::get('/user', function (Request $request) {
     $data = $request->user();
-    $data->load('basicInformation.gender', 'role' );
+    $data->load('basicInformation.gender', 'role' ,'college');
     return UserRegistrationResource::make($data);
 })->middleware('auth:sanctum');
