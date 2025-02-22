@@ -18,6 +18,8 @@ class TeamResource extends JsonResource
             'id'=> $this->id,
             'title'=> $this->title,
             'logo'=> $this->logo,
+            'age'=> $this->age,
+            'scua'=> $this->scua,
             'sports_id'=> new SportsResource($this->whenLoaded('sports')),
             'college_id'=> new CollegeResource($this->whenLoaded('college')),
             'lib_award_id'=>new LibraryResource($this->whenLoaded('award')),
