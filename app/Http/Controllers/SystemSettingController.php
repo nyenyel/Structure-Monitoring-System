@@ -21,7 +21,10 @@ class SystemSettingController extends Controller
      */
     public function update(Request $request, SystemSetting $system)
     {
-        $new = $system->update($request->validated());
+        $new = $system->update($request->validated([
+            'irr' => 'string',
+            'deadline' => 'date',
+        ]));
         return response()->json($new);
     }
 
