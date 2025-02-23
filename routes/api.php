@@ -14,6 +14,7 @@ use App\Http\Controllers\API\v1\TallyController;
 use App\Http\Controllers\API\v1\BasicController\UserController;
 use App\Http\Controllers\API\v1\SearchController;
 use App\Http\Controllers\API\v1\SMSController;
+use App\Http\Controllers\SystemSettingController;
 use App\Http\Resources\UserRegistrationResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +30,8 @@ Route::prefix('v1')->group( function () {
         Route::apiResource('schedule', ScheduleController::class);
         Route::apiResource('banner', BannerController::class);
         Route::apiResource('user', UserController::class);
-        Route::put('approve-player', [PlayerController::class, 'approvePlayer'])->name('approvePlayer');
+        Route::apiResource('system', SystemSettingController::class);
+        Route::put('approve-player', action: [PlayerController::class, 'approvePlayer'])->name('approvePlayer');
         Route::get('college-team/{college}', [TeamController::class, 'collegeTeam']);
         Route::put('search', [SearchController::class, 'search']);
 
@@ -52,5 +54,5 @@ Route::prefix('auth')->group(function (){
 Route::get('/user', function (Request $request) {
     $data = $request->user();
     $data->load('basicInformation.gender', 'role' ,'college');
-    return UserRegistrationResource::make($data);
+    return UserRegistrationResource::make(parameters: $data);
 })->middleware('auth:sanctum');
