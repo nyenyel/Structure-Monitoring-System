@@ -23,7 +23,15 @@ class ScheduleController extends Controller
                                 $query->where('is_default', true);
                             })
                             ->whereNotNull(['date', 'time'], 'and')
-                            ->with(['firstTeam', 'secondTeam', 'winningTeam', 'sports', 'gameStatus'])
+                            ->with([
+                                'firstTeam.player.basicInformation.gender',
+                                'firstTeam.player.position',
+                                'secondTeam.player.basicInformation.gender',
+                                'secondTeam.player.position',
+                                'winningTeam.player',
+                                'sports',
+                                'gameStatus'
+                            ])
                             ->get();
             return ScheduleResource::collection($schedule);
     }
