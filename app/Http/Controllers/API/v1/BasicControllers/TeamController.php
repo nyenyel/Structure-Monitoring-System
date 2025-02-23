@@ -73,7 +73,7 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
-        $team->load(['sports', 'college', 'award', 'coach.gender', 'player.basicInformation.gender', 'player.position', 'player.status']);
+        $team->load(['sports', 'college', 'award', 'coach.gender', 'player.basicInformation.gender', 'player.position.sports', 'player.status']);
         return TeamResource::make($team);
     }
 
