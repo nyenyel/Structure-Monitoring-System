@@ -27,6 +27,7 @@ class RegisterRequest extends FormRequest
                 'user.lib_role_id' => 'sometimes|integer|exists:lib_roles,id',
                 'user.password' => 'required|min:8|max:16',
                 'user.college_id' => 'nullable',
+                'user.team_id' => 'nullable',
                 'info.first_name' => 'required|string',
                 'info.middle_name' => 'required|string',
                 'info.last_name' => 'required|string',

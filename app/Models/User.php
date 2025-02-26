@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Models\Library\LibRole;
 use App\Models\Sports\College;
 use App\Models\Sports\Incident;
+use App\Models\Sports\Team;
 use App\Models\Users\BasicInformation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -30,6 +31,7 @@ class User extends Authenticatable
         'lib_role_id',
         'college_id',
         'email',
+        'team_id',
         'password',
     ];
 
@@ -71,5 +73,9 @@ class User extends Authenticatable
     public function college () : BelongsTo
     {
         return $this->belongsTo(College::class, 'college_id');
+    }
+    public function team () : BelongsTo
+    {
+        return $this->belongsTo(Team::class, 'team_id');
     }
 }

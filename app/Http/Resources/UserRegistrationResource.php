@@ -19,6 +19,7 @@ class UserRegistrationResource extends JsonResource
             'id' => $this->id,
             'email' => $this->email,
             // 'token' => $this->token,
+            'team' => new TeamResource($this->whenLoaded('team')),
             'role' => new LibraryResource($this->whenLoaded('role')),
             'basic_information' => new BasicInformationResource($this->whenLoaded('basicInformation')),
             'college' => new CollegeResource($this->whenLoaded('college')),
