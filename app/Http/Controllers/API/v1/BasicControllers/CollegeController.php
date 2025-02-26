@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Store\CollegeStoreRequest;
 use App\Http\Requests\Update\CollegeUpdateRequest;
 use App\Http\Resources\CollegeResource;
+use App\Models\Others\Banner;
 use App\Models\Sports\College;
 use Error;
 use Exception;
@@ -67,8 +68,9 @@ class CollegeController extends Controller
      */
     public function show(College $college)
     {
-        //
-        return CollegeResource::make($college->load('team'));
+        $banner = Banner::where('is_default',  true)->first();
+        
+        return CollegeResource::make($college->load(['team' => function ($q) use ($banner) {$q->where('id', $banner->id);}]));
 
     }
 
