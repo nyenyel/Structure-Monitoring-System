@@ -19,7 +19,7 @@ class CollegeResource extends JsonResource
             'title' => $this->title,
             'acronym' => $this->acronym,
             'logo' => $this->logo,
-            'college' => CollegeResource::collection($this->whenLoaded('team'))
+            'team' => TeamResource::collection($this->whenLoaded('team'))
         ];
     }
 }
