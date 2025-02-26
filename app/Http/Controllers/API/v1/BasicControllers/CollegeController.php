@@ -33,7 +33,7 @@ class CollegeController extends Controller
     public function index()
     {
         $data = College::where('delete', false)->get();
-        return CollegeResource::collection($data);
+        return CollegeResource::collection(resource: $data);
     }
 
     /**
@@ -68,7 +68,7 @@ class CollegeController extends Controller
     public function show(College $college)
     {
         //
-        return CollegeResource::make($college);
+        return CollegeResource::make($college->load('team'));
 
     }
 
