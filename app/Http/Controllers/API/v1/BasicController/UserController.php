@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $data = User::all();
-        $data->load(['basicInformation', 'role', 'college']);
+        $data->load(['basicInformation', 'role', 'college', 'team']);
         return UserRegistrationResource::collection($data);
     }
 
@@ -35,7 +35,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->load(['role', 'basicInformation.gender', 'college']);
+        $user->load(['role', 'basicInformation.gender', 'college', 'team']);
         return UserRegistrationResource::make($user);
     }
 
