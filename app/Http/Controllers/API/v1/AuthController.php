@@ -30,6 +30,7 @@ class AuthController extends Controller
             $validated['user']['basic_information_id'] = $basicInformation->id;
 
             $validated['user']['college_id'] = !in_array($validated['user']['lib_role_id'], [4, 5]) ? null : $validated['user']['college_id'];
+            $validated['user']['team_id'] = !in_array($validated['user']['lib_role_id'], [5]) ? null : $validated['user']['team_id'];
 
             $user = User::create($validated['user']);
             $token = $user->createToken('auth_token')->plainTextToken;
