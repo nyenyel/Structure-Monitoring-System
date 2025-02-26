@@ -70,7 +70,11 @@ class CollegeController extends Controller
     {
         $banner = Banner::where('is_default',  true)->first();
         
-        return CollegeResource::make($college->load(['team' => function ($q) use ($banner) {$q->where('banner_id', $banner->id);}]));
+        return CollegeResource::make($college->load([
+            'team' => function ($q) use ($banner) {
+                $q->where('banner', $banner->id);
+            }
+        ]));
 
     }
 
