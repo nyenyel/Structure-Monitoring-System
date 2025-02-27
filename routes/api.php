@@ -16,6 +16,7 @@ use App\Http\Controllers\API\v1\SearchController;
 use App\Http\Controllers\API\v1\SMSController;
 use App\Http\Controllers\SystemSettingController;
 use App\Http\Resources\UserRegistrationResource;
+use App\Models\Others\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -48,11 +49,13 @@ Route::prefix('auth')->group(function (){
     Route::post('register', [AuthController::class, 'register']);
     Route::get('user', [AuthController::class, 'user']);
     Route::post('login', [AuthController::class, 'login'])->name('login');
-    Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+    Route::post( 'logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 });
 
 Route::get('/user', function (Request $request) {
     $data = $request->user();
     $data->load('basicInformation.gender', 'role' ,'college.team.sports', 'team');
+    $banner = Banner::where('is_default', true)->first();
+    $data->team = $data->team->filter(fn($team) => $team->banner == $banner->id);
     return UserRegistrationResource::make($data);
 })->middleware('auth:sanctum');
