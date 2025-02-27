@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\SystemSetting;
+use App\Models\User;
+use App\Services\SemaphoreService;
 use Illuminate\Http\Request;
 
 class SystemSettingController extends Controller
@@ -21,12 +23,19 @@ class SystemSettingController extends Controller
      */
     public function update(Request $request, SystemSetting $system)
     {
+        $semaphore = new SemaphoreService();
         $valdated = $request->validate([
             'irr' => 'string',
             'deadline' => 'date',
         ]);
+        $user = User::with('basicInformation')
+                    ->get()
+                    ->pluck('basicInformation.phone_no')
+                    ->toArray();
         $new = $system->update($valdated);
-        return response()->json($new);
+        $message = $valdated;
+        // $response = $semaphore->bulkSMS([], $message);
+        return response()->json($user);
     }
 
 }
