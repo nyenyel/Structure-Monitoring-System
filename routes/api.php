@@ -54,8 +54,13 @@ Route::prefix('auth')->group(function (){
 
 Route::get('/user', function (Request $request) {
     $data = $request->user();
-    $data->load('basicInformation.gender', 'role' ,'college.team.sports', 'team');
-    $banner = Banner::where('is_default', true)->first();
-    $data->team = $data->team->filter(fn($team) => $team->banner == $banner->id);
+    $banner = Banner::where('is_default', true)->value('id');
+    $data->load([
+        'basicInformation.gender', 
+        'role' ,
+        'college.team' => fn($q) => $q->where('banner', $banner),
+        'college.team.sports',
+        'team'
+    ]);
     return UserRegistrationResource::make($data);
 })->middleware('auth:sanctum');
