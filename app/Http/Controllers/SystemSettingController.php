@@ -36,7 +36,7 @@ class SystemSettingController extends Controller
         $irr = `The updated IRR is: ` . $valdated['irr'];
         $deadline = `The updated Deadline is: ` . $valdated['deadline'];
 
-        $message = $valdated['irr'] == null;
+        $message = $irr . " ----------- " . $deadline;
         // $response = $semaphore->bulkSMS([], $message);
         return response()->json([$user, $message]);
     }
