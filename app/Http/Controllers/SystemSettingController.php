@@ -33,9 +33,12 @@ class SystemSettingController extends Controller
                     ->pluck('basicInformation.phone_no')
                     ->toArray();
         $new = $system->update($valdated);
-        $message = $valdated;
+        $irr = `The updated IRR is: ` . $valdated['irr'];
+        $deadline = `The updated Deadline is: ` . $valdated['deadline'];
+
+        $message = $valdated['irr'] == null;
         // $response = $semaphore->bulkSMS([], $message);
-        return response()->json($user);
+        return response()->json([$user, $message]);
     }
 
 }
