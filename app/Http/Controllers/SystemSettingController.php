@@ -33,8 +33,9 @@ class SystemSettingController extends Controller
                     ->pluck('basicInformation.phone_no')
                     ->toArray();
         $new = $system->update($valdated);
-        $irr = `The updated IRR is: ` . $valdated['irr'];
-        $deadline = `The updated Deadline is: ` . $valdated['deadline'];
+
+        $irr = "The updated IRR is: " . $valdated['irr'];
+        $deadline = "The updated Deadline is: " . $valdated['deadline'];
 
         $message = $irr . " ----------- " . $deadline;
         // $response = $semaphore->bulkSMS([], $message);
