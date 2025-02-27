@@ -68,6 +68,7 @@ class SportsController extends Controller
             'team.coach',
             'team.college',
             'team.sports',
+            'team.award',
             'team.player',
             'schedule',
             'schedule.firstTeam', 
