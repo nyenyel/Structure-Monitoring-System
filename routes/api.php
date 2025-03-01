@@ -38,7 +38,7 @@ Route::prefix('v1')->group( function () {
         Route::put('search', [SearchController::class, 'search']);
 
         Route::post('add-checklist', [ChecklistController::class, 'addToChecklist']);
-        Route::get('get-checklist', [ChecklistController::class, 'getChecklist']);
+        Route::get('get-checklist', [ChecklistController::class, 'getChecklist'])->middleware('auth:sanctum');
         Route::delete('remove-checklist/{checklist}', [ChecklistController::class, 'removeChecklist']);
 
     });
