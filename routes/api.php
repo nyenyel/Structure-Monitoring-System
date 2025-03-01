@@ -14,6 +14,7 @@ use App\Http\Controllers\API\v1\TallyController;
 use App\Http\Controllers\API\v1\BasicController\UserController;
 use App\Http\Controllers\API\v1\SearchController;
 use App\Http\Controllers\API\v1\SMSController;
+use App\Http\Controllers\ChecklistController;
 use App\Http\Controllers\SystemSettingController;
 use App\Http\Resources\UserRegistrationResource;
 use App\Models\Others\Banner;
@@ -35,6 +36,10 @@ Route::prefix('v1')->group( function () {
         Route::put('approve-player', action: [PlayerController::class, 'approvePlayer'])->name('approvePlayer');
         Route::get('college-team/{college}', [TeamController::class, 'collegeTeam']);
         Route::put('search', [SearchController::class, 'search']);
+
+        Route::post('add-checklist', [ChecklistController::class, 'addToChecklist']);
+        Route::get('getChecklist', [ChecklistController::class, 'search']);
+        Route::delete('removeChecklist/{checklist}', [ChecklistController::class, 'removeChecklist']);
 
     });
     Route::prefix('compute')->group(function(){
