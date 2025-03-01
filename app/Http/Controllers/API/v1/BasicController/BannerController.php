@@ -52,7 +52,7 @@ class BannerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Banner $banner)
+    public function show(Banner $banner): BannerResource
     {
         $data = Banner::where('is_default', 1)->first();
         return BannerResource::make($data);

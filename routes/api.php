@@ -38,8 +38,8 @@ Route::prefix('v1')->group( function () {
         Route::put('search', [SearchController::class, 'search']);
 
         Route::post('add-checklist', [ChecklistController::class, 'addToChecklist']);
-        Route::get('getChecklist', [ChecklistController::class, 'search']);
-        Route::delete('removeChecklist/{checklist}', [ChecklistController::class, 'removeChecklist']);
+        Route::get('get-checklist', [ChecklistController::class, 'search']);
+        Route::delete('remove-checklist/{checklist}', [ChecklistController::class, 'removeChecklist']);
 
     });
     Route::prefix('compute')->group(function(){

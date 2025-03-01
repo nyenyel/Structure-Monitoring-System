@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sport_id');
             $table->unsignedBigInteger('college_id');
             $table->foreign('banner_id')->references('id')->on('banners');
-            $table->foreign('college_id')->references('id')->on('coleges');
+            $table->foreign('college_id')->references('id')->on('colleges');
             $table->foreign('sport_id')->references('id')->on('sports');
             $table->timestamps();
         });
