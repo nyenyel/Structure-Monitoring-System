@@ -29,9 +29,10 @@ class ChecklistController extends Controller
     public function getChecklist() {
         $banner = Banner::where('is_default', true)->value('id');
         $user = Auth::user();
-        $college = $user->college->value('id');
+        $college = $user->college;
 
-        $checklist = Checklist::where('banner_id', $banner)->where('college_id', $college)->get(); 
+        $checklist = Checklist::where('banner_id', $banner)->where('college_id', $college->id)->get(); 
+        $checklist->load(['college', 'sport', 'banner']);
         return response()->json($checklist);
     }
 
