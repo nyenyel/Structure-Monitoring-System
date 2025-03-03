@@ -29,6 +29,8 @@ class PlayerStoreRequest extends FormRequest
             'player.student_no' => 'required|numeric',
             'player.age' => 'required|integer',
             'player.scua' => 'required',
+            'player.parent_sign' => 'required',
+            'player.image' => 'required',
             'player.team_id' => 'sometimes|integer|exists:teams,id',
             'player.position_id' => 'sometimes|integer|exists:lib_positions,id',
             'player.basic_information_id' => 'sometimes|integer',

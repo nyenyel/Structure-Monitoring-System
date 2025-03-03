@@ -12,6 +12,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use League\CommonMark\Exception\IOException;
 
 class PlayerController extends Controller
@@ -38,9 +39,24 @@ class PlayerController extends Controller
      */
     public function store(PlayerStoreRequest $request)
     {
+        $validated =$request->validated();
+
+        $playerImg = $request->file('player.image'); // Correct way to access the file in an array
+        $playerExt = $playerImg->getClientOriginalExtension();
+        $playerImageName = Str::random(20) . '.' . $playerExt;
+        $playerImg->move(public_path('image'), $playerImageName);
+
+        $validated['player']['image'] = asset('image/' . $playerImageName);
+
+        $parentSignImg = $request->file('player.parent_sign'); // Correct way to access the file in an array
+        $parentSignExt = $playerImg->getClientOriginalExtension();
+        $parentSignName = Str::random(20) . '.' . $parentSignExt;
+        $parentSignImg->move(public_path('image'), $parentSignName);
+
+        $validated['player']['parent_sign']= asset('image/' . $parentSignName);
+
         // $data = $request;
         // $data['player']['lib_player_status_id'] = 1;
-        $validated =$request->validated();
         // Store files and get their URLs
         if ($request->hasFile('player.cor')) {
             try {
