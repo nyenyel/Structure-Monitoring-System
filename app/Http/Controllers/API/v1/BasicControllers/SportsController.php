@@ -109,7 +109,12 @@ class SportsController extends Controller
     public function getPlayersFromSport(Sports $sport)
     {
         $banner = Banner::where('is_default', true)->value('id');
-        $player = $sport->load(['team.player.basicInformation'])
+        $player = $sport->load(
+                        [
+                            'team.player.basicInformation' ,
+                            'team.player.postion' , 
+                            'team.player.team'
+                        ])
                         ->team->where('banner', $banner)
                         ->flatMap->player;
         return response()->json($player);
