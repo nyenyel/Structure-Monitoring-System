@@ -111,11 +111,10 @@ class SportsController extends Controller
         $banner = Banner::where('is_default', true)->value('id');
         $player = $sport->load(
                         [
-                            'team.player.basicInformation' ,
+                            'team.player.basicInformation.gender' ,
                             'team.player.position' , 
                             'team.player.team',
                             'team.player.status',
-                            'team.player.gender',
                         ])
                         ->team->where('banner', $banner)
                         ->flatMap->player;
