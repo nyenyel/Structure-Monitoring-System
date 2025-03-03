@@ -113,7 +113,8 @@ class SportsController extends Controller
                         [
                             'team.player.basicInformation' ,
                             'team.player.position' , 
-                            'team.player.team'
+                            'team.player.team',
+                            'team.player.status',
                         ])
                         ->team->where('banner', $banner)
                         ->flatMap->player;
