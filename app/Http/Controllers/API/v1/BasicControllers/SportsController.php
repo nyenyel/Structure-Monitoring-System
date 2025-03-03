@@ -105,4 +105,10 @@ class SportsController extends Controller
         }
         return response()->noContent();
     }
+
+    public function getPlayersFromSport(Sports $sport)
+    {
+        $player = $sport->load(['team.player.basicInformation'])->team->flatMap->player;
+        return response()->json($player);
+    }
 }
