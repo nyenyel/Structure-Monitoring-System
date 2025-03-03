@@ -112,11 +112,12 @@ class SportsController extends Controller
         $player = $sport->load(
                         [
                             'team.player.basicInformation' ,
-                            'team.player.postion' , 
+                            'team.player.position' , 
                             'team.player.team'
                         ])
                         ->team->where('banner', $banner)
                         ->flatMap->player;
+
         return response()->json($player);
     }
 }
