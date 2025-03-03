@@ -113,7 +113,7 @@ class SportsController extends Controller
                         [
                             'team.player.basicInformation.gender' ,
                             'team.player.position' , 
-                            'team.player.team',
+                            'team.player.team.college',
                             'team.player.status',
                         ])
                         ->team->where('banner', $banner)
