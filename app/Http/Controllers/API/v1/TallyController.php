@@ -40,6 +40,7 @@ class TallyController extends Controller
                         $temp += 3;
                         $goldCounter += $team->player->count();
                     }
+                    $temp *= $team->player->count();
                 }
             }
             $data[] = [
