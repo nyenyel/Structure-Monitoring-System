@@ -42,6 +42,11 @@ class Team extends Model
         return $this->belongsTo(BasicInformation::class, 'coach_id');
     }
 
+    public function secCoach():BelongsTo
+    {
+        return $this->belongsTo(BasicInformation::class, 'sec_coach_id');
+    }
+
     public function firstTeamSched():HasMany
     {
         return $this->hasMany(Schedule::class, 'first_team_id');
