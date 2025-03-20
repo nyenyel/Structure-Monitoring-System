@@ -37,8 +37,7 @@ class TallyController extends Controller
 
                     }elseif($team->lib_award_id == 5){
                         $temp += 3;
-                        $goldCounter++;
-
+                        $goldCounter += $team->player->count();
                     }
                 }
             }
