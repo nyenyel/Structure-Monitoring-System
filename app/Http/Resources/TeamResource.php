@@ -22,6 +22,7 @@ class TeamResource extends JsonResource
             'college_id'=> new CollegeResource($this->whenLoaded('college')),
             'lib_award_id'=>new LibraryResource($this->whenLoaded('award')),
             'coach_id'=> new BasicInformationResource($this->whenLoaded('coach')),
+            'sec_coach_id'=> new BasicInformationResource($this->whenLoaded('secCoach')),
             'players'=> PlayerResource::collection($this->whenLoaded('player'))
         ];
     }

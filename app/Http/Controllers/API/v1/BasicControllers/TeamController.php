@@ -80,7 +80,7 @@ class TeamController extends Controller
             'college',
             'award',
             'coach.gender',
-            'sec_coach.gender',
+            'secCoach.gender',
             'player.basicInformation.gender',
             'player.position.sports',
             'player.status'
