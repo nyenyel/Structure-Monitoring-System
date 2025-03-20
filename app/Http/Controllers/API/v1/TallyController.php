@@ -31,10 +31,11 @@ class TallyController extends Controller
                     if($team->lib_award_id == 3){
                         $temp += 1;
                         $bronzeCounter++;
+                        $bronzeCounter += $team->player->count();
                     }elseif($team->lib_award_id == 4){
                         $temp += 2;
                         $silverCounter++;
-
+                        $silverCounter += $team->player->count();
                     }elseif($team->lib_award_id == 5){
                         $temp += 3;
                         $goldCounter += $team->player->count();
