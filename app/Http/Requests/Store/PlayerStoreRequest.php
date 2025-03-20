@@ -38,7 +38,7 @@ class PlayerStoreRequest extends FormRequest
 
             'player.cor' => 'required|mimes:pdf',  // Accepts only PDF files, with a max size of 2MB
             'player.med_cert' => 'required|mimes:pdf',
-            'player.psa' => 'required|mimes:pdf',
+            'player.psa' => 'sometimes|mimes:pdf',
 
             'info.first_name' => 'required|string',
             'info.middle_name' => 'required|string',
