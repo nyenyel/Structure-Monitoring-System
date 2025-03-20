@@ -22,6 +22,7 @@ class Team extends Model
         'college_id',
         'lib_award_id',
         'coach_id',
+        'sec_coach_id',
         'banner',
     ];
 
