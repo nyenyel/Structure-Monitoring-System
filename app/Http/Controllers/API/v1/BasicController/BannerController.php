@@ -19,7 +19,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $banner = Banner::where('delete', false)->get();
+        $banner = Banner::where('delete', false)->orderBy('year', 'asc')->get();
         return BannerResource::collection($banner);
     }
 
