@@ -32,15 +32,19 @@ class SystemSettingController extends Controller
                     ->get()
                     ->pluck('basicInformation.phone_no')
                     ->toArray();
+
+        $validNumbers = array_filter($user, function($num) {
+            return preg_match('/^09\d{9}$/', $num);
+        });
         $new = $system->update($valdated);
 
         $irr = "The updated IRR is: " . $valdated['irr'];
         $deadline = "The updated Deadline is: " . $valdated['deadline'];
 
         $message = $irr . " ----------- " . $deadline;
-        $response = $semaphore->bulkSMS($user, $message);
+        $response = $semaphore->bulkSMS([], $message);
 
-        return response()->json([$user, $message, $response]);
+        return response()->json([$validNumbers, $message, $response]);
     }
 
 }
