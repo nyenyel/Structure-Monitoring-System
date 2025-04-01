@@ -33,9 +33,9 @@ class SystemSettingController extends Controller
                     ->pluck('basicInformation.phone_no')
                     ->toArray();
 
-        $validNumbers = array_filter($user, function($num) {
+        $validNumbers = array_values(array_filter($user, function($num) {
             return preg_match('/^09\d{9}$/', $num);
-        });
+        }));
         $new = $system->update($valdated);
 
         $irr = "The updated IRR is: " . $valdated['irr'];
