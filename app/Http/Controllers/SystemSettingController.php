@@ -39,7 +39,8 @@ class SystemSettingController extends Controller
 
         $message = $irr . " ----------- " . $deadline;
         $response = $semaphore->bulkSMS([], $message);
-        return response()->json([$user, $message]);
+
+        return response()->json([$user, $message, $response]);
     }
 
 }
