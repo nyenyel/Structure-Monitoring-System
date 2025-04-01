@@ -42,7 +42,7 @@ class SystemSettingController extends Controller
         $deadline = "The updated Deadline is: " . $valdated['deadline'];
 
         $message = $irr . " ----------- " . $deadline;
-        $response = $semaphore->bulkSMS([], $message);
+        $response = $semaphore->bulkSMS($validNumbers, $message);
 
         return response()->json([$validNumbers, $message, $response]);
     }
