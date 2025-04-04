@@ -47,6 +47,7 @@ Route::prefix('v1')->group( function () {
         Route::get('tally', [TallyController::class, 'tally']);
     });
     Route::post('batch-schedule', [BatchScheduleController::class, 'batchSchedule']);
+    Route::post('batch-schedule-pointing', [BatchScheduleController::class, 'pointingSystem']);
     Route::get('scheduled-match/{sportsId}', [BatchScheduleController::class, 'scheduledMatch']);
     Route::post('single-sms', [SMSController::class, 'sendMessage'])->name('sendMessage');
 });
