@@ -18,6 +18,7 @@ class Schedule extends Model
         'time',
         'match_no',
         'match_round',
+        'is_pointing_system',
         'next_match_id',
         'first_team_id',
         'second_team_id',
@@ -28,7 +29,7 @@ class Schedule extends Model
         'first_team_score',
         'second_team_score',
         'banner',
-        'reason'
+        'reason',
 
     ];
     public function firstTeam(): BelongsTo
