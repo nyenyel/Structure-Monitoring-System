@@ -279,7 +279,7 @@ class BatchScheduleController extends Controller
     }
     
     public function pointingSystem(Request $request){
-        return $request;
+        // return $request;
         $teams = $request->team;
         $combinations = $this->getCombinations($teams, 2);
         return response()->json(["data" => $combinations]);
