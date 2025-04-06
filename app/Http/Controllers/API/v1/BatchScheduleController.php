@@ -281,12 +281,12 @@ class BatchScheduleController extends Controller
     public function pointingSystem(Request $request){
         try{
             $banner = Banner::where('is_default', true)->first();
-            return $request;
+            // return $request;
             $template = [
                 'date' => null,
                 'time' => null,
                 'match_no' => '',
-                'match_round' => $request->sports['desc'] ?? 'Pointing System',
+                'match_round' => $request->sports['title'] ?? 'Pointing System',
                 'is_pointing_system' => true,
                 'next_match_id' => null,
                 'first_team_id' => null,
