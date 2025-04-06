@@ -60,10 +60,9 @@ class ScheduleController extends Controller
         try {
 
             $validated = $request->validated();
-
-            if (isset($validated['referee_full_name'])) {
+            $refExist = isset($validated['referee_full_name']);
+            if ($refExist) {
                 if (!empty($validated['referee_full_name'])){
-            return response()->json(['message' => isset($validated['referee_full_name'])]);
 
                     $semaphore = new SemaphoreService();
                     // Collect the coach phone numbers
@@ -110,6 +109,8 @@ class ScheduleController extends Controller
                     $response = $semaphore->bulkSMS($numbersArray, $message);
                     // return response()->json(['number'=> $numbersArray, 'message' => $message, 'semaphore' => $response]);
                 }
+            } else {
+                //does nothing
             }
         }catch (Exception $e){
             return response()->json([
