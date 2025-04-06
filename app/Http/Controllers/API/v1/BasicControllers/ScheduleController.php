@@ -60,8 +60,8 @@ class ScheduleController extends Controller
         try {
 
             $validated = $request->validated();
+            return response()->json(['message' => $validated]);
 
-            return response()->json(['message' => 'This shit went here 0']);
             if (!empty($validated['referee_full_name'])) {
                 $semaphore = new SemaphoreService();
                 // Collect the coach phone numbers
@@ -69,10 +69,8 @@ class ScheduleController extends Controller
                     $schedule->firstTeam->coach->phone_no ?? '09219298620',
                     $schedule->secondTeam->coach->phone_no ?? '09219298620',
                 ]);
-                return response()->json(['message' => 'This shit went here 1']);
         
                 $playerNumbers = collect();
-                return response()->json(['message' => 'This shit went here 2']);
         
                 // Loop through first team's players and collect phone numbers
                 if($schedule->firstTeam){
@@ -82,7 +80,6 @@ class ScheduleController extends Controller
                         }
                     }
                 }
-                return response()->json(['message' => 'This shit went here 3']);
 
                 if($schedule->secondTeam){
                     // Loop through second team's players and collect phone numbers
@@ -93,11 +90,9 @@ class ScheduleController extends Controller
                     }
                 }
                 
-                return response()->json(['message' => 'This shit went here 4']);
                 
                 // Combine both coach and player numbers
                 $numbers = $coachNumbers->merge($playerNumbers);
-                return response()->json(['message' => 'This shit went here 5']);
                 
                 // If you want to convert the collection to an array, you can do so
                 $numbersArray = $numbers->toArray();
