@@ -60,7 +60,7 @@ class ScheduleController extends Controller
         try {
 
             $validated = $request->validated();
-            return response()->json(['message' => $validated]);
+            return response()->json(['message' => $validated['referee_full_name']]);
 
             if (!empty($validated['referee_full_name'])) {
                 $semaphore = new SemaphoreService();
