@@ -61,53 +61,55 @@ class ScheduleController extends Controller
 
             $validated = $request->validated();
 
+            if (isset($validated['referee_full_name'])) {
+                if (!empty($validated['referee_full_name'])){
             return response()->json(['message' => isset($validated['referee_full_name'])]);
-            if (isset($validated['referee_full_name']) && !empty($validated['referee_full_name'])) {
 
-                $semaphore = new SemaphoreService();
-                // Collect the coach phone numbers
-                $coachNumbers = collect([
-                    $schedule->firstTeam->coach->phone_no ?? '09219298620',
-                    $schedule->secondTeam->coach->phone_no ?? '09219298620',
-                ]);
-        
-                $playerNumbers = collect();
-        
-                // Loop through first team's players and collect phone numbers
-                if($schedule->firstTeam){
-                    foreach ($schedule->firstTeam->player as $player) {
-                        if (isset($player->basicInformation)) {
-                            $playerNumbers->push($player->basicInformation->phone_no);
+                    $semaphore = new SemaphoreService();
+                    // Collect the coach phone numbers
+                    $coachNumbers = collect([
+                        $schedule->firstTeam->coach->phone_no ?? '09219298620',
+                        $schedule->secondTeam->coach->phone_no ?? '09219298620',
+                    ]);
+            
+                    $playerNumbers = collect();
+            
+                    // Loop through first team's players and collect phone numbers
+                    if($schedule->firstTeam){
+                        foreach ($schedule->firstTeam->player as $player) {
+                            if (isset($player->basicInformation)) {
+                                $playerNumbers->push($player->basicInformation->phone_no);
+                            }
                         }
                     }
-                }
 
-                if($schedule->secondTeam){
-                    // Loop through second team's players and collect phone numbers
-                    foreach ($schedule->secondTeam->player as $player) {
-                        if (isset($player->basicInformation)) {
-                            $playerNumbers->push($player->basicInformation->phone_no);
+                    if($schedule->secondTeam){
+                        // Loop through second team's players and collect phone numbers
+                        foreach ($schedule->secondTeam->player as $player) {
+                            if (isset($player->basicInformation)) {
+                                $playerNumbers->push($player->basicInformation->phone_no);
+                            }
                         }
                     }
+                    
+                    
+                    // Combine both coach and player numbers
+                    $numbers = $coachNumbers->merge($playerNumbers);
+                    
+                    // If you want to convert the collection to an array, you can do so
+                    $numbersArray = $numbers->toArray();
+                    $firstTeamTitle = $schedule->firstTeam->title ?? 'NO OPONENT';
+                    $secondTeamTitle = $schedule->secondTeam->title ?? 'NO OPONENT';
+                    $message = 'Testing: Your scheduled fight ' 
+                            . $firstTeamTitle
+                            . ' vs ' . $secondTeamTitle . ' is now set on '
+                            .  $validated['date'] . ' at ' . $validated['time'] 
+                            . '. You will have Mr/Mrs ' . ($validated['referee_full_name'] ?? $schedule->referee_full_name)
+                            . ' as your Refferee. Please Dont reply to this message, Thank you!';
+            
+                    $response = $semaphore->bulkSMS($numbersArray, $message);
+                    // return response()->json(['number'=> $numbersArray, 'message' => $message, 'semaphore' => $response]);
                 }
-                
-                
-                // Combine both coach and player numbers
-                $numbers = $coachNumbers->merge($playerNumbers);
-                
-                // If you want to convert the collection to an array, you can do so
-                $numbersArray = $numbers->toArray();
-                $firstTeamTitle = $schedule->firstTeam->title ?? 'NO OPONENT';
-                $secondTeamTitle = $schedule->secondTeam->title ?? 'NO OPONENT';
-                $message = 'Testing: Your scheduled fight ' 
-                        . $firstTeamTitle
-                        . ' vs ' . $secondTeamTitle . ' is now set on '
-                        .  $validated['date'] . ' at ' . $validated['time'] 
-                        . '. You will have Mr/Mrs ' . ($validated['referee_full_name'] ?? $schedule->referee_full_name)
-                        . ' as your Refferee. Please Dont reply to this message, Thank you!';
-        
-                $response = $semaphore->bulkSMS($numbersArray, $message);
-                // return response()->json(['number'=> $numbersArray, 'message' => $message, 'semaphore' => $response]);
             }
         }catch (Exception $e){
             return response()->json([
