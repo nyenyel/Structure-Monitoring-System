@@ -61,8 +61,8 @@ class ScheduleController extends Controller
 
             $validated = $request->validated();
 
+            return response()->json(['message' => isset($validated['referee_full_name'])]);
             if (isset($validated['referee_full_name']) && !empty($validated['referee_full_name'])) {
-            return response()->json(['message' => $validated['referee_full_name']]);
 
                 $semaphore = new SemaphoreService();
                 // Collect the coach phone numbers
