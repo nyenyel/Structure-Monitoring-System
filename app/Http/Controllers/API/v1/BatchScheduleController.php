@@ -312,7 +312,7 @@ class BatchScheduleController extends Controller
 
             return response()->json(["data" => $combinations, "testinng" =>$counter]);
         } catch(Exception $e){
-            return response()->json([ "error" =>$e]);
+            return response()->json([ "error" =>$e->getMessage()]);
 
         }
     }
