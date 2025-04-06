@@ -303,11 +303,12 @@ class BatchScheduleController extends Controller
             $combinations = $this->getCombinations($teams, 2);
             $counter = 0;
             foreach($combinations as $data){
-                $counter ++;
                 $newData['first_team_id'] = $data[0];
                 $newData['second_team_id'] = $data[1];
+                $newData['match_no'] = $counter;
                 Schedule::create($newData);
                 $newData = $template;
+                $counter ++;
             }
 
             return response()->json(["data" => $combinations, "testinng" =>$counter]);
