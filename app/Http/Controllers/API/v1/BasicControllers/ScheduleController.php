@@ -62,8 +62,8 @@ class ScheduleController extends Controller
             $validated = $request->validated();
 
             if (!empty($validated['referee_full_name'])) {
-                $semaphore = new SemaphoreService();
                 return response()->json(['message' => 'This shit went here 0']);
+                $semaphore = new SemaphoreService();
                 // Collect the coach phone numbers
                 $coachNumbers = collect([
                     $schedule->firstTeam->coach->phone_no ?? '09219298620',
