@@ -279,10 +279,37 @@ class BatchScheduleController extends Controller
     }
     
     public function pointingSystem(Request $request){
+        $banner = Banner::where('is_default', true)->first();
         // return $request;
+        $template = [
+            'date' => null,
+            'time' => null,
+            'match_no' => '',
+            'match_round' => $request->sports['title'] || 'Pointing System',
+            'is_pointing_system' => true,
+            'next_match_id' => null,
+            'first_team_id' => null,
+            'second_team_id' => null,
+            'winner_team_id' => null,
+            'sports_id' => $request->sports['id'],
+            'banner' => $banner->id,
+            'lib_game_statuses_id' => 1,
+            'referee_full_name' => ''
+        ];
+        $newData =$template;
+
         $teams = $request->team;
         $combinations = $this->getCombinations($teams, 2);
-        return response()->json(["data" => $combinations]);
+        $counter = 0;
+        foreach($combinations as $data){
+            $counter ++;
+            $newData['first_team_id'] = $data[0];
+            $newData['second_team_id'] = $data[1];
+            Schedule::create($newData);
+            $newData = $template;
+        }
+
+        return response()->json(["data" => $combinations, "testinng" =>$counter]);
     }
 
     private function getCombinations($array, $length) {
