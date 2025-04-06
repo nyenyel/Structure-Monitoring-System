@@ -60,6 +60,8 @@ class ScheduleController extends Controller
         try {
 
             $validated = $request->validated();
+            return response()->json(['message' => 'This shit went here 123']);
+
             if (!empty($validated['referee_full_name'])) {
                 $semaphore = new SemaphoreService();
                 // Collect the coach phone numbers
@@ -116,7 +118,6 @@ class ScheduleController extends Controller
         }
         try{
             // return $request->validated();
-            return response()->json(['message' => 'This shit went here 123']);
 
             if ($schedule->is_pointing_system == 1) {
                 return response()->json(['message' => 'Pointing system result updated']);
