@@ -286,7 +286,7 @@ class BatchScheduleController extends Controller
                 'date' => null,
                 'time' => null,
                 'match_no' => '',
-                'match_round' => $request->sports['title'] || 'Pointing System',
+                'match_round' => $request->sports['title'] ?? 'Pointing System',
                 'is_pointing_system' => true,
                 'next_match_id' => null,
                 'first_team_id' => null,
