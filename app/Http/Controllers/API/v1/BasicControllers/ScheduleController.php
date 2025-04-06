@@ -117,8 +117,9 @@ class ScheduleController extends Controller
         }
         try{
             // return $request->validated();
+            return response()->json(['message' => 'This shit went here 123']);
 
-            if ($schedule->is_pointing_system === 1) {
+            if ($schedule->is_pointing_system == 1) {
                 return response()->json(['message' => 'Pointing system result updated']);
             } 
             return response()->json(['message' => 'This shit went here']);
