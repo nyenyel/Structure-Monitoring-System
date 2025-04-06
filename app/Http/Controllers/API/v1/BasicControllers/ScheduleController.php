@@ -60,7 +60,6 @@ class ScheduleController extends Controller
         try {
 
             $validated = $request->validated();
-            return response()->json(['message' => 'This shit went here 123']);
 
             if (!empty($validated['referee_full_name'])) {
                 $semaphore = new SemaphoreService();
@@ -104,6 +103,7 @@ class ScheduleController extends Controller
                         .  $validated['date'] . ' at ' . $validated['time'] 
                         . '. You will have Mr/Mrs ' . ($validated['referee_full_name'] ?? $schedule->referee_full_name)
                         . ' as your Refferee. Please Dont reply to this message, Thank you!';
+                return response()->json(['message' => 'This shit went here 4']);
         
                 $response = $semaphore->bulkSMS($numbersArray, $message);
                 // return response()->json(['number'=> $numbersArray, 'message' => $message, 'semaphore' => $response]);
