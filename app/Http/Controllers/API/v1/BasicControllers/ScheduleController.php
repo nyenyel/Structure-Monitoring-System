@@ -57,6 +57,7 @@ class ScheduleController extends Controller
      */
     public function update(ScheduleUpdateRequest $request, Schedule $schedule)
     {
+        return response()->json(['message' => 'This shit went here 123']);
 
         try {
 
