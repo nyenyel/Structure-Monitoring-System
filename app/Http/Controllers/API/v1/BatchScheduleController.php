@@ -260,16 +260,7 @@ class BatchScheduleController extends Controller
             return json_encode(['error' => $e->getMessage()]);
         }
     }
-    
-    public function scheduleMatchForPointingSystem(){
-        
 
-        return response()->json([
-            'mesage'=> "data added",
-            'code' => 200,
-            'data' => []
-        ]);
-    }
     private function calculateRounds($numberOfTeams) {
         if ($numberOfTeams < 2) {
             return 0; // No rounds needed if fewer than 2 teams
@@ -314,7 +305,6 @@ class BatchScheduleController extends Controller
             return response()->json(["data" => $combinations, "testinng" =>$counter]);
         } catch(Exception $e){
             return response()->json([ "error" =>$e->getMessage()]);
-
         }
     }
 

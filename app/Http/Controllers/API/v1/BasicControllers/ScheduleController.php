@@ -107,7 +107,13 @@ class ScheduleController extends Controller
         }
         try{
             // return $request->validated();
+
+            if ($schedule->is_pointing_system === 1) {
+                return response()->json(['message' => 'Pointing system result updated']);
+            } 
+            return response()->json(['message' => 'This shit went here']);
             $result = $schedule->update($request->validated());
+
             if($request->winner_team_id == null){
                 $schedule->load(['firstTeam', 'secondTeam', 'winningTeam', 'sports', 'gameStatus']);
                 return ScheduleResource::make($schedule);

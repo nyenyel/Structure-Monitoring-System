@@ -29,6 +29,7 @@ class ScheduleStoreRequest extends FormRequest
             'date'=> 'sometimes|date|nullable',
             'time' => 'sometimes|nullable',
             'sports_id' => 'required|integer|exists:sports,id',
+            'is_pointing_system' => 'sometimes|boolean',
             'lib_game_statuses_id' => 'required|integer|exists:lib_game_statuses,id',
             'first_team_id' => 'sometimes|integer|nullable',
             'second_team_id'=> 'sometimes|integer|nullable',
