@@ -7,6 +7,7 @@ use App\Http\Resources\ScheduleResource;
 use App\Models\Others\Banner;
 use App\Models\Sports\Schedule;
 use App\Models\Sports\Sports;
+use App\Models\Sports\Team;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -361,7 +362,12 @@ class BatchScheduleController extends Controller
         
         // Limit to top 3
         $top3 = array_slice($winCounts, 0, 3);
-        
+        $awardId = 5;
+        foreach($top3 as $award){
+            $team = Team::find($award['id']);
+            $team->update(['lib_award_id' => $awardId]);
+            $awardId --;
+        }
         return response()->json(["data" => $top3]);
     }
 }
