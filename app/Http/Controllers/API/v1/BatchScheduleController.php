@@ -325,7 +325,7 @@ class BatchScheduleController extends Controller
     public function computePoints(Sports $sport){
         $banner = Banner::where('is_default', true)->first();
         $scheds = Schedule::where('banner', $banner->id)
-                            ->where('sports_id', $sport->id)
+                            ->where('sport_id', $sport->id)
                             ->with('winningTeam')
                             ->get();
 
@@ -336,7 +336,20 @@ class BatchScheduleController extends Controller
             }
         }
 
-        return response()->json(["data" => $wins]);
+        $winCounts = [];
+        foreach ($wins as $team) {
+            $teamId = $team->id;
+
+            if (!isset($winCounts[$teamId])) {
+                $winCounts[$teamId] = [
+                    'id' => $teamId,
+                    'wins' => 1,
+                ];
+            } else {
+                $winCounts[$teamId]['wins']++;
+            }
+        }
+        return response()->json(["data" => $winCounts]);
     }
 }
 
