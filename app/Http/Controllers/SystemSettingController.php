@@ -27,6 +27,7 @@ class SystemSettingController extends Controller
         $valdated = $request->validate([
             'irr' => 'string',
             'deadline' => 'date',
+            'type' => 'string'
         ]);
         $user = User::with('basicInformation')
                     ->get()
@@ -41,7 +42,7 @@ class SystemSettingController extends Controller
         $irr = "The updated IRR is: " . $valdated['irr'];
         $deadline = "The updated Deadline is: " . $valdated['deadline'];
 
-        $message = $irr . " ----------- " . $deadline;
+        $message = $valdated['type'] === "irr" ? $irr : $deadline;
         $response = $semaphore->bulkSMS($validNumbers, $message);
 
         return response()->json([$validNumbers, $message, $response]);

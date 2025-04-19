@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ScheduleResource;
 use App\Models\Others\Banner;
 use App\Models\Sports\Schedule;
+use App\Models\Sports\Sports;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -319,6 +320,23 @@ class BatchScheduleController extends Controller
         }
     
         return $result;
+    }
+
+    public function computePoints(Sports $sport){
+        $banner = Banner::where('is_default', true)->first();
+        $scheds = Schedule::where('banner', $banner->id)
+                            ->where('sport_id', $sport->id)
+                            ->with('winningTeam')
+                            ->get();
+
+        $wins = [];
+        foreach ($scheds as $data) {
+            if ($data->winningTeam !== null) {
+                $wins[] = $data->winningTeam; // Correct way to push in PHP
+            }
+        }
+
+        return response()->json(["data" => $wins]);
     }
 }
 

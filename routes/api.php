@@ -41,12 +41,14 @@ Route::prefix('v1')->group( function () {
         Route::post('add-checklist', [ChecklistController::class, 'addToChecklist']);
         Route::get('get-checklist', [ChecklistController::class, 'getChecklist'])->middleware('auth:sanctum');
         Route::delete('remove-checklist/{checklist}', [ChecklistController::class, 'removeChecklist']);
+        Route::post('compute-points/{sport}', [BatchScheduleController::class, 'computePoints']);
 
     });
     Route::prefix('compute')->group(function(){
         Route::get('tally', [TallyController::class, 'tally']);
     });
     Route::post('batch-schedule', [BatchScheduleController::class, 'batchSchedule']);
+
     Route::post('batch-schedule-pointing', [BatchScheduleController::class, 'pointingSystem']);
     Route::get('scheduled-match/{sportsId}', [BatchScheduleController::class, 'scheduledMatch']);
     Route::post('single-sms', [SMSController::class, 'sendMessage'])->name('sendMessage');
