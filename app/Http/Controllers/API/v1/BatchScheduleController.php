@@ -338,8 +338,8 @@ class BatchScheduleController extends Controller
 
         $winCounts = [];
         foreach ($wins as $team) {
-            $teamId = $team->id;
-
+            $teamId = $team['id']; // changed from $team->id to $team['id']
+        
             if (!isset($winCounts[$teamId])) {
                 $winCounts[$teamId] = [
                     'id' => $teamId,
