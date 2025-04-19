@@ -325,7 +325,7 @@ class BatchScheduleController extends Controller
     public function computePoints(Sports $sport){
         $banner = Banner::where('is_default', true)->first();
         $scheds = Schedule::where('banner', $banner->id)
-                            ->where('sport_id', $sport->id)
+                            ->where('sports_id', $sport->id)
                             ->with('winningTeam')
                             ->get();
 
@@ -337,19 +337,32 @@ class BatchScheduleController extends Controller
         }
 
         $winCounts = [];
-        foreach ($wins as $team) {
-            $teamId = $team['id']; // changed from $team->id to $team['id']
+       foreach ($wins as $team) {
+            $teamId = $team['id'];
         
-            if (!isset($winCounts[$teamId])) {
-                $winCounts[$teamId] = [
+            if (!isset($winTracker[$teamId])) {
+                $winTracker[$teamId] = [
                     'id' => $teamId,
                     'wins' => 1,
                 ];
             } else {
-                $winCounts[$teamId]['wins']++;
+                $winTracker[$teamId]['wins']++;
             }
         }
-        return response()->json(["data" => $winCounts]);
+        
+        // Convert the associative $winTracker into a plain indexed array
+        foreach ($winTracker as $count) {
+            $winCounts[] = $count;
+        }
+        
+        usort($winCounts, function ($a, $b) {
+            return $b['wins'] <=> $a['wins'];
+        });
+        
+        // Limit to top 3
+        $top3 = array_slice($winCounts, 0, 3);
+        
+        return response()->json(["data" => $top3]);
     }
 }
 
