@@ -325,7 +325,7 @@ class BatchScheduleController extends Controller
     public function computePoints(Sports $sport){
         $banner = Banner::where('is_default', true)->first();
         $scheds = Schedule::where('banner', $banner->id)
-                            ->where('sport_id', $sport->id)
+                            ->where('sports_id', $sport->id)
                             ->with('winningTeam')
                             ->get();
 
