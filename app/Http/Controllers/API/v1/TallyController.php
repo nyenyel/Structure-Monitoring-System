@@ -26,6 +26,7 @@ class TallyController extends Controller
             $goldCounter = 0;
             $silverCounter = 0;
             $bronzeCounter = 0;
+            $dub = [];
             foreach($teams as $team){
                 if($team->lib_award_id > 2){
                     if($team->lib_award_id == 3){
@@ -41,6 +42,7 @@ class TallyController extends Controller
                         $goldCounter += $team->player->count();
                     }
                     $temp *= $team->player->count();
+                    $deb[] = ["player_count" => $team->player->count()];
                 }
             }
             $data[] = [
