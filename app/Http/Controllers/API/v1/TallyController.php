@@ -17,9 +17,8 @@ class TallyController extends Controller
         
         $colleges = College::with(['team' => function ($query) use ($banner){
             $query->where('banner', $banner->id)->with('award');
-        }])->get();
+        }])->where('delete', false)->get();
         // $colleges->load(['team.award']);
-        $deb = [];
         foreach($colleges as $college){
             $name = $college->title . '('. $college->acronym.')';
             $teams = $college->team;
@@ -41,8 +40,8 @@ class TallyController extends Controller
                         $temp += 3;
                         $goldCounter += $team->player->count();
                     }
-                    $temp *= $team->player->count();
-                    $deb[] = ["player_count" => $team->player->count()];
+                    $team->player->count() != 0 ? $temp *= $team->player->count(): $temp *=1;
+
                 }
             }
             $data[] = [
@@ -54,7 +53,6 @@ class TallyController extends Controller
                 'bronze' => $bronzeCounter,
                 'logo' => $college->logo,
                 'team' => TeamResource::collection($college->team),
-                $deb
             ];
         }
         return response()->json( ['data' =>$data]); 
