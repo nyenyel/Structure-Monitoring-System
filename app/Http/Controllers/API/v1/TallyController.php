@@ -19,6 +19,7 @@ class TallyController extends Controller
             $query->where('banner', $banner->id)->with('award');
         }])->get();
         // $colleges->load(['team.award']);
+        $deb = [];
         foreach($colleges as $college){
             $name = $college->title . '('. $college->acronym.')';
             $teams = $college->team;
@@ -26,7 +27,6 @@ class TallyController extends Controller
             $goldCounter = 0;
             $silverCounter = 0;
             $bronzeCounter = 0;
-            $dub = [];
             foreach($teams as $team){
                 if($team->lib_award_id > 2){
                     if($team->lib_award_id == 3){
@@ -53,7 +53,8 @@ class TallyController extends Controller
                 'silver' => $silverCounter,
                 'bronze' => $bronzeCounter,
                 'logo' => $college->logo,
-                'team' => TeamResource::collection($college->team)
+                'team' => TeamResource::collection($college->team),
+                $deb
             ];
         }
         return response()->json( ['data' =>$data]); 
