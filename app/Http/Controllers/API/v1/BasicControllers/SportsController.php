@@ -112,27 +112,21 @@ class SportsController extends Controller
         $banner = Banner::where('is_default', true)->value('id');
         $user = Auth::user();
 
-        $user->college_id == null ? $player = $sport->load(
+         $player = $sport->load(
                         [
+                            'team' => function ($query) use ($banner, $user) {
+                                if ($user->college_id !== null) {
+                                    $query->where('college_id', $user->college_id);
+                                }
+                            },
                             'team.player.basicInformation.gender' ,
                             'team.player.position' , 
                             'team.player.team.college',
                             'team.player.status',
                         ])
                         ->team->where('banner', $banner)
-                        ->flatMap->player 
-                        : 
-                        $player = $sport->load(
-                            [
-                                'team.player.basicInformation.gender' ,
-                                'team.player.position' , 
-                                'team.player.team.college',
-                                'team.player.status',
-                            ])
-                        ->team->where('banner', $banner)
-                        ->team->where('college_id', $user->college_id)
-                        ->flatMap->player ;
-
+                        ->flatMap->player;
+        
         return response()->json($player);
     }
 }
