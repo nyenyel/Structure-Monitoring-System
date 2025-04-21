@@ -36,7 +36,7 @@ Route::prefix('v1')->group( function () {
         Route::put('approve-player', action: [PlayerController::class, 'approvePlayer'])->name('approvePlayer');
         Route::get('college-team/{college}', [TeamController::class, 'collegeTeam']);
         Route::put('search', [SearchController::class, 'search']);
-        Route::get('get-player-on-sport/{sport}', [SportsController::class, 'getPlayersFromSport']);
+        Route::get('get-player-on-sport/{sport}', [SportsController::class, 'getPlayersFromSport'])->middleware('auth:sanctum');
 
         Route::post('add-checklist', [ChecklistController::class, 'addToChecklist']);
         Route::get('get-checklist', [ChecklistController::class, 'getChecklist'])->middleware('auth:sanctum');
