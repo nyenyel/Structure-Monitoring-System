@@ -12,6 +12,7 @@ use Error;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SportsController extends Controller
 {
@@ -109,7 +110,9 @@ class SportsController extends Controller
     public function getPlayersFromSport(Sports $sport)
     {
         $banner = Banner::where('is_default', true)->value('id');
-        $player = $sport->load(
+        $user = Auth::user();
+
+        $user->college_id == null ? $player = $sport->load(
                         [
                             'team.player.basicInformation.gender' ,
                             'team.player.position' , 
@@ -117,7 +120,18 @@ class SportsController extends Controller
                             'team.player.status',
                         ])
                         ->team->where('banner', $banner)
-                        ->flatMap->player;
+                        ->flatMap->player 
+                        : 
+                        $player = $sport->load(
+                            [
+                                'team.player.basicInformation.gender' ,
+                                'team.player.position' , 
+                                'team.player.team.college',
+                                'team.player.status',
+                            ])
+                        ->team->where('banner', $banner)
+                        ->team->where('college_id', $user->college_id)
+                        ->flatMap->player ;
 
         return response()->json($player);
     }
