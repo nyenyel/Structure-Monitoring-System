@@ -31,8 +31,9 @@ Route::prefix('v1')->group( function () {
         Route::apiResource('incident', IncidentController::class);
         Route::apiResource('schedule', ScheduleController::class);
         Route::apiResource('banner', BannerController::class);
-        Route::apiResource('user', UserController::class);
         Route::apiResource('system', SystemSettingController::class);
+        Route::get('user', [UserController::class, 'index'])->middleware('auth:sanctum');
+        Route::apiResource('user', UserController::class)->except('index');
         Route::put('approve-player', action: [PlayerController::class, 'approvePlayer'])->name('approvePlayer');
         Route::get('college-team/{college}', [TeamController::class, 'collegeTeam']);
         Route::put('search', [SearchController::class, 'search']);

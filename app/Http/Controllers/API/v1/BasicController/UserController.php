@@ -8,6 +8,7 @@ use App\Models\Library\LibGender;
 use App\Models\Library\LibRole;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -17,8 +18,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = User::all();
-        $data->load(['basicInformation', 'role', 'college', 'team']);
+        $user = Auth::user();
+        
+        if ($user->college == null){
+            $data = User::all();
+            $data->load(['basicInformation', 'role', 'college', 'team']);
+        } else {
+            $data = User::where('college_id', $user->college->id);
+            $data->load(['basicInformation', 'role', 'college', 'team']);
+        }
+        
         return UserRegistrationResource::collection($data);
     }
 
