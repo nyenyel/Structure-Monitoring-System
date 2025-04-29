@@ -39,11 +39,11 @@ class TeamStoreRequest extends FormRequest
             'info.last_name' => 'required|string',
             'info.phone_no' => 'required|numeric',
             'info.lib_gender_id' => 'required|integer|exists:lib_genders,id',
-            'sec_info.first_name' => 'required|string',
-            'sec_info.middle_name' => 'required|string',
-            'sec_info.last_name' => 'required|string',
-            'sec_info.phone_no' => 'required|numeric',
-            'sec_info.lib_gender_id' => 'required|integer|exists:lib_genders,id',
+            'sec_info.first_name' => 'sometimes|string',
+            'sec_info.middle_name' => 'sometimes|string',
+            'sec_info.last_name' => 'sometimes|string',
+            'sec_info.phone_no' => 'sometimes|numeric',
+            'sec_info.lib_gender_id' => 'sometimes|integer|',
         ];
     }
 
