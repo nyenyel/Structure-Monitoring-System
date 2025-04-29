@@ -24,7 +24,7 @@ class UserController extends Controller
             $data = User::all();
             $data->load(['basicInformation', 'role', 'college', 'team']);
         } else {
-            $data = User::where('college_id', $user->college->id);
+            $data = User::where('college_id', $user->college->id)->get();
             $data->load(['basicInformation', 'role', 'college', 'team']);
         }
         
