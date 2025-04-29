@@ -58,7 +58,7 @@ class TeamController extends Controller
 
         $secBasicInformation = null;
 
-        if (array_key_exists('sec_info', $validated) && $validated['sec_info'] !== null) {
+        if (array_key_exists('sec_info', $validated) && $validated['sec_info'] !== null && $validated['sec_info']['first_name'] !== null) {
             $secBasicInformation = BasicInformation::create($validated['sec_info']);
         }
 
