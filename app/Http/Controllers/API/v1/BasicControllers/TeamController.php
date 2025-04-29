@@ -56,11 +56,15 @@ class TeamController extends Controller
         // Create a new BasicInformation record
         $basicInformation = BasicInformation::create($validated['info']);
 
-        $secBasicInformation = $validated['sec_info'] != null ? BasicInformation::create($validated['sec_info']) : null;
+        $secBasicInformation = null;
+
+        if (array_key_exists('sec_info', $validated) && $validated['sec_info'] !== null) {
+            $secBasicInformation = BasicInformation::create($validated['sec_info']);
+        }
 
         // Add the coach_id to the team data
         $validated['team']['coach_id'] = $basicInformation->id;
-        $validated['team']['sec_coach_id'] = $secBasicInformation->id  != null ? $secBasicInformation->id : null;
+        $validated['team']['sec_coach_id'] = $secBasicInformation?->id;
         $validated['team']['banner'] = $banner->id;
 
         // Create a new Team record
