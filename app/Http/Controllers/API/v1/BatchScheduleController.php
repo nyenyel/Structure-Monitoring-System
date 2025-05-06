@@ -362,13 +362,16 @@ class BatchScheduleController extends Controller
         
         // Limit to top 3
         $top3 = array_slice($winCounts, 0, 3);
+        $teamToReturn = [];
         $awardId = 5;
         foreach($top3 as $award){
             $team = Team::find($award['id']);
             $team->update(['lib_award_id' => $awardId]);
+            $team->load('award');
+            $teamToReturn[] = $team;
             $awardId --;
         }
-        return response()->json(["data" => $top3]);
+        return response()->json(["data" => $teamToReturn]);
     }
 }
 
