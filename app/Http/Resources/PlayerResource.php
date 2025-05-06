@@ -22,6 +22,8 @@ class PlayerResource extends JsonResource
             'psa' => $this->psa,
             'age'=> $this->age,
             'scua'=> $this->scua,
+            'image' => $this->image,
+            'parent_sign' => $this->parent_sign,
             'team_id'=> new TeamResource($this->whenLoaded('team')),
             'position_id' => new PositionResource($this->whenLoaded('position')),
             'basic_information_id' => new BasicInformationResource($this->whenLoaded('basicInformation')),
