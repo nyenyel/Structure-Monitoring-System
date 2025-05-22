@@ -22,10 +22,10 @@ class UserController extends Controller
         
         if ($user->college == null){
             $data = User::all();
-            $data->load(['basicInformation', 'role', 'college', 'team', 'team.sports']);
+            $data->load(['basicInformation', 'role', 'college', 'team']);
         } else {
             $data = User::where('college_id', $user->college->id)->get();
-            $data->load(['basicInformation', 'role', 'college', 'team', 'team.sports']);
+            $data->load(['basicInformation', 'role', 'college', 'team']);
         }
         
         return UserRegistrationResource::collection($data);/*  */
