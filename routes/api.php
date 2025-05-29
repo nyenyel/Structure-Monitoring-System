@@ -54,7 +54,7 @@ Route::prefix('v1')->group( function () {
     Route::post('batch-schedule-pointing', [BatchScheduleController::class, 'pointingSystem']);
     Route::get('scheduled-match/{sportsId}', [BatchScheduleController::class, 'scheduledMatch']);
     Route::post('single-sms', [SMSController::class, 'sendMessage'])->name('sendMessage');
-    Route::post('/send-email', [EmailController::class, 'sendAlarmEmail']);
+    Route::post('send-email', [EmailController::class, 'sendAlarmEmail']);
 });
 
 Route::prefix('auth')->group(function (){
