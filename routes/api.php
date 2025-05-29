@@ -15,6 +15,7 @@ use App\Http\Controllers\API\v1\BasicController\UserController;
 use App\Http\Controllers\API\v1\SearchController;
 use App\Http\Controllers\API\v1\SMSController;
 use App\Http\Controllers\ChecklistController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\SystemSettingController;
 use App\Http\Resources\UserRegistrationResource;
 use App\Models\Others\Banner;
@@ -53,6 +54,7 @@ Route::prefix('v1')->group( function () {
     Route::post('batch-schedule-pointing', [BatchScheduleController::class, 'pointingSystem']);
     Route::get('scheduled-match/{sportsId}', [BatchScheduleController::class, 'scheduledMatch']);
     Route::post('single-sms', [SMSController::class, 'sendMessage'])->name('sendMessage');
+    Route::post('/send-email', [EmailController::class, 'sendAlarmEmail']);
 });
 
 Route::prefix('auth')->group(function (){
